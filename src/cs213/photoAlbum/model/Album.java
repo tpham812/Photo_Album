@@ -10,43 +10,72 @@ import java.util.List;
  */
 public class Album {
 	
-	/** The name of the album */
+	/** Name of the album */
 	private String name; 
 	
-	/** The number of photos*/
+	/** Number of photos */
 	private int photos;
 	
-	/** The list of photos */
+	/** List of the photos */
 	private List<Photo> photoList; 
 	
-	
-	public Album(String name, int photos){
+	/**
+	 * Constructor for the album object
+	 * @param name name of the album
+	 * @param photos number of photos
+	 * @param photoList	the list of photos
+	 */
+	public Album(String name, int photos, List<Photo> photoList){
 		
 	}
 	
-
-	
-	public void addPhoto(){
+	/**
+	 * Recaptions the photo
+	 * @return name new name of photo
+	 */
+	public String recaptionPhoto(){
 		
 	}
 	
-	public void deletePhoto(){
-		
-	}
-	
-	public String renamePhoto(){
-		return null;
-	}
-	
+	/**
+	 * Returns the list of photos
+	 * @return photoList the list of photos
+	 */
 	public List<Photo> getPhotos(){
-		return photoList; 
+		
 	}
 	
-	public String toString(){
+	
+	/**
+	 * Sets the name of the album
+	 * @param name name of album
+	 */
+	public void setAlbumName(String name){
+	}
+	
+	/**
+	 * Sets the number of photos in the album
+	 * @param photos
+	 */
+	public void setAlbumPhotos(int photos){
+		this.photos = photos; 
+	}
+	
+	/**
+	 * Returns the name of the album
+	 * @return name name of album
+	 */
+	public String getAlbumName(){
 		return name; 
 	}
-	public setName(String name){
-		this.name = name; 
+	
+	/**
+	 * Returns the number of photos in the album
+	 * @return photos number of photos in album
+	 */
+	public int getNumPhotos(){
+		return photos; 
 	}
+
 	
 }
