@@ -13,7 +13,7 @@ import cs213.photoAlbum.model.User;
 public interface IAlbumController {
 
 	/**
-	 * List albums.
+	 * List of albums
 	 *
 	 * @param user the user
 	 * @return the list
