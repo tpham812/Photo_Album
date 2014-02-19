@@ -8,11 +8,18 @@ import java.util.List;
  *  New class User which will include the unique ID for each user, their full name, and the album(s) of the user
  *  
 */
+
 public class User {
-	private String id = ""; 
-	private String fname = "";
-	List<Album> albumList; 
 	
+	/** ID of the user */
+	private String id; 
+	
+	/** full name of the user */
+	private String fname;
+	
+	/** List of albums */
+	List<Album> albumList; 
+	 
 	/**
 	 * Constructor for the User object of the User class
 	 * @author brett
@@ -21,21 +28,26 @@ public class User {
 	 */
 	
 	public User(String id , String fname){
+		
+		/** Users ID */
 	 this.id = id; 
+	 
+	 	/** Users full name*/
 	 this.fname = fname;
 	}
 	
 	/**
 	 * Adds new album to the list of albums
 	 * @author brett
+	 * @param user The user
 	 * 
 	 * 
 	 */
-	public void addAlbum(){
+	public void addAlbum(User user){
 		
 	}
 	/**
-	 * deletes album associated to the user
+	 * deletes album 
 	 * @author brett
 	 * 
 	 * 
@@ -47,11 +59,11 @@ public class User {
 	/**
 	 * Renames the specified album
 	 * @author brett
-	 * @param album The album title which is to be renamed
+	 * @param album The album  which is to be renamed
 	 * @return album The newly created album title
 	 */
-	public String rename(String album){
-		return album; 
+	public String renameAlbum(Album album){
+		
 	}
 	
 	/**
@@ -61,4 +73,38 @@ public class User {
 	public String toString(){
 		return id; 
 	}
+	
+	
+	/**
+	 * Sets the users ID
+	 * @param id Users ID
+	 */
+	 public void setUserID(String id){
+		 this.id = id; 
+	 }
+	 
+	 
+	 /**
+	  * Sets the users full name
+	  * @param fName Users full name
+	  */
+	 public void setUserFullName(String fname){
+		 this.fname = fname; 
+	 }
+	 
+	 /**
+	  * Returns the users id
+	  * @return id users id
+	  */
+	 public String getUserID(){
+		 return id; 
+	 }
+	 
+	 /**
+	  * Returns the users full name
+	  * @return fname Users full name
+	  */
+	 public String getUserFullName(){
+		 return fname; 
+	 }
 }
