@@ -1,5 +1,7 @@
 package cs213.photoAlbum.model;
 
+import java.util.List;
+
 /**
  * @author brett
  * 
@@ -25,7 +27,7 @@ public class Album {
 	}
 	
 	public String renamePhoto(){
-		
+		return null;
 	}
 	
 	public List<Photo> getPhotos(){

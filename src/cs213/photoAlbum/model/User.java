@@ -1,6 +1,7 @@
 package cs213.photoAlbum.model;
 
-import java.awt.List;
+import java.util.List;
+
 
 /**
  * @author brett
