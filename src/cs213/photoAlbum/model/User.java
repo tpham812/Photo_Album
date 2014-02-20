@@ -26,7 +26,6 @@ public class User {
 	/**
 	 * Constructor for the User object of the User class.
 	 *
-	 * @author brett
 	 * @param id The users unique string ID
 	 * @param fname The users full name
 	 */	
