@@ -63,7 +63,7 @@ public class User {
 	 * @return album The newly created album title
 	 */
 	public String renameAlbum(Album album){
-		
+		return null;
 	}
 	
 	/**

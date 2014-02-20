@@ -34,7 +34,7 @@ public class Album {
 	 * @return name new name of photo
 	 */
 	public String recaptionPhoto(){
-		
+		return null;
 	}
 	
 	/**
@@ -42,7 +42,8 @@ public class Album {
 	 * @return photoList the list of photos
 	 */
 	public List<Photo> getPhotos(){
-		
+		return null;
+
 	}
 	
 	
