@@ -8,8 +8,9 @@ import cs213.photoAlbum.model.Photo;
 import cs213.photoAlbum.model.User;
 
 /**
+ * Controller interface for {@link Photo} management, such as adding/deleting tags, get photos by date range/tag.
  * @author dheeptha
- * The Interface IPhotoController.
+ * 
  */
 public interface IPhotoController {
 

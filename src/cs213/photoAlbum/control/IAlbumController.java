@@ -7,8 +7,9 @@ import cs213.photoAlbum.model.Photo;
 import cs213.photoAlbum.model.User;
 
 /**
+ * Controller interface to create/delete {@link Album}, and to manage {@link Photo} in the {@link Album}
  * @author dheeptha
- * The Interface IAlbumController.
+ * .
  */
 public interface IAlbumController {
 

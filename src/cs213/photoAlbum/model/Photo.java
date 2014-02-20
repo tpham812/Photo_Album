@@ -5,10 +5,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
+ * Photo owned by a {@link User} and part of multiple {@link Album}s.
  * @author dheeptha
- * Represents a Photo.
- */
+ * 
+ **/
 public class Photo {
 
 	/** Name of the photo. */

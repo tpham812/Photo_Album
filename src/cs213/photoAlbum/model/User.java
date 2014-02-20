@@ -4,13 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class User.
- *
+ * Represents the User, containing a unique ID, their full name, and the album(s) of the user
+ * 
  * @author brett
- *  New class User which will include the unique ID for each user, their full name, and the album(s) of the user
- */
+ **/
 public class User {
 	
 	/**  ID of the user. */
