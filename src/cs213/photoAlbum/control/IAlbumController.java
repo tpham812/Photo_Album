@@ -13,7 +13,7 @@ import cs213.photoAlbum.model.User;
 public interface IAlbumController {
 
 	/**
-	 * List of albums
+	 * List the user's albums
 	 *
 	 * @param user the user
 	 * @return the list
@@ -21,7 +21,7 @@ public interface IAlbumController {
 	List<Album> listAlbums(User user);
 
 	/**
-	 * Creates the album.
+	 * Creates an album for the user
 	 *
 	 * @param albumName the album name
 	 * @param user the user
@@ -30,7 +30,7 @@ public interface IAlbumController {
 	boolean createAlbum(String albumName, User user);
 
 	/**
-	 * Delete album.
+	 * Deletes the user's album 
 	 *
 	 * @param albumName the album name
 	 * @param user the user
@@ -39,7 +39,7 @@ public interface IAlbumController {
 	boolean deleteAlbum(String albumName, User user);
 
 	/**
-	 * List photos.
+	 * List all the photos in the album
 	 *
 	 * @param albumName the album name
 	 * @param user the user
@@ -48,7 +48,7 @@ public interface IAlbumController {
 	List<Photo> listPhotos(String albumName, User user);
 
 	/**
-	 * Adds the photo.
+	 * Adds the photo to the user
 	 *
 	 * @param fileName the file name
 	 * @param caption the caption
@@ -59,7 +59,7 @@ public interface IAlbumController {
 	boolean addPhoto(String fileName, String caption, String albumName, User user);
 
 	/**
-	 * Move photo.
+	 * Move the user's photo to a different album
 	 *
 	 * @param fileName the file name
 	 * @param oldAlbumName the old album name
@@ -70,7 +70,7 @@ public interface IAlbumController {
 	boolean movePhoto(String fileName, String oldAlbumName, String newAlbumName, User user);
 
 	/**
-	 * Removes the photo.
+	 * Removes the user's photo from the album.
 	 *
 	 * @param fileName the file name
 	 * @param albumName the album name

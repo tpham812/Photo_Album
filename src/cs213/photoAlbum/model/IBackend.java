@@ -6,32 +6,35 @@ import java.util.List;
 
 /**
  * @author dheeptha
- * The Interface IBackend.
+ * IBackend is the interface to perform backend functions
  */
 public interface IBackend {
 
 	/**
-	 * Read file.
+	 * Retrieve the user's photo file.
 	 *
-	 * @param p the p
+	 * @param photo the photo
+	 * @param user the user
 	 * @return the file
 	 */
-	File readFile(Photo p);
+	File retrievePhotoFile(Photo photo, User user);
 
 	/**
-	 * Adds the file.
+	 * Store the contents of the InputStream as a file represented by {@link Photo#getName()} for the user
 	 *
-	 * @param p the p
+	 * @param photo the photo
+	 * @param user the user
 	 * @param stream the stream
 	 */
-	void addFile(Photo p, InputStream stream);
+	void storeFile(Photo photo, InputStream stream, User user);
 
 	/**
-	 * Delete file.
+	 * Delete the user's photo
 	 *
-	 * @param p the p
+	 * @param photo the photo
+	 * @param user the user
 	 */
-	void deleteFile(Photo p);
+	void deleteFile(Photo photo, User user);
 
 	/**
 	 * Read user.
@@ -43,7 +46,7 @@ public interface IBackend {
 	/**
 	 * Write user.
 	 *
-	 * @param u the u
+	 * @param u the user
 	 */
 	void writeUser(User u);
 
@@ -55,7 +58,7 @@ public interface IBackend {
 	void deleteUser(String userId);
 
 	/**
-	 * Gets the user.
+	 * Gets the users corresponding to the userids.
 	 *
 	 * @param userIds the user ids
 	 * @return the user
