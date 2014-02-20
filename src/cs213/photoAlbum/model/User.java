@@ -8,7 +8,6 @@ import java.util.List;
  *  New class User which will include the unique ID for each user, their full name, and the album(s) of the user
  *  
 */
-
 public class User {
 	
 	/** ID of the user */
@@ -28,10 +27,8 @@ public class User {
 	 */
 	
 	public User(String id , String fname){
-		
 		/** Users ID */
 	 this.id = id; 
-	 
 	 	/** Users full name*/
 	 this.fname = fname;
 	}
@@ -59,11 +56,12 @@ public class User {
 	/**
 	 * Renames the specified album
 	 * @author brett
-	 * @param album The album  which is to be renamed
+	 * @param album The album title which is to be renamed
 	 * @return album The newly created album title
 	 */
-	public String renameAlbum(Album album){
-		return null;
+	public String rename(Album album){
+		return id; 
+		
 	}
 	
 	/**
@@ -88,7 +86,7 @@ public class User {
 	  * Sets the users full name
 	  * @param fName Users full name
 	  */
-	 public void setUserFullName(String fname){
+	 public void setUserFullName(String fName){
 		 this.fname = fname; 
 	 }
 	 
