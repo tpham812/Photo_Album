@@ -5,8 +5,9 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
+ * IBackend is the interface to perform backend functions such as storage/retrieval of files and saving the user data.
  * @author dheeptha
- * IBackend is the interface to perform backend functions
+ * 
  */
 public interface IBackend {
 

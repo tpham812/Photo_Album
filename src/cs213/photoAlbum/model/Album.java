@@ -3,7 +3,8 @@ package cs213.photoAlbum.model;
 import java.util.List;
 
 /**
- * The class Album
+ * Album of a {@link User} containing multiple {@link Photo}s
+ * 
  * @author brett
  * 
  *
