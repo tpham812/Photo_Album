@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Album {
 	
+	
 	/** Name of the album */
 	private String name; 
 	
@@ -34,6 +35,7 @@ public class Album {
 	 * @return name new name of photo
 	 */
 	public String recaptionPhoto(){
+		return name; 
 		
 	}
 	
@@ -42,6 +44,7 @@ public class Album {
 	 * @return photoList the list of photos
 	 */
 	public List<Photo> getPhotos(){
+		return photoList; 
 		
 	}
 	
