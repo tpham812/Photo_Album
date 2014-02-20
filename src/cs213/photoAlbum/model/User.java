@@ -35,7 +35,6 @@ public class User {
 	
 	/**
 	 * Adds new album to the list of albums
-	 * @author brett
 	 * @param user The user
 	 * 
 	 * 
@@ -45,7 +44,7 @@ public class User {
 	}
 	/**
 	 * deletes album 
-	 * @author brett
+	 *
 	 * 
 	 * 
 	 */
@@ -55,7 +54,6 @@ public class User {
 	
 	/**
 	 * Renames the specified album
-	 * @author brett
 	 * @param album The album title which is to be renamed
 	 * @return album The newly created album title
 	 */
@@ -65,7 +63,6 @@ public class User {
 	}
 	
 	/**
-	 * @author brett
 	 * @return id The users unique string ID 
 	 */
 	public String toString(){
@@ -84,9 +81,9 @@ public class User {
 	 
 	 /**
 	  * Sets the users full name
-	  * @param fName Users full name
+	  * @param fname Users full name
 	  */
-	 public void setUserFullName(String fName){
+	 public void setUserFullName(String fname){
 		 this.fname = fname; 
 	 }
 	 
