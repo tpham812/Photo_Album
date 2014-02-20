@@ -27,12 +27,12 @@ public interface IUserController {
 	boolean addUser(String userId, String userName);
 
 	/**
-	 * Deleteuser.
+	 * Delete the user.
 	 *
 	 * @param userId the user id
 	 * @return true, if successful
 	 */
-	boolean deleteuser(String userId);
+	boolean deleteUser(String userId);
 
 	/**
 	 * Login.

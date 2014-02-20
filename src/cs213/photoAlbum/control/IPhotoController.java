@@ -14,7 +14,7 @@ import cs213.photoAlbum.model.User;
 public interface IPhotoController {
 
 	/**
-	 * Adds the tag.
+	 * Add a tag to the user's photo.
 	 *
 	 * @param fileName the file name
 	 * @param tagType the tag type
@@ -25,7 +25,7 @@ public interface IPhotoController {
 	boolean addTag(String fileName, String tagType, String tagValue, User user);
 
 	/**
-	 * Delete tag.
+	 * Delete a tag associated with the user's photo
 	 *
 	 * @param fileName the file name
 	 * @param tagType the tag type
@@ -36,7 +36,7 @@ public interface IPhotoController {
 	boolean deleteTag(String fileName, String tagType, String tagValue, User user);
 
 	/**
-	 * List photo info.
+	 * Obtain all the info available about the photo.
 	 *
 	 * @param fileName the file name
 	 * @param user the user
@@ -45,7 +45,7 @@ public interface IPhotoController {
 	Map<String, String> listPhotoInfo(String fileName, User user);
 
 	/**
-	 * Gets the photos by date.
+	 * Gets the photos by date range for the user
 	 *
 	 * @param start the start
 	 * @param end the end
@@ -55,7 +55,7 @@ public interface IPhotoController {
 	List<Photo> getPhotosByDate(Date start, Date end, User user);
 
 	/**
-	 * Gets the photos by tag.
+	 * Gets the photos by tag for the user.
 	 *
 	 * @param tags the tags
 	 * @param user the user

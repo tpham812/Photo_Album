@@ -1,39 +1,30 @@
 package cs213.photoAlbum.model;
 
 import java.util.Calendar;
+import java.util.Map;
 import java.util.Set;
 
 /**
+ *
  * @author dheeptha
- * The Class Photo.
+ * Represents a Photo.
  */
 public class Photo {
 
-	/** The name. */
+	/** Name of the photo. */
 	private String name;
 
-	/** The caption. */
+	/** Photo caption. */
 	private String caption;
 
-	/** The date time. */
+	/**  Date time when the photo was taken. */
 	private Calendar dateTime;
 
-	/** The tags. */
-	private Set<String> tags;
-
-	/** The user. */
-	private User user;
-
-	/**
-	 * The Enum TAG.
-	 */
-	public static enum TAG {
-
-		/** The location. */
-		location,
-		/** The person. */
-		person
-	}
+	/**  Tags associated with the photo. */
+	private Map<String,String> tags;
+	
+	/** The person tags. */
+	private Set<String> personTags;
 
 	/**
 	 * Gets the name.
@@ -95,40 +86,39 @@ public class Photo {
 
 	/**
 	 * Gets the tags.
-	 * 
+	 *
 	 * @return the tags
 	 */
-	public Set<String> getTags() {
+	public Map<String, String> getTags() {
 		return tags;
 	}
 
 	/**
 	 * Sets the tags.
-	 * 
-	 * @param tags
-	 *            the new tags
+	 *
+	 * @param tags the tags
 	 */
-	public void setTags(Set<String> tags) {
+	public void setTags(Map<String, String> tags) {
 		this.tags = tags;
 	}
 
 	/**
-	 * Gets the user.
-	 * 
-	 * @return the user
+	 * Gets the person tags.
+	 *
+	 * @return the person tags
 	 */
-	public User getUser() {
-		return user;
+	public Set<String> getPersonTags() {
+		return personTags;
 	}
 
 	/**
-	 * Sets the user.
-	 * 
-	 * @param user
-	 *            the new user
+	 * Sets the person tags.
+	 *
+	 * @param personTags the new person tags
 	 */
-	public void setUser(User user) {
-		this.user = user;
-	};
+	public void setPersonTags(Set<String> personTags) {
+		this.personTags = personTags;
+	}
+
 
 }
