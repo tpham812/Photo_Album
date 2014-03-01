@@ -1,7 +1,6 @@
 package cs213.photoAlbum.model;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -21,28 +20,11 @@ public interface IBackend {
 	File retrievePhotoFile(Photo photo, User user);
 
 	/**
-	 * Store the contents of the InputStream as a file represented by {@link Photo#getName()} for the user
-	 *
-	 * @param photo the photo
-	 * @param user the user
-	 * @param stream the stream
-	 */
-	void storeFile(Photo photo, InputStream stream, User user);
-
-	/**
-	 * Delete the user's photo
-	 *
-	 * @param photo the photo
-	 * @param user the user
-	 */
-	void deleteFile(Photo photo, User user);
-
-	/**
 	 * Read user.
 	 *
 	 * @param userId the user id
 	 */
-	void readUser(String userId);
+	User readUser(String userId);
 
 	/**
 	 * Write user.
