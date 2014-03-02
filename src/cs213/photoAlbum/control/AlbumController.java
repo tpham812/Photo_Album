@@ -33,7 +33,13 @@ public class AlbumController implements IAlbumController {
 
 	@Override
 	public List<Photo> listPhotos(String albumName, User user) {
-		 return null; 
+		 for (int i = 0; i < user.albumList.size(); i++){
+			 if (albumName.equals(user.albumList.get(i).getAlbumName())){
+				 return user.albumList.get(i).getPhotos(); 
+				 }
+		 }
+		
+		return null;  
 		
 	}
 
