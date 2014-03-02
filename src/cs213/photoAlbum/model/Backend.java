@@ -37,7 +37,6 @@ public class Backend implements IBackend {
 		} catch (Exception e) {
 			System.err.println("Error: Failed to read file for " + userId);
 		} finally {
-			close(fileIn, userId);
 			close(in, userId);
 		}
 		return user;
@@ -74,7 +73,6 @@ public class Backend implements IBackend {
 			return false;
 		} finally {
 			close(out, u.getUserID());
-			//close(fileOut, u.getUserID());
 		}		
 	}
 
