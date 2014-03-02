@@ -1,5 +1,6 @@
 package cs213.photoAlbum.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.Set;
@@ -9,7 +10,7 @@ import java.util.Set;
  * @author dheeptha
  * 
  **/
-public class Photo {
+public class Photo implements Serializable {
 
 	/** Name of the photo. */
 	private String name;

@@ -1,5 +1,6 @@
 package cs213.photoAlbum.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * 
  *
  */
-public class Album {
+public class Album implements Serializable {
 	
 	
 	/** Name of the album */
