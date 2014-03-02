@@ -1,7 +1,9 @@
 package cs213.photoAlbum.control;
 
-import java.util.List;
+import java.util.ArrayList;
 
+import java.util.List;
+import cs213.photoAlbum.model.Backend; 
 import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.Photo;
 import cs213.photoAlbum.model.User;
@@ -10,26 +12,29 @@ public class AlbumController implements IAlbumController {
 
 	@Override
 	public List<Album> listAlbums(User user) {
-		// TODO Auto-generated method stub
-		return null;
+			return user.getAlbums(); 
 	}
 
 	@Override
 	public boolean createAlbum(String albumName, User user) {
-		// TODO Auto-generated method stub
-		return false;
+		Album albm = new Album(albumName, 0, null);
+		user.albumList.add(albm); 
+		if (user.albumList == null){
+			return false; 
+		} else {
+		return true; 
 	}
-
+	}
 	@Override
 	public boolean deleteAlbum(String albumName, User user) {
-		// TODO Auto-generated method stub
-		return false;
+		user.deleteAlbum(albumName); 
+		return true; 
 	}
 
 	@Override
 	public List<Photo> listPhotos(String albumName, User user) {
-		// TODO Auto-generated method stub
-		return null;
+		 return null; 
+		
 	}
 
 	@Override

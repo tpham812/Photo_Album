@@ -19,7 +19,7 @@ public class User implements Serializable {
 	private String fname;
 	
 	/**  List of albums. */
-	List<Album> albumList; 
+	public List<Album> albumList; 
 	
 	/**  User's photos indexed by the name of the file. */
 	Map<String,Photo> photos;
@@ -49,7 +49,7 @@ public class User implements Serializable {
 	/**
 	 * deletes album .
 	 */
-	public void deleteAlbum(){ 
+	public void deleteAlbum(String albumName){ 
 		
 	}
 	
@@ -111,6 +111,9 @@ public class User implements Serializable {
 		 return fname; 
 	 }
 
+	 public List<Album> getAlbums(){
+		 return albumList; 
+	 }
 
 	/**
 	 * Gets the photos.
