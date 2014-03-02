@@ -29,7 +29,7 @@ public class Backend implements IBackend {
 			user = (User) in.readObject();
 
 		} catch (Exception e) {
-			System.err.println("Failed to read file for " + userId);
+			System.err.println("Error: Failed to read file for " + userId);
 		} finally {
 			close(fileIn, userId);
 			close(in, userId);
@@ -49,7 +49,7 @@ public class Backend implements IBackend {
 			out.writeObject(u);
 
 		} catch (Exception e) {
-			System.err.println("Failed to read file for " + u.getUserID());
+			System.err.println("Error: Failed to write file for " + u.getUserID());
 		} finally {
 			close(out, u.getUserID());
 			close(fileOut, u.getUserID());
@@ -83,7 +83,7 @@ public class Backend implements IBackend {
 				in.close();
 			}
 		} catch (IOException e) {
-			System.err.println("Failed to read file for " + userId);
+			System.err.println("Error: Failed to close file for " + userId);
 		}
 	}
 
@@ -93,7 +93,7 @@ public class Backend implements IBackend {
 				fileIn.close();
 			}
 		} catch (IOException e) {
-			System.err.println("Failed to read file for " + userId);
+			System.err.println("Error: Failed to close file for " + userId);
 		}
 	}
 
@@ -103,7 +103,7 @@ public class Backend implements IBackend {
 				fileOut.close();
 			}
 		} catch (IOException e) {
-			System.err.println("Failed to read file for " + userId);
+			System.err.println("Error: Failed to close file for " + userId);
 		}
 	}
 
@@ -114,7 +114,7 @@ public class Backend implements IBackend {
 				out.close();
 			}
 		} catch (IOException e) {
-			System.err.println("Failed to read file for " + userId);
+			System.err.println("Error: Failed to close file for " + userId);
 		}
 	}
 
