@@ -1,5 +1,6 @@
 package cs213.photoAlbum.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import java.util.Map;
  * 
  * @author brett
  **/
-public class User {
+public class User implements Serializable {
 	
 	/**  ID of the user. */
 	private String id; 

@@ -16,7 +16,7 @@ public interface IUserController {
 	 *
 	 * @return the list
 	 */
-	List<User> listUsers();
+	List<String> listUsers();
 
 	/**
 	 * Adds the user.
@@ -46,6 +46,6 @@ public interface IUserController {
 	/**
 	 * Logout.
 	 */
-	void logout();
+	void logout(User u);
 
 }

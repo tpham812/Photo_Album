@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,12 @@ public class Backend implements IBackend {
 		User user = null;
 
 		try {
-			fileIn = new FileInputStream(getSerializedFile(userId));
+			File f = new File(getSerializedFile(userId));			
+			if(!f.exists()) {
+				return null;
+			}
+			
+			fileIn = new FileInputStream(f);
 			in = new ObjectInputStream(fileIn);
 			user = (User) in.readObject();
 
@@ -36,9 +42,23 @@ public class Backend implements IBackend {
 		}
 		return user;
 	}
+	
+	public List<String> listUsers(){
+		
+		List<String> users = new ArrayList<String>();		
+		File f = new File("data");
+		
+	    for (File e : f.listFiles()) {
+	        
+	    	String name = e.getName();
+	    	name = name.substring(0,name.length()-4);
+	        users.add(name);
+	    }
+		return users;
+	}
 
 	@Override
-	public void writeUser(User u) {
+	public boolean  writeUser(User u) {
 
 		FileOutputStream fileOut = null;
 		ObjectOutputStream out = null;
@@ -47,13 +67,15 @@ public class Backend implements IBackend {
 			fileOut = new FileOutputStream(getSerializedFile(u.getUserID()));
 			out = new ObjectOutputStream(fileOut);
 			out.writeObject(u);
-
+			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("Error: Failed to write file for " + u.getUserID());
+			return false;
 		} finally {
 			close(out, u.getUserID());
-			close(fileOut, u.getUserID());
-		}
+			//close(fileOut, u.getUserID());
+		}		
 	}
 
 	private String getSerializedFile(String userId) {
@@ -61,9 +83,9 @@ public class Backend implements IBackend {
 	}
 	
 	@Override
-	public void deleteUser(String userId) {
+	public boolean deleteUser(String userId) {
 
-		new File(getSerializedFile(userId)).delete();
+		return new File(getSerializedFile(userId)).delete();
 	}
 
 	@Override

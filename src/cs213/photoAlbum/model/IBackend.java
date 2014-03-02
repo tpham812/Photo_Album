@@ -31,14 +31,14 @@ public interface IBackend {
 	 *
 	 * @param u the user
 	 */
-	void writeUser(User u);
+	boolean writeUser(User u);
 
 	/**
 	 * Delete user.
 	 *
 	 * @param userId the user id
 	 */
-	void deleteUser(String userId);
+	boolean deleteUser(String userId);
 
 	/**
 	 * Gets the users corresponding to the userids.
