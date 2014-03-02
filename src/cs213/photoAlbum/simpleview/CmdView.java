@@ -1,6 +1,7 @@
 package cs213.photoAlbum.simpleview;
 
 import java.util.List;
+import java.util.Scanner;
 
 import cs213.photoAlbum.control.AlbumController;
 import cs213.photoAlbum.control.IAlbumController;
@@ -76,6 +77,17 @@ public class CmdView {
 	}
 
 	private void launchInteractiveMode() {
+		
+        Scanner scanner = new Scanner(System.in);  
+
+        while(scanner.hasNext()){
+        	String l = scanner.nextLine();
+        	System.out.println(l);
+        }
+        
+        scanner.close();
+        
+		
 		
 	}
 

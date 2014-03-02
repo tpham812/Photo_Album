@@ -8,5 +8,5 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="cs213.photoAlbum.simpleview.CmdView"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="login dbas"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="PhotoAlbum44"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="photoalbum44"/>
 </launchConfiguration>
