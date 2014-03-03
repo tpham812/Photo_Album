@@ -117,26 +117,43 @@ public class CmdView {
 
 				params = getQuotedParams(l, 3);
 				if (params.size() == 3) {
-					albumController.addPhoto(params.get(0), params.get(1),
-							params.get(2), u);
+					albumController.addPhoto(params.get(0), params.get(1), params.get(2), u);
 				}
 
 			} else if (l.startsWith("movePhoto")) {
 				params = getQuotedParams(l, 3);
 				if (params.size() == 3) {
-					albumController.movePhoto(params.get(0), params.get(1),
-							params.get(2), u);
+					albumController.movePhoto(params.get(0), params.get(1), params.get(2), u);
 				}
 			} else if (l.startsWith("removePhoto")) {
 
 				params = getQuotedParams(l, 3);
 				if (params.size() == 3) {
-					albumController
-							.removePhoto(params.get(0), params.get(1), u);
+					albumController.removePhoto(params.get(0), params.get(1), u);
 				}
 
-			} else if (l.startsWith("addTag")) {
-			} else if (l.startsWith("deleteTag")) {
+			} else if (l.startsWith("addTag") || l.startsWith("deleteTag")) {
+
+				params = getQuotedParams(l, 1);
+				if (params.size() == 1) {
+					String photo = params.get(0);
+					l = l.substring(l.indexOf(photo) + photo.length() + 1);
+					StringBuffer tagName = new StringBuffer();
+					StringBuffer tagValue = new StringBuffer();
+					parseTag(l, tagName, tagValue);
+
+					if (tagName.length() > 0 && tagValue.length() > 0) {
+						
+						System.out.println(photo + " " + tagName + " " + tagValue);
+
+						if (l.startsWith("addTag")) {
+							photoController.addTag(photo, tagName.toString(), tagValue.toString(), u);
+						} else {
+							photoController.deleteTag(photo, tagName.toString(), tagValue.toString(), u);
+						}
+					}
+				}
+
 			} else if (l.startsWith("listPhotoInfo")) {
 
 				params = getQuotedParams(l, 1);
@@ -145,18 +162,19 @@ public class CmdView {
 				}
 
 			} else if (l.startsWith("getPhotosByDate")) {
-				
+
 				String vals[] = l.split(" ");
-				if(vals.length != 3){
+				if (vals.length != 3) {
 					Calendar start = parseDate(vals[1]);
 					Calendar end = parseDate(vals[2]);
-					
-					if (start!= null && end != null) {				
+
+					if (start != null && end != null) {
 						photoController.getPhotosByDate(start, end, u);
 					}
 				}
-				
+
 			} else if (l.startsWith("getPhotosByTag")) {
+
 			} else if (l.startsWith("logout")) {
 				break;
 			} else {
@@ -169,14 +187,27 @@ public class CmdView {
 
 	}
 
+	private void parseTag(String l, StringBuffer tagName, StringBuffer tagValue) {
+		
+		String sp[] = l.split(":");
+		if (sp.length == 2) {
+			tagName.append(sp[0]);
+	
+			List<String> params = getQuotedParams(sp[1], 1);
+			if(!params.isEmpty()) {
+				tagValue.append(params.get(0));
+			}
+		}
+	}
+
 	private Calendar parseDate(String string) {
 
 		Calendar cal = Calendar.getInstance();
-		
+
 		Date dateStr = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("MM/DD/YYYY-HH:MM:SS");
-		
-        try {
+
+		try {
 			dateStr = formatter.parse(string);
 			cal.setTime(dateStr);
 			cal.set(Calendar.MILLISECOND, 0);
@@ -246,8 +277,7 @@ public class CmdView {
 
 	private void addUser(String[] args) {
 		if (args.length != 3) {
-			System.err
-					.println("Error: Usage for adduser <user id> \"<user name>\" ");
+			System.err.println("Error: Usage for adduser <user id> \"<user name>\" ");
 			return;
 		}
 
@@ -259,8 +289,7 @@ public class CmdView {
 		if (user) {
 			System.out.println("created user " + userId + " with name " + name);
 		} else {
-			System.out.println("user " + userId + " already exists with name "
-					+ name);
+			System.out.println("user " + userId + " already exists with name " + name);
 		}
 	}
 
