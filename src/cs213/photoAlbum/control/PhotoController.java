@@ -1,7 +1,6 @@
 package cs213.photoAlbum.control;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
