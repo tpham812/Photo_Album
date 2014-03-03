@@ -164,16 +164,18 @@ public class CmdView {
 			} else if (l.startsWith("getPhotosByDate")) {
 
 				String vals[] = l.split(" ");
-				if (vals.length != 3) {
+				if (vals.length == 3) {
 					Calendar start = parseDate(vals[1]);
 					Calendar end = parseDate(vals[2]);
 
 					if (start != null && end != null) {
+												
 						photoController.getPhotosByDate(start, end, u);
 					}
 				}
 
 			} else if (l.startsWith("getPhotosByTag")) {
+				
 
 			} else if (l.startsWith("logout")) {
 				break;
@@ -184,17 +186,30 @@ public class CmdView {
 		}
 
 		scanner.close();
+	}
+	
+	private void parseTag(String l, List<String> tagNames, List<String> tagValues) {
+		//getPhotosByTag [<tagType>:]"<tagValue>" [,[<tagType>:]"<tagValue>"]
 
+		
 	}
 
 	private void parseTag(String l, StringBuffer tagName, StringBuffer tagValue) {
-		
+
 		String sp[] = l.split(":");
+		String val = null;
 		if (sp.length == 2) {
 			tagName.append(sp[0]);
-	
-			List<String> params = getQuotedParams(sp[1], 1);
-			if(!params.isEmpty()) {
+			val = sp[1];
+
+		} else if (sp.length == 1) {
+			val = sp[0];
+		}
+
+		if (val != null) {
+
+			List<String> params = getQuotedParams(val, 1);
+			if (!params.isEmpty()) {
 				tagValue.append(params.get(0));
 			}
 		}
@@ -205,7 +220,7 @@ public class CmdView {
 		Calendar cal = Calendar.getInstance();
 
 		Date dateStr = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/DD/YYYY-HH:MM:SS");
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy-HH:mm:ss");
 
 		try {
 			dateStr = formatter.parse(string);
