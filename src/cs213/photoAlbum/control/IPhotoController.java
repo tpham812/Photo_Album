@@ -1,5 +1,6 @@
 package cs213.photoAlbum.control;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +54,7 @@ public interface IPhotoController {
 	 * @param user the user
 	 * @return the photos by date
 	 */
-	List<Photo> getPhotosByDate(Date start, Date end, User user);
+	List<Photo> getPhotosByDate(Calendar start, Calendar end, User user);
 
 	/**
 	 * Gets the photos by tag for the user.

@@ -1,6 +1,10 @@
 package cs213.photoAlbum.simpleview;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -68,7 +72,7 @@ public class CmdView {
 
 			User user = login(args);
 			if (user != null) {
-				launchInteractiveMode();
+				launchInteractiveMode(user);
 			}
 
 		} else {
@@ -76,7 +80,7 @@ public class CmdView {
 		}
 	}
 
-	private void launchInteractiveMode() {
+	private void launchInteractiveMode(User u) {
 
 		Scanner scanner = new Scanner(System.in);
 		List<String> params = null;
@@ -85,35 +89,102 @@ public class CmdView {
 			String l = scanner.nextLine();
 
 			if (l.startsWith("createAlbum")) {
-				
-				params = getQuotedParams(l,1);
-				if(params.size() == 1) {
-					System.out.println(params.get(0));
+
+				params = getQuotedParams(l, 1);
+				if (params.size() == 1) {
+					albumController.createAlbum(params.get(0), u);
 				}
-				
+
 			} else if (l.startsWith("deleteAlbum")) {
+
+				params = getQuotedParams(l, 1);
+				if (params.size() == 1) {
+					albumController.deleteAlbum(params.get(0), u);
+				}
 
 			} else if (l.startsWith("listAlbums")) {
 
+				albumController.listAlbums(u);
+
 			} else if (l.startsWith("listPhotos")) {
+
+				params = getQuotedParams(l, 1);
+				if (params.size() == 1) {
+					albumController.listPhotos(params.get(0), u);
+				}
 
 			} else if (l.startsWith("addPhoto")) {
 
+				params = getQuotedParams(l, 3);
+				if (params.size() == 3) {
+					albumController.addPhoto(params.get(0), params.get(1),
+							params.get(2), u);
+				}
+
 			} else if (l.startsWith("movePhoto")) {
+				params = getQuotedParams(l, 3);
+				if (params.size() == 3) {
+					albumController.movePhoto(params.get(0), params.get(1),
+							params.get(2), u);
+				}
 			} else if (l.startsWith("removePhoto")) {
+
+				params = getQuotedParams(l, 3);
+				if (params.size() == 3) {
+					albumController
+							.removePhoto(params.get(0), params.get(1), u);
+				}
+
 			} else if (l.startsWith("addTag")) {
 			} else if (l.startsWith("deleteTag")) {
 			} else if (l.startsWith("listPhotoInfo")) {
+
+				params = getQuotedParams(l, 1);
+				if (params.size() == 1) {
+					photoController.listPhotoInfo(params.get(0), u);
+				}
+
 			} else if (l.startsWith("getPhotosByDate")) {
+				
+				String vals[] = l.split(" ");
+				if(vals.length != 3){
+					Calendar start = parseDate(vals[1]);
+					Calendar end = parseDate(vals[2]);
+					
+					if (start!= null && end != null) {				
+						photoController.getPhotosByDate(start, end, u);
+					}
+				}
+				
 			} else if (l.startsWith("getPhotosByTag")) {
 			} else if (l.startsWith("logout")) {
 				break;
+			} else {
+				System.err.println("Error: invalid command " + l);
 			}
 
 		}
 
 		scanner.close();
 
+	}
+
+	private Calendar parseDate(String string) {
+
+		Calendar cal = Calendar.getInstance();
+		
+		Date dateStr = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/DD/YYYY-HH:MM:SS");
+		
+        try {
+			dateStr = formatter.parse(string);
+			cal.setTime(dateStr);
+			cal.set(Calendar.MILLISECOND, 0);
+		} catch (ParseException e) {
+			System.err.println("Failed to parse date " + string);
+		}
+
+		return cal;
 	}
 
 	private List<String> getQuotedParams(String l, int numParams) {
@@ -130,9 +201,9 @@ public class CmdView {
 				strings.clear();
 				break;
 			}
-			s = l.substring(i+1, j);
+			s = l.substring(i + 1, j);
 			strings.add(s);
-			
+
 			i = j + 1;
 
 		}

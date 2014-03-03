@@ -1,5 +1,6 @@
 package cs213.photoAlbum.control;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class PhotoController implements IPhotoController {
 	}
 
 	@Override
-	public List<Photo> getPhotosByDate(Date start, Date end, User user) {
+	public List<Photo> getPhotosByDate(Calendar start, Calendar end, User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
