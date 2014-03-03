@@ -45,13 +45,27 @@ public class AlbumController implements IAlbumController {
 
 	@Override
 	public boolean addPhoto(String fileName, String caption, String albumName, User user) {
-		// TODO Auto-generated method stub
-		return false;
+		Photo photo = new Photo(); 
+		photo.setName(fileName);
+	    photo.setCaption(caption); 
+	    if (photo == null){
+	    	return false;
+	    }
+		
+		for (int i = 0; i < user.albumList.size(); i++){
+			 if (albumName.equals(user.albumList.get(i).getAlbumName())){
+				 Album album = user.albumList.get(i); 
+				 album.photoList.add(photo); 
+				 return true; 
+			 }
+		} 
+			return false;
 	}
+	
 
 	@Override
 	public boolean movePhoto(String fileName, String oldAlbumName, String newAlbumName, User user) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
