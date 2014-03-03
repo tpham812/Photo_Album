@@ -54,8 +54,8 @@ public class AlbumController implements IAlbumController {
 		
 		for (int i = 0; i < user.albumList.size(); i++){
 			 if (albumName.equals(user.albumList.get(i).getAlbumName())){
-				 Album album = user.albumList.get(i); 
-				 album.getPhotos().add(photo); 
+				user.albumList.get(i).photoList.add(photo);
+				 
 				 return true; 
 			 }
 		} 
@@ -71,8 +71,15 @@ public class AlbumController implements IAlbumController {
 
 	@Override
 	public boolean removePhoto(String fileName, String albumName, User user) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		for (int i = 0; i < user.albumList.size(); i++){
+			 if (albumName.equals(user.albumList.get(i).getAlbumName())){
+				user.albumList.get(i).photoList.remove(fileName); 
+				return true; 
+		
+		
+			 }
 
+		}
+		return false; 
+	}
 }
