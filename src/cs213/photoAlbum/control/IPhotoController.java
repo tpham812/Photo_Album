@@ -63,6 +63,6 @@ public interface IPhotoController {
 	 * @param user the user
 	 * @return the photos by tag
 	 */
-	List<Photo> getPhotosByTag(Map<String, String> tags, User user);
+	List<Photo> getPhotosByTag(List<String> tagNames, List<String> tagValues , User user);
 
 }

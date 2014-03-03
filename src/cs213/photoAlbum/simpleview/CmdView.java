@@ -181,10 +181,8 @@ public class CmdView {
 				l = l.replaceAll("getPhotosByTag", "");				
 				parseTag(l, tagNames, tagValues);
 				
-				for(int i = 0 ; i < tagNames.size() ; i++){
-					System.out.println(tagNames.get(i));
-					System.out.println(tagValues.get(i));
-				}				
+				photoController.getPhotosByTag(tagNames, tagValues, u);
+				
 				
 			} else if (l.startsWith("logout")) {
 				break;
