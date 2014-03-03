@@ -20,7 +20,7 @@ public class Album implements Serializable {
 	private int photos;
 	
 	/** List of the photos */
-	private List<Photo> photoList; 
+	public List<Photo> photoList; 
 	
 	/**
 	 * Constructor for the album object
