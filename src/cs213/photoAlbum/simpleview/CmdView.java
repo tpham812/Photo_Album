@@ -168,15 +168,24 @@ public class CmdView {
 					Calendar start = parseDate(vals[1]);
 					Calendar end = parseDate(vals[2]);
 
-					if (start != null && end != null) {
-												
+					if (start != null && end != null) {												
 						photoController.getPhotosByDate(start, end, u);
 					}
 				}
 
 			} else if (l.startsWith("getPhotosByTag")) {
 				
-
+				List<String> tagNames = new ArrayList<String>();
+				List<String> tagValues = new ArrayList<String>();
+				
+				l = l.replaceAll("getPhotosByTag", "");				
+				parseTag(l, tagNames, tagValues);
+				
+				for(int i = 0 ; i < tagNames.size() ; i++){
+					System.out.println(tagNames.get(i));
+					System.out.println(tagValues.get(i));
+				}				
+				
 			} else if (l.startsWith("logout")) {
 				break;
 			} else {
@@ -189,9 +198,29 @@ public class CmdView {
 	}
 	
 	private void parseTag(String l, List<String> tagNames, List<String> tagValues) {
-		//getPhotosByTag [<tagType>:]"<tagValue>" [,[<tagType>:]"<tagValue>"]
 
+		while(l.length() > 0) {
+			StringBuffer tagName = new StringBuffer();
+			StringBuffer tagValue = new StringBuffer();
+			
+			int i1 = l.indexOf('"');
+			int i2 = l.indexOf('"', i1 + 1);
+			String l1 = l.substring(0, i2 + 1);
+			
+			parseTag(l1, tagName, tagValue);
+
+			if(tagValue.length() != 0) {
+				
+				tagNames.add(tagName.toString());
+				tagValues.add(tagValue.toString());				
+				l = l.substring(i2 + 1);
+				
+			} else {
+				break;
+			}
 		
+			l = l.substring(l.indexOf(',') + 1);
+		}		
 	}
 
 	private void parseTag(String l, StringBuffer tagName, StringBuffer tagValue) {
@@ -199,7 +228,7 @@ public class CmdView {
 		String sp[] = l.split(":");
 		String val = null;
 		if (sp.length == 2) {
-			tagName.append(sp[0]);
+			tagName.append(sp[0].trim());
 			val = sp[1];
 
 		} else if (sp.length == 1) {
