@@ -55,7 +55,7 @@ public class AlbumController implements IAlbumController {
 		for (int i = 0; i < user.albumList.size(); i++){
 			 if (albumName.equals(user.albumList.get(i).getAlbumName())){
 				 Album album = user.albumList.get(i); 
-				 album.photoList.add(photo); 
+				 album.getPhotos().add(photo); 
 				 return true; 
 			 }
 		} 
