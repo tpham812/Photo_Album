@@ -35,7 +35,7 @@ public class PhotoController implements IPhotoController {
 	}
 
 	@Override
-	public List<Photo> getPhotosByTag(Map<String, String> tags, User user) {
+	public List<Photo> getPhotosByTag(List<String> tagNames, List<String> tagValues , User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
