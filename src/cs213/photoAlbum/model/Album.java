@@ -29,7 +29,8 @@ public class Album implements Serializable {
 	 * @param photoList	the list of photos
 	 */
 	public Album(String name, int photos, List<Photo> photoList){
-		
+		this.name = name; 
+		this.photos = photos;
 	}
 	
 	/**
@@ -56,6 +57,7 @@ public class Album implements Serializable {
 	 * @param name name of album
 	 */
 	public void setAlbumName(String name){
+		this.name=name;
 	}
 	
 	/**
