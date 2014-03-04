@@ -55,18 +55,32 @@ public class User implements Serializable {
 			System.out.println("album created for user "+ this + ":");
 			System.out.println(album.getAlbumName()); 
 		}
-	/*	else {
+		else {
 			this.albumList.add(album);
 				System.out.println("album created for user "+ this + ":");
 				System.out.println(album.getAlbumName()); 
 		}
-	*/
+	
 	}
 
 	/**
 	 * deletes album .
 	 */
 	public void deleteAlbum(String albumName) {
+		if (albumList == null){
+			System.out.println("There are currently no albums");
+		} else {
+			for (int i = 0; i < this.albumList.size(); i++){
+				if (albumName.equals(this.albumList.get(i).getAlbumName())){
+					this.albumList.remove(this.albumList.get(i)); 
+					System.out.println("deleted album from user " + this + ":");
+					System.out.println(albumName); 
+					return; 
+				}
+			}
+			System.out.println("album does not exist for user " + this); 
+		}
+		//scroll through album list, find album and delete it 
 
 	}
 
@@ -130,7 +144,16 @@ public class User implements Serializable {
 	}
 
 	public List<Album> getAlbums() {
-		return albumList;
+		if (this.albumList.size() == 0){
+			System.out.println("No albums exist for user " + this);
+		} else {
+			System.out.println("Albums for user " + this + ":");
+			for (int i = 0; i < this.albumList.size(); i++){
+				System.out.println(this.albumList.get(i).getAlbumName()+ " " + "number of photos:" + this.albumList.get(i).getNumPhotos()+ ",");
+			}	
+		}
+		return albumList; 
+		
 	}
 
 	/**
