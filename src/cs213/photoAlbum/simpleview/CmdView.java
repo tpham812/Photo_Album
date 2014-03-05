@@ -179,9 +179,14 @@ public class CmdView {
 				}
 			} else if (l.startsWith("removePhoto")) {
 
-				params = getQuotedParams(l, 3);
-				if (params.size() == 3) {
-					albumController.removePhoto(params.get(0), params.get(1), u);
+				params = getQuotedParams(l, 2);
+				if (params.size() == 2) {
+					if (albumController.removePhoto(params.get(0), params.get(1), u)){
+						System.out.println("Removed photo:");
+						System.out.println(params.get(0) + " - From album "+ params.get(1));
+					} else {
+						System.out.println("Photo "  + params.get(0) + " is not in album "+ params.get(1));
+					}
 				}
 
 			} else if (l.startsWith("addTag") || l.startsWith("deleteTag")) {
