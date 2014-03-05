@@ -12,6 +12,11 @@ import java.util.Set;
  **/
 public class Photo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** Name of the photo. */
 	private String name;
 

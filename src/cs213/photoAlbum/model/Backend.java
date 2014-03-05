@@ -106,25 +106,6 @@ public class Backend implements IBackend {
 		}
 	}
 
-	private void close(FileInputStream fileIn, String userId) {
-		try {
-			if (fileIn != null) {
-				fileIn.close();
-			}
-		} catch (IOException e) {
-			System.err.println("Error: Failed to close file for " + userId);
-		}
-	}
-
-	private void close(FileOutputStream fileOut, String userId) {
-		try {
-			if (fileOut != null) {
-				fileOut.close();
-			}
-		} catch (IOException e) {
-			System.err.println("Error: Failed to close file for " + userId);
-		}
-	}
 
 	private void close(ObjectOutputStream out, String userId) {
 		try {

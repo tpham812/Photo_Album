@@ -13,6 +13,11 @@ import java.util.List;
 public class Album implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** Name of the album */
 	private String name; 
 	
