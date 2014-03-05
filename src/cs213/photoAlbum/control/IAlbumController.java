@@ -63,7 +63,7 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return true, if successful
 	 */
-	boolean addPhoto(String fileName, String caption, String albumName, User user);
+	Photo addPhoto(String fileName, String caption, String albumName, User user);
 
 	/**
 	 * Move the user's photo to a different album

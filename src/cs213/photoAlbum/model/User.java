@@ -68,6 +68,12 @@ public class User implements Serializable {
 		return albumList.get(albumName);
 	}
 
+	public void addPhoto(Photo photo, Album album) {
+		
+		photos.put(photo.getName(), photo);		
+	}
+	
+	
 	/**
 	 * deletes album .
 	 */
