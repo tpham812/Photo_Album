@@ -13,6 +13,11 @@ import java.util.Map;
  **/
 public class User implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** ID of the user. */
 	private String id;
 
