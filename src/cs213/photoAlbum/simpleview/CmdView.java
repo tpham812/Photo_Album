@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -14,6 +15,7 @@ import cs213.photoAlbum.control.IPhotoController;
 import cs213.photoAlbum.control.IUserController;
 import cs213.photoAlbum.control.PhotoController;
 import cs213.photoAlbum.control.UserController;
+import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.User;
 
 public class CmdView {
@@ -92,19 +94,36 @@ public class CmdView {
 
 				params = getQuotedParams(l, 1);
 				if (params.size() == 1) {
-					albumController.createAlbum(params.get(0), u);
+					if(albumController.createAlbum(params.get(0), u)){
+						System.out.println("created album for user " + u.getUserID() + ":");						
+					} else {
+						System.out.println("album exists for user " + u.getUserID() + ":");
+					}
+					System.out.println(params.get(0));
 				}
 
 			} else if (l.startsWith("deleteAlbum")) {
 
 				params = getQuotedParams(l, 1);
 				if (params.size() == 1) {
-					albumController.deleteAlbum(params.get(0), u);
+					if(albumController.deleteAlbum(params.get(0), u)){
+						System.out.println("deleted album from user " + u.getUserID() + ":");						
+					} else {
+						System.out.println("album does not exist for user " + u.getUserID() + ":");
+					}	
+					System.out.println(params.get(0));
 				}
 
 			} else if (l.startsWith("listAlbums")) {
 
-				albumController.listAlbums(u);
+				Collection<Album> albums = albumController.listAlbums(u);
+				
+				if(albums.isEmpty()){
+					System.out.println("No albums exist for user " + u.getUserID());
+				} else {
+					System.out.println("Albums for user " + u.getUserID() + ":");
+				}
+				
 
 			} else if (l.startsWith("listPhotos")) {
 
