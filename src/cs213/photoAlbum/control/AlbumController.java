@@ -62,11 +62,11 @@ public class AlbumController implements IAlbumController {
 			user.getPhotos().put(fileName, photo);
 		}
 
-		Map<String, Photo> photos = user.getAlbum(albumName).photos;
-		if(photos.containsKey(fileName)) {
+		Album album = user.getAlbum(albumName);		
+		if(album == null || album.photos.containsKey(fileName)) {
 			return null;
 		} else {
-			photos.put(fileName, photo);
+			album.photos.put(fileName, photo);
 		}
 		
 		return photo;
@@ -80,15 +80,27 @@ public class AlbumController implements IAlbumController {
 
 	@Override
 	public boolean removePhoto(String fileName, String albumName, User user) {
-		for (int i = 0; i < user.albumList.size(); i++) {
-			if (albumName.equals(user.albumList.get(i).getAlbumName())) {
-				user.albumList.get(i).photos.remove(fileName);
-				return true;
-
-			}
-
+		
+		Map<String, Photo> photos = user.getAlbum(albumName).photos;
+		if(!photos.containsKey(fileName)) {
+			return false;
+		} else {
+			photos.remove(fileName);
 		}
-		return false;
+		
+		boolean photoExists = false;
+		for(Album a: user.getAlbums()){
+			if(a.photos.containsKey(fileName)){
+				photoExists = true;
+				break;
+			}
+		}
+		
+		if(!photoExists) {
+			user.getPhotos().remove(fileName);
+		}
+
+		return true;
 	}
 
 	@Override
