@@ -48,18 +48,28 @@ public class AlbumController implements IAlbumController {
 	
 
 	@Override
-	public boolean addPhoto(String fileName, String caption, String albumName, User user) {
-		Photo photo = new Photo();
-		photo.setName(fileName);
-		photo.setCaption(caption);
+	public Photo addPhoto(String fileName, String caption, String albumName, User user) {
+		
+		Photo photo = null;
+		
+		if(user.getPhotos().containsKey(fileName)) {
+			photo = user.getPhotos().get(fileName);
+			
+		} else {
+			photo = new Photo();
+			photo.setName(fileName);
+			photo.setCaption(caption);
+			user.getPhotos().put(fileName, photo);
+		}
 
 		Map<String, Photo> photos = user.getAlbum(albumName).photos;
 		if(photos.containsKey(fileName)) {
-			return false;
+			return null;
 		} else {
 			photos.put(fileName, photo);
 		}
-		return true;
+		
+		return photo;
 	}
 
 	@Override

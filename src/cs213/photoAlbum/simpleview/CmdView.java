@@ -162,9 +162,10 @@ public class CmdView {
 					if(!photoController.fileExists(params.get(0))) {
 						System.out.println("File " + params.get(0) + " does not exist");
 					} else {
-						if(albumController.addPhoto(params.get(0), params.get(1), params.get(2), u)) {
+						Photo p = albumController.addPhoto(params.get(0), params.get(1), params.get(2), u);
+						if(p != null) {
 							System.out.println("Added photo " + params.get(0) + ":");
-							System.out.println(params.get(1) + " - " + "Album: " + params.get(2));
+							System.out.println(p.getCaption() + " - " + "Album: " + params.get(2));
 						} else {
 							System.out.println("Photo " + params.get(0) + " already exists in album "+ params.get(2));
 						}
