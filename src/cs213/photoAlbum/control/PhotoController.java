@@ -4,10 +4,17 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import cs213.photoAlbum.model.Backend;
 import cs213.photoAlbum.model.Photo;
 import cs213.photoAlbum.model.User;
 
 public class PhotoController implements IPhotoController {
+	
+	private Backend backend;
+
+	public PhotoController() {
+		this.backend = new Backend();
+	}
 
 	@Override
 	public boolean addTag(String fileName, String tagType, String tagValue, User user) {
@@ -37,6 +44,11 @@ public class PhotoController implements IPhotoController {
 	public List<Photo> getPhotosByTag(List<String> tagNames, List<String> tagValues , User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+
+	public boolean fileExists(String fileName) {
+		return backend.fileExists(fileName);
 	}
 
 }

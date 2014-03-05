@@ -2,14 +2,17 @@ package cs213.photoAlbum.control;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import cs213.photoAlbum.model.Album;
+import cs213.photoAlbum.model.Backend;
 import cs213.photoAlbum.model.Photo;
 import cs213.photoAlbum.model.User;
 
 public class AlbumController implements IAlbumController {
 
+	
 	@Override
 	public Collection<Album> listAlbums(User user) {
 		return user.getAlbums();
@@ -38,16 +41,11 @@ public class AlbumController implements IAlbumController {
 	}
 
 	@Override
-	public List<Photo> listPhotos(String albumName, User user) {
-		for (int i = 0; i < user.albumList.size(); i++) {
-			if (albumName.equals(user.albumList.get(i).getAlbumName())) {
-				return user.albumList.get(i).getPhotos();
-			}
-		}
+	public Collection<Photo> listPhotos(String albumName, User user) {
 
-		return null;
-
+		return user.getAlbum(albumName).getPhotos();
 	}
+	
 
 	@Override
 	public boolean addPhoto(String fileName, String caption, String albumName, User user) {
@@ -55,14 +53,13 @@ public class AlbumController implements IAlbumController {
 		photo.setName(fileName);
 		photo.setCaption(caption);
 
-		for (int i = 0; i < user.albumList.size(); i++) {
-			if (albumName.equals(user.albumList.get(i).getAlbumName())) {
-				user.albumList.get(i).photoList.add(photo);
-
-				return true;
-			}
+		Map<String, Photo> photos = user.getAlbum(albumName).photos;
+		if(photos.containsKey(fileName)) {
+			return false;
+		} else {
+			photos.put(fileName, photo);
 		}
-		return false;
+		return true;
 	}
 
 	@Override
@@ -75,12 +72,17 @@ public class AlbumController implements IAlbumController {
 	public boolean removePhoto(String fileName, String albumName, User user) {
 		for (int i = 0; i < user.albumList.size(); i++) {
 			if (albumName.equals(user.albumList.get(i).getAlbumName())) {
-				user.albumList.get(i).photoList.remove(fileName);
+				user.albumList.get(i).photos.remove(fileName);
 				return true;
 
 			}
 
 		}
 		return false;
+	}
+
+	@Override
+	public Album getAlbum(String albumName, User user) {
+		return user.getAlbum(albumName);
 	}
 }

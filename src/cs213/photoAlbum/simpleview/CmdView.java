@@ -16,6 +16,7 @@ import cs213.photoAlbum.control.IUserController;
 import cs213.photoAlbum.control.PhotoController;
 import cs213.photoAlbum.control.UserController;
 import cs213.photoAlbum.model.Album;
+import cs213.photoAlbum.model.Photo;
 import cs213.photoAlbum.model.User;
 
 public class CmdView {
@@ -122,21 +123,52 @@ public class CmdView {
 					System.out.println("No albums exist for user " + u.getUserID());
 				} else {
 					System.out.println("Albums for user " + u.getUserID() + ":");
-				}
-				
+					for(Album a:albums) {
+						System.out.println(a.getAlbumName() + " number of photos: " + a.getPhotos().size() + ", " );
+					}
+				}				
 
 			} else if (l.startsWith("listPhotos")) {
 
 				params = getQuotedParams(l, 1);
 				if (params.size() == 1) {
-					albumController.listPhotos(params.get(0), u);
+					
+					Album a = albumController.getAlbum(params.get(0), u);
+					
+					if(a == null) {
+						System.out.println("album does not exist for user " + u.getUserID() +":");
+						System.out.println(params.get(1));
+					} else {
+						Collection<Photo> photos = albumController.listPhotos(params.get(0), u);
+						
+						if(photos.isEmpty()) {
+							System.out.println("No photos exist for album " + a.getAlbumName());
+
+						} else {
+							System.out.println("Photos for album " + a.getAlbumName() + ":");
+							
+							for(Photo p: photos){								
+								System.out.println(p.getName() + " - " + p.getDateTime());
+							}
+						}
+					}
 				}
 
 			} else if (l.startsWith("addPhoto")) {
 
 				params = getQuotedParams(l, 3);
 				if (params.size() == 3) {
-					albumController.addPhoto(params.get(0), params.get(1), params.get(2), u);
+					
+					if(!photoController.fileExists(params.get(0))) {
+						System.out.println("File " + params.get(0) + " does not exist");
+					} else {
+						if(albumController.addPhoto(params.get(0), params.get(1), params.get(2), u)) {
+							System.out.println("Added photo " + params.get(0) + ":");
+							System.out.println(params.get(1) + " - " + "Album: " + params.get(2));
+						} else {
+							System.out.println("Photo " + params.get(0) + " already exists in album "+ params.get(2));
+						}
+					}
 				}
 
 			} else if (l.startsWith("movePhoto")) {
@@ -204,6 +236,7 @@ public class CmdView {
 				
 				
 			} else if (l.startsWith("logout")) {
+				userController.logout(u);
 				break;
 			} else {
 				System.err.println("Error: invalid command " + l);

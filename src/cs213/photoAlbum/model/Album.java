@@ -2,7 +2,10 @@ package cs213.photoAlbum.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Album of a {@link User} containing multiple {@link Photo}s
@@ -22,7 +25,7 @@ public class Album implements Serializable {
 	private String name; 
 		
 	/** List of the photos */
-	public List<Photo> photoList; 
+	public Map<String, Photo> photos; 
 	
 	/**
 	 * Constructor for the album object
@@ -30,7 +33,7 @@ public class Album implements Serializable {
 	 */
 	public Album(String name){
 		this.name = name; 
-		this.photoList = new ArrayList<Photo>();
+		this.photos = new LinkedHashMap<String, Photo>();
 	}
 	
 	/**
@@ -46,9 +49,12 @@ public class Album implements Serializable {
 	 * Returns the list of photos
 	 * @return photoList the list of photos
 	 */
-	public List<Photo> getPhotos(){
-		return photoList; 
-		
+	public Collection<Photo> getPhotos(){
+		return photos.values(); 
+	}
+	
+	public Photo getPhoto(String name) {
+		return photos.get(name);
 	}
 	
 	

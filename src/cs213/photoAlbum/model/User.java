@@ -63,6 +63,10 @@ public class User implements Serializable {
 	public boolean containsAlbum(String albumName) {
 		return albumList.containsKey(albumName);
 	}
+	
+	public Album getAlbum(String albumName) {
+		return albumList.get(albumName);
+	}
 
 	/**
 	 * deletes album .

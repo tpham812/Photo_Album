@@ -64,4 +64,5 @@ public interface IPhotoController {
 	 */
 	List<Photo> getPhotosByTag(List<String> tagNames, List<String> tagValues , User user);
 
+	public boolean fileExists(String fileName);
 }

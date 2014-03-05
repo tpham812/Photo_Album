@@ -15,6 +15,10 @@ public class Backend implements IBackend {
 	public File retrievePhotoFile(Photo photo, User user) {
 		return new File(photo.getName());
 	}
+	
+	public boolean fileExists(String name){
+		return new File(name).exists();
+	}
 
 	@Override
 	public User readUser(String userId) {
