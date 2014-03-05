@@ -32,6 +32,10 @@ public interface IAlbumController {
 	 */
 	boolean createAlbum(String albumName, User user);
 
+	
+	Album getAlbum(String albumName, User user);
+	
+	
 	/**
 	 * Deletes the user's album 
 	 *
@@ -48,7 +52,7 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return the list
 	 */
-	List<Photo> listPhotos(String albumName, User user);
+	Collection<Photo> listPhotos(String albumName, User user);
 
 	/**
 	 * Adds the photo to the user
@@ -81,5 +85,5 @@ public interface IAlbumController {
 	 * @return true, if successful
 	 */
 	boolean removePhoto(String fileName, String albumName, User user);
-
+	
 }
