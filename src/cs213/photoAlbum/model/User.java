@@ -1,9 +1,11 @@
 package cs213.photoAlbum.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Represents the User, containing a unique ID, their full name, and the
@@ -25,7 +27,7 @@ public class User implements Serializable {
 	private String fname;
 
 	/** List of albums. */
-	public List<Album> albumList;
+	public Map<String, Album> albumList;
 
 	/** User's photos indexed by the name of the file. */
 	Map<String, Photo> photos;
@@ -43,6 +45,8 @@ public class User implements Serializable {
 		this.id = id;
 		/** Users full name */
 		this.fname = fname;
+		this.albumList = new LinkedHashMap<String, Album>();
+		this.photos = new LinkedHashMap<String, Photo>();
 	}
 
 	/**
@@ -51,42 +55,20 @@ public class User implements Serializable {
 	 * @param user
 	 *            The user
 	 */
-	public void addAlbum(Album album) {
-		/* check that album adds */
-		if(albumList==null){
-			List<Album> alb =	new ArrayList<Album>();	
-			alb.add(album);
-			this.albumList=alb;
-			System.out.println("album created for user "+ this + ":");
-			System.out.println(album.getAlbumName()); 
-		}
-		else {
-			this.albumList.add(album);
-				System.out.println("album created for user "+ this + ":");
-				System.out.println(album.getAlbumName()); 
-		}
+	public void addAlbum(Album album) {		
+		
+		albumList.put(album.getAlbumName(), album);				
+	}
 	
+	public boolean containsAlbum(String albumName) {
+		return albumList.containsKey(albumName);
 	}
 
 	/**
 	 * deletes album .
 	 */
-	public void deleteAlbum(String albumName) {
-		if (albumList == null){
-			System.out.println("There are currently no albums");
-		} else {
-			for (int i = 0; i < this.albumList.size(); i++){
-				if (albumName.equals(this.albumList.get(i).getAlbumName())){
-					this.albumList.remove(this.albumList.get(i)); 
-					System.out.println("deleted album from user " + this + ":");
-					System.out.println(albumName); 
-					return; 
-				}
-			}
-			System.out.println("album does not exist for user " + this); 
-		}
-		//scroll through album list, find album and delete it 
-
+	public void deleteAlbum(String albumName) {				
+		albumList.remove(albumName);
 	}
 
 	/**
@@ -148,17 +130,8 @@ public class User implements Serializable {
 		return fname;
 	}
 
-	public List<Album> getAlbums() {
-		if (this.albumList.size() == 0){
-			System.out.println("No albums exist for user " + this);
-		} else {
-			System.out.println("Albums for user " + this + ":");
-			for (int i = 0; i < this.albumList.size(); i++){
-				System.out.println(this.albumList.get(i).getAlbumName()+ " " + "number of photos:" + this.albumList.get(i).getNumPhotos()+ ",");
-			}	
-		}
-		return albumList; 
-		
+	public Collection<Album> getAlbums() {		
+		return albumList.values(); 		
 	}
 
 	/**

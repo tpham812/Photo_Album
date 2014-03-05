@@ -1,6 +1,8 @@
 package cs213.photoAlbum.control;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.Photo;
@@ -19,7 +21,7 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return the list
 	 */
-	List<Album> listAlbums(User user);
+	Collection<Album> listAlbums(User user);
 
 	/**
 	 * Creates an album for the user
