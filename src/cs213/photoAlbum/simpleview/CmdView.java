@@ -157,6 +157,8 @@ public class CmdView {
 		}
 		scanner.close();
 	}
+	
+
 
 	private void getPhotosByTag(IUser u, String cmd) {
 		List<String> tagNames = new ArrayList<String>();
@@ -174,7 +176,7 @@ public class CmdView {
 				System.out.println(p.getCaption()+ " - Album: " + formatAlbum(p, u.getAlbums()) + " - Date: " + CalendarUtils.toFmtDate(p.getDateTime()));	
 			}	
 		}else {
-			System.out.println("Error: Invalid arguments");
+			System.out.println("Error: Usage - getPhotosByTag [<tagType>:]\"<tagValue>\" [,[<tagType>:]\"<tagValue>\"]");
 		}
 	}
 
@@ -193,7 +195,7 @@ public class CmdView {
 				}
 			}
 		}else {
-			System.out.println("Error: Invalid arguments");
+			System.out.println("Error: Usage - getPhotosByDate <start date> <end date> ");
 		}
 	}
 
@@ -240,13 +242,13 @@ public class CmdView {
 				}
 			}
 		}else {
-			System.out.println("Error: Invalid arguments");
+			System.out.println("Error: Usage - listPhotoInfo \"<fileName>\" ");
 		}
 	}
 
 	private void addOrDeleteTag(IUser u, String cmd) {
 		List<String> params;
-		boolean addPhoto = cmd.startsWith("addTag");
+		boolean addTag = cmd.startsWith("addTag");
 		params = getQuotedParams(cmd, 1);
 		if (params.size() == 1) {
 			String photo = params.get(0);
@@ -259,7 +261,7 @@ public class CmdView {
 				System.out.println("Error: Photo " + photo + " does not exist");
 
 			} else if (tagName.length() > 0 && tagValue.length() > 0) {
-				if (addPhoto) {
+				if (addTag) {
 					if (photoController.addTag(photo, tagName.toString(), tagValue.toString(), u)) {
 
 						System.out.println("Added tag:");
@@ -278,10 +280,16 @@ public class CmdView {
 					}
 
 				}
+			} else{
+				
+				System.out.println("Error: tagType and tagValue cannot be empty");				
 			}
-
 		}else {
-			System.out.println("Error: Invalid arguments");
+			if(addTag) {
+				System.out.println("Error: Usage - addTag \"<fileName>\" <tagType>:\"<tagValue>\" "); 
+			} else {
+				System.out.println("Error: Usage - deleteTag \"<fileName>\" <tagType>:\"<tagValue>\"");
+			}
 		}
 	}
 
@@ -296,7 +304,7 @@ public class CmdView {
 				System.out.println("Photo " + params.get(0) + " is not in album " + params.get(1));
 			}
 		}else {
-			System.out.println("Error: Invalid arguments");
+			System.out.println("Error: Usage - removePhoto \"<fileName>\" \"<albumName>\" ");
 		}
 	}
 
@@ -317,7 +325,7 @@ public class CmdView {
 				}
 			}
 		}else {
-			System.out.println("Error: Invalid arguments");
+			System.out.println("Error: Usage - movePhoto \"<fileName>\" \"<oldAlbumName>\" \"<newAlbumName>\" ");
 		}
 	}
 
@@ -338,7 +346,7 @@ public class CmdView {
 				}
 			}
 		}else {
-			System.out.println("Error: Invalid arguments");
+			System.out.println("Error: Usage - addPhoto \"<fileName>\" \"<caption>\" \"<albumName>\" ");
 		}
 	}
 
@@ -367,7 +375,7 @@ public class CmdView {
 				}
 			}
 		} else {
-			System.out.println("Error: Invalid arguments");
+			System.out.println("Error: Usage - listPhotos \"<name>\" ");
 		}
 	}
 
@@ -403,7 +411,7 @@ public class CmdView {
 			}
 			System.out.println(params.get(0));
 		}else {
-			System.out.println("Error: Invalid arguments");
+			System.out.println("Error: Usage - deleteAlbum \"<name>\" ");
 		}
 	}
 
@@ -418,7 +426,7 @@ public class CmdView {
 			}
 			System.out.println(params.get(0));
 		} else {
-			System.out.println("Error: Invalid arguments");
+			System.out.println("Error: Usage - createAlbum \"<name>\" ");
 		}
 	}
 
@@ -528,7 +536,7 @@ public class CmdView {
 		IUser user;
 
 		if (args.length != 2) {
-			System.out.println("Error: Usage for login <user id>");
+			System.out.println("Error: Usage - login <user id>");
 		}
 
 		String userId = args[1];
@@ -542,7 +550,7 @@ public class CmdView {
 
 	private void deleteUser(String[] args) {
 		if (args.length != 2) {
-			System.out.println("Error: Usage for deleteuser <user id>");
+			System.out.println("Error: Usage - deleteuser <user id>");
 			return;
 		}
 
@@ -558,7 +566,7 @@ public class CmdView {
 
 	private void addUser(String[] args) {
 		if (args.length != 3) {
-			System.out.println("Error: Usage for adduser <user id> \"<user name>\" ");
+			System.out.println("Error: Usage - adduser <user id> \"<user name>\" ");
 			return;
 		}
 

@@ -57,8 +57,10 @@ public class Backend implements IBackend {
 	    for (File e : f.listFiles()) {
 	        
 	    	String name = e.getName();
-	    	name = name.substring(0,name.length()-4);
-	        users.add(name);
+	    	if(name.endsWith(".ser")) {
+		    	name = name.substring(0,name.length()-4);
+		        users.add(name);
+	    	}
 	    }
 		return users;
 	}
