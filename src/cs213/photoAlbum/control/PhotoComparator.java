@@ -2,12 +2,13 @@ package cs213.photoAlbum.control;
 
 import java.util.Comparator;
 
+import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.Photo;
 
-public class PhotoComparator implements Comparator<Photo> {
+public class PhotoComparator implements Comparator<IPhoto> {
 	
 	@Override
-	public int compare(Photo o1, Photo o2) {			
+	public int compare(IPhoto o1, IPhoto o2) {			
 		int i = o1.getDateTime().compareTo(o2.getDateTime());
 		
 		if (i == 0) {

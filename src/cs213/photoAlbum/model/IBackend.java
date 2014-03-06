@@ -17,21 +17,21 @@ public interface IBackend {
 	 * @param user the user
 	 * @return the file
 	 */
-	File retrievePhotoFile(Photo photo, User user);
+	File retrievePhotoFile(IPhoto photo, IUser user);
 
 	/**
 	 * Read user.
 	 *
 	 * @param userId the user id
 	 */
-	User readUser(String userId);
+	IUser readUser(String userId);
 
 	/**
 	 * Write user.
 	 *
 	 * @param u the user
 	 */
-	boolean writeUser(User u);
+	boolean writeUser(IUser u);
 
 	/**
 	 * Delete user.
