@@ -8,6 +8,12 @@ public class PhotoComparator implements Comparator<Photo> {
 	
 	@Override
 	public int compare(Photo o1, Photo o2) {			
-		return o1.getDateTime().compareTo(o2.getDateTime());
+		int i = o1.getDateTime().compareTo(o2.getDateTime());
+		
+		if (i == 0) {
+			i = o1.getName().compareTo(o2.getName());
+		}
+		
+		return i;
 	}
 }

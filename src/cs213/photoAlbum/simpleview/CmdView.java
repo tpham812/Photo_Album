@@ -5,11 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeMap;
 
 import cs213.photoAlbum.control.AlbumController;
 import cs213.photoAlbum.control.IAlbumController;
@@ -127,7 +132,15 @@ public class CmdView {
 				} else {
 					System.out.println("Albums for user " + u.getUserID() + ":");
 					for (Album a : albums) {
-						System.out.println(a.getAlbumName() + " number of photos: " + a.getPhotos().size() + ", ");
+						Calendar max = a.maxPhotoDate();
+						Calendar min = a.minPhotoDate();
+
+						if (max == null) {
+							System.out.println(a.getAlbumName() + " number of photos: " + a.getPhotos().size());
+						} else {
+							System.out.println(a.getAlbumName() + " number of photos: " + a.getPhotos().size() + ", "
+									+ CalendarUtils.toFmtDate(min) + " - " + CalendarUtils.toFmtDate(max));
+						}
 					}
 				}
 
@@ -256,8 +269,28 @@ public class CmdView {
 						System.out.println("Date: " + CalendarUtils.toFmtDate(p.getDateTime()));
 						System.out.println("Caption: " + p.getCaption());
 						System.out.println("Tags:");
-						for (Entry<String, Set<String>> e : p.getTags().entrySet()) {
-							for (String val : e.getValue()) {
+						Map<String, SortedSet<String>> tags = 
+								new TreeMap<String, SortedSet<String>>();
+						
+						tags.putAll(p.getTags());
+						
+						SortedSet<String> set = tags.remove("location");
+						if(set != null) {
+							for (String val : set) {
+								System.out.println("location:" + val);
+							}
+						}
+						
+						set = tags.remove("person");
+						if(set != null) {
+							for (String val : set) {
+								System.out.println("person:" + val);
+							}
+						}
+						
+						for (Entry<String, SortedSet<String>> e : tags.entrySet()) {
+							set = e.getValue();
+							for (String val : set) {
 								System.out.println(e.getKey() + ":" + val);
 							}
 						}
@@ -272,7 +305,12 @@ public class CmdView {
 					Calendar end = parseDate(vals[2]);
 
 					if (start != null && end != null) {
-						photoController.getPhotosByDate(start, end, u);
+						SortedSet<Photo> photosByDate = photoController.getPhotosByDate(start, end, u);
+						
+						System.out.println("Photos for user " + u.getUserID() + " in range " + vals[1] + " to " + vals[2] +":") ;
+						for (Photo p:photosByDate) {
+							System.out.println(p.getCaption()+ " - Album: " + formatAlbum(p, u.getAlbums()) + " - Date: " + CalendarUtils.toFmtDate(p.getDateTime()));	
+						}
 					}
 				}
 
