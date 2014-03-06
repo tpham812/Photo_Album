@@ -175,7 +175,18 @@ public class CmdView {
 			} else if (l.startsWith("movePhoto")) {
 				params = getQuotedParams(l, 3);
 				if (params.size() == 3) {
-					albumController.movePhoto(params.get(0), params.get(1), params.get(2), u);
+					
+					
+					if(!albumController.containsPhoto(params.get(0), params.get(2), u)) {
+						
+						if(albumController.movePhoto(params.get(0), params.get(1), params.get(2), u)){
+							
+							System.out.println("Moved photo " + params.get(0) + ":");
+							System.out.println(params.get(0) + " - From album "+ params.get(1) + " to album " + params.get(2));
+						} else {
+							System.out.println("Photo "  + params.get(0) + " does not exist in "+ params.get(1));
+						}
+					}
 				}
 			} else if (l.startsWith("removePhoto")) {
 
