@@ -33,10 +33,10 @@ public class PhotoController implements IPhotoController {
 			return false;
 		}
 
-		Map<String, Set<String>> tagMap = photo.getTags();
-		Set<String> tags = tagMap.get(tagType);
+		Map<String, SortedSet<String>> tagMap = photo.getTags();
+		SortedSet<String> tags = tagMap.get(tagType);
 		if (tags == null) {
-			tags = new LinkedHashSet<String>();
+			tags = new TreeSet<String>();
 			tagMap.put(tagType, tags);
 		}
 
@@ -60,7 +60,7 @@ public class PhotoController implements IPhotoController {
 			return false;
 		}
 
-		Map<String, Set<String>> tagMap = photo.getTags();
+		Map<String, SortedSet<String>> tagMap = photo.getTags();
 		Set<String> tags = tagMap.get(tagType);
 
 		if (tags == null) {

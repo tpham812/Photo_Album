@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 
 /**
  * Photo owned by a {@link User} and part of multiple {@link Album}s.
@@ -28,10 +29,10 @@ public class Photo implements Serializable {
 	private Calendar dateTime;
 
 	/**  Tags associated with the photo. */
-	private Map<String,Set<String>> tags;
+	private Map<String,SortedSet<String>> tags;
 	
 	public Photo(){
-		this.tags = new LinkedHashMap<String, Set<String>>();
+		this.tags = new LinkedHashMap<String, SortedSet<String>>();
 	}
 	
 	/**
@@ -97,7 +98,7 @@ public class Photo implements Serializable {
 	 *
 	 * @return the tags
 	 */
-	public Map<String, Set<String>> getTags() {
+	public Map<String, SortedSet<String>> getTags() {
 		return tags;
 	}
 
@@ -106,7 +107,7 @@ public class Photo implements Serializable {
 	 *
 	 * @param tags the tags
 	 */
-	public void setTags(Map<String, Set<String>> tags) {
+	public void setTags(Map<String, SortedSet<String>> tags) {
 		this.tags = tags;
 	}
 

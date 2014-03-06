@@ -2,6 +2,7 @@ package cs213.photoAlbum.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -98,7 +99,38 @@ public class Album implements Serializable {
 			return false;
 		return true;
 	}
+	
+	public Calendar maxPhotoDate(){
+		
+		Calendar cal = null;
+		
+		for(Photo p: photos.values()){
+			
+			if(cal == null) {
+				cal = p.getDateTime();
+			} else if (p.getDateTime().after(cal)){
+				cal = p.getDateTime();
+			}			
+		}
+		
+		return cal;		
+	}
 
+	
+	public Calendar minPhotoDate(){
+		
+		Calendar cal = null;
+		
+		for(Photo p: photos.values()){
+			
+			if(cal == null) {
+				cal = p.getDateTime();
+			} else if (p.getDateTime().before(cal)){
+				cal = p.getDateTime();
+			}			
+		}		
+		return cal;		
+	}
 	
 	
 }
