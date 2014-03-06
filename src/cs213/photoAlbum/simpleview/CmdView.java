@@ -322,7 +322,16 @@ public class CmdView {
 				l = l.replaceAll("getPhotosByTag", "");
 				parseTag(l, tagNames, tagValues);
 
-				photoController.getPhotosByTag(tagNames, tagValues, u);
+				if(!tagNames.isEmpty() && !tagValues.isEmpty()) {
+					
+					SortedSet<Photo> photosByDate = photoController.getPhotosByTag(tagNames, tagValues, u);;
+					
+					System.out.println("Photos for user " + u.getUserID() + " with tags " + l.trim() + ":") ;
+					for (Photo p:photosByDate) {
+						System.out.println(p.getCaption()+ " - Album: " + formatAlbum(p, u.getAlbums()) + " - Date: " + CalendarUtils.toFmtDate(p.getDateTime()));	
+					}	
+				}
+				
 
 			} else if (l.startsWith("logout")) {
 				userController.logout(u);

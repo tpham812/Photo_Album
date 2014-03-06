@@ -96,14 +96,46 @@ public class PhotoController implements IPhotoController {
 
 	@Override
 	public SortedSet<Photo> getPhotosByTag(List<String> tagNames, List<String> tagValues, User user) {
-		
+
 		SortedSet<Photo> result = new TreeSet<Photo>(new PhotoComparator());
-		
+
+		boolean m = false;
+
 		for (Photo p : user.getPhotos().values()) {
-			
+			m = true;
+
+			for (int i = 0; i < tagNames.size(); i++) {
+				String tagName = tagNames.get(0);
+				String tagValue = tagValues.get(0);
+
+				if (!matches(p, tagName, tagValue)) {
+					m = false;
+					break;
+				}
+			}
+			if (m) {
+				result.add(p);
+			}
 		}
-		
+
 		return result;
+	}
+
+	private boolean matches(Photo p, String tagName, String tagValue) {
+
+		if (tagName.isEmpty()) {
+			for (SortedSet<String> vals : p.getTags().values()) {
+				if (vals.contains(tagValue)) {
+					return true;
+				}
+			}
+		} else {
+			SortedSet<String> s = p.getTags().get(tagName);
+			if (s != null) {
+				return s.contains(tagValue);
+			}
+		}
+		return false;
 	}
 
 	public boolean fileExists(String fileName) {
