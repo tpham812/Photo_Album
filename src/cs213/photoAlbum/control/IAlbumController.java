@@ -86,4 +86,7 @@ public interface IAlbumController {
 	 */
 	boolean removePhoto(String fileName, String albumName, User user);
 	
+	boolean containsPhoto(String fileName, String albumName, User user);
+
+	
 }

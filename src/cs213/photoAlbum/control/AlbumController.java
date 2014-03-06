@@ -46,6 +46,13 @@ public class AlbumController implements IAlbumController {
 		return user.getAlbum(albumName).getPhotos();
 	}
 	
+	public boolean containsPhoto(String fileName, String albumName, User user) {
+		Album album = user.getAlbum(albumName);		
+		if(album == null || !album.photos.containsKey(fileName)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public Photo addPhoto(String fileName, String caption, String albumName, User user) {
@@ -67,15 +74,33 @@ public class AlbumController implements IAlbumController {
 			return null;
 		} else {
 			album.photos.put(fileName, photo);
-		}
-		
+		}		
 		return photo;
 	}
 
 	@Override
 	public boolean movePhoto(String fileName, String oldAlbumName, String newAlbumName, User user) {
+		
+		Photo p = getPhoto(fileName,oldAlbumName,user);
+		
+		if (p == null) {
+			return false;
+		}
+		removePhoto(fileName, oldAlbumName, user);
+		p = addPhoto(fileName, p.getCaption(), newAlbumName, user);
+		
+		return p != null;
+	}
+	
+	public Photo getPhoto(String fileName, String albumName, User user){
+		
+		Album album = user.getAlbum(albumName);		
 
-		return false;
+		if (album == null) {
+			return null;
+		} 
+		
+		return album.getPhoto(fileName);
 	}
 
 	@Override
