@@ -66,7 +66,7 @@ public class CmdView {
 	public void processArgs(String[] args) {
 
 		if (args.length == 0) {
-			System.err.println("Error: Please input a command");
+			System.out.println("Error: Please input a command");
 			return;
 		}
 
@@ -89,7 +89,7 @@ public class CmdView {
 			}
 
 		} else {
-			System.err.println("Error: Unknown command " + cmdName);
+			System.out.println("Error: Unknown command " + cmdName);
 		}
 	}
 
@@ -111,6 +111,8 @@ public class CmdView {
 						System.out.println("album exists for user " + u.getUserID() + ":");
 					}
 					System.out.println(params.get(0));
+				} else {
+					System.out.println("Error: Invalid arguments");
 				}
 
 			} else if (l.startsWith("deleteAlbum")) {
@@ -123,6 +125,8 @@ public class CmdView {
 						System.out.println("album does not exist for user " + u.getUserID() + ":");
 					}
 					System.out.println(params.get(0));
+				}else {
+					System.out.println("Error: Invalid arguments");
 				}
 
 			} else if (l.startsWith("listAlbums")) {
@@ -170,6 +174,8 @@ public class CmdView {
 							}
 						}
 					}
+				} else {
+					System.out.println("Error: Invalid arguments");
 				}
 
 			} else if (l.startsWith("addPhoto")) {
@@ -188,6 +194,8 @@ public class CmdView {
 							System.out.println("Photo " + params.get(0) + " already exists in album " + params.get(2));
 						}
 					}
+				}else {
+					System.out.println("Error: Invalid arguments");
 				}
 
 			} else if (l.startsWith("movePhoto")) {
@@ -205,6 +213,8 @@ public class CmdView {
 							System.out.println("Photo " + params.get(0) + " does not exist in " + params.get(1));
 						}
 					}
+				}else {
+					System.out.println("Error: Invalid arguments");
 				}
 			} else if (l.startsWith("removePhoto")) {
 
@@ -216,6 +226,8 @@ public class CmdView {
 					} else {
 						System.out.println("Photo " + params.get(0) + " is not in album " + params.get(1));
 					}
+				}else {
+					System.out.println("Error: Invalid arguments");
 				}
 
 			} else if (l.startsWith("addTag") || l.startsWith("deleteTag")) {
@@ -253,6 +265,8 @@ public class CmdView {
 						}
 					}
 
+				}else {
+					System.out.println("Error: Invalid arguments");
 				}
 
 			} else if (l.startsWith("listPhotoInfo")) {
@@ -297,6 +311,8 @@ public class CmdView {
 							}
 						}
 					}
+				}else {
+					System.out.println("Error: Invalid arguments");
 				}
 
 			} else if (l.startsWith("getPhotosByDate")) {
@@ -314,6 +330,8 @@ public class CmdView {
 							System.out.println(p.getCaption()+ " - Album: " + formatAlbum(p, u.getAlbums()) + " - Date: " + CalendarUtils.toFmtDate(p.getDateTime()));	
 						}
 					}
+				}else {
+					System.out.println("Error: Invalid arguments");
 				}
 
 			} else if (l.startsWith("getPhotosByTag")) {
@@ -332,6 +350,8 @@ public class CmdView {
 					for (IPhoto p:photosByDate) {
 						System.out.println(p.getCaption()+ " - Album: " + formatAlbum(p, u.getAlbums()) + " - Date: " + CalendarUtils.toFmtDate(p.getDateTime()));	
 					}	
+				}else {
+					System.out.println("Error: Invalid arguments");
 				}
 				
 
@@ -339,7 +359,7 @@ public class CmdView {
 				userController.logout(u);
 				break;
 			} else {
-				System.err.println("Error: invalid command " + l);
+				System.out.println("Error: invalid command " + l);
 			}
 
 		}
@@ -453,7 +473,7 @@ public class CmdView {
 		IUser user;
 
 		if (args.length != 2) {
-			System.err.println("Error: Usage for login <user id>");
+			System.out.println("Error: Usage for login <user id>");
 		}
 
 		String userId = args[1];
@@ -467,7 +487,7 @@ public class CmdView {
 
 	private void deleteUser(String[] args) {
 		if (args.length != 2) {
-			System.err.println("Error: Usage for deleteuser <user id>");
+			System.out.println("Error: Usage for deleteuser <user id>");
 			return;
 		}
 
@@ -483,7 +503,7 @@ public class CmdView {
 
 	private void addUser(String[] args) {
 		if (args.length != 3) {
-			System.err.println("Error: Usage for adduser <user id> \"<user name>\" ");
+			System.out.println("Error: Usage for adduser <user id> \"<user name>\" ");
 			return;
 		}
 
