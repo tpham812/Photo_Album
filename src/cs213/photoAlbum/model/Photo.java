@@ -12,7 +12,7 @@ import java.util.SortedSet;
  * @author dheeptha
  * 
  **/
-public class Photo implements Serializable {
+public class Photo implements Serializable, IPhoto {
 
 	/**
 	 * 
@@ -35,78 +35,67 @@ public class Photo implements Serializable {
 		this.tags = new LinkedHashMap<String, SortedSet<String>>();
 	}
 	
-	/**
-	 * Gets the name.
-	 * 
-	 * @return the name
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IPhoto#getName()
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * Sets the name.
-	 * 
-	 * @param name
-	 *            the new name
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IPhoto#setName(java.lang.String)
 	 */
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * Gets the caption.
-	 * 
-	 * @return the caption
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IPhoto#getCaption()
 	 */
+	@Override
 	public String getCaption() {
 		return caption;
 	}
 
-	/**
-	 * Sets the caption.
-	 * 
-	 * @param caption
-	 *            the new caption
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IPhoto#setCaption(java.lang.String)
 	 */
+	@Override
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
 
-	/**
-	 * Gets the date time.
-	 * 
-	 * @return the date time
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IPhoto#getDateTime()
 	 */
+	@Override
 	public Calendar getDateTime() {
 		return dateTime;
 	}
 
-	/**
-	 * Sets the date time.
-	 * 
-	 * @param dateTime
-	 *            the new date time
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IPhoto#setDateTime(java.util.Calendar)
 	 */
+	@Override
 	public void setDateTime(Calendar dateTime) {
 		this.dateTime = dateTime;
 		this.dateTime.set(Calendar.MILLISECOND, 0);
 	}
 
-	/**
-	 * Gets the tags.
-	 *
-	 * @return the tags
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IPhoto#getTags()
 	 */
+	@Override
 	public Map<String, SortedSet<String>> getTags() {
 		return tags;
 	}
 
-	/**
-	 * Sets the tags.
-	 *
-	 * @param tags the tags
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IPhoto#setTags(java.util.Map)
 	 */
+	@Override
 	public void setTags(Map<String, SortedSet<String>> tags) {
 		this.tags = tags;
 	}

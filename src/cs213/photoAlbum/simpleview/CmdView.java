@@ -23,8 +23,10 @@ import cs213.photoAlbum.control.IUserController;
 import cs213.photoAlbum.control.PhotoController;
 import cs213.photoAlbum.control.UserController;
 import cs213.photoAlbum.model.Album;
+import cs213.photoAlbum.model.IAlbum;
+import cs213.photoAlbum.model.IPhoto;
+import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
-import cs213.photoAlbum.model.User;
 import cs213.photoAlbum.util.CalendarUtils;
 
 public class CmdView {
@@ -81,7 +83,7 @@ public class CmdView {
 			deleteUser(args);
 		} else if (cmdName.equals("login")) {
 
-			User user = login(args);
+			IUser user = login(args);
 			if (user != null) {
 				launchInteractiveMode(user);
 			}
@@ -91,7 +93,7 @@ public class CmdView {
 		}
 	}
 
-	private void launchInteractiveMode(User u) {
+	private void launchInteractiveMode(IUser u) {
 
 		Scanner scanner = new Scanner(System.in);
 		List<String> params = null;
@@ -125,13 +127,13 @@ public class CmdView {
 
 			} else if (l.startsWith("listAlbums")) {
 
-				Collection<Album> albums = albumController.listAlbums(u);
+				Collection<IAlbum> albums = albumController.listAlbums(u);
 
 				if (albums.isEmpty()) {
 					System.out.println("No albums exist for user " + u.getUserID());
 				} else {
 					System.out.println("Albums for user " + u.getUserID() + ":");
-					for (Album a : albums) {
+					for (IAlbum a : albums) {
 						Calendar max = a.maxPhotoDate();
 						Calendar min = a.minPhotoDate();
 
@@ -149,13 +151,13 @@ public class CmdView {
 				params = getQuotedParams(l, 1);
 				if (params.size() == 1) {
 
-					Album a = albumController.getAlbum(params.get(0), u);
+					IAlbum a = albumController.getAlbum(params.get(0), u);
 
 					if (a == null) {
 						System.out.println("album does not exist for user " + u.getUserID() + ":");
 						System.out.println(params.get(1));
 					} else {
-						Collection<Photo> photos = albumController.listPhotos(params.get(0), u);
+						Collection<IPhoto> photos = albumController.listPhotos(params.get(0), u);
 
 						if (photos.isEmpty()) {
 							System.out.println("No photos exist for album " + a.getAlbumName());
@@ -163,7 +165,7 @@ public class CmdView {
 						} else {
 							System.out.println("Photos for album " + a.getAlbumName() + ":");
 
-							for (Photo p : photos) {
+							for (IPhoto p : photos) {
 								System.out.println(p.getName() + " - " + CalendarUtils.toFmtDate(p.getDateTime()));
 							}
 						}
@@ -178,7 +180,7 @@ public class CmdView {
 					if (!photoController.fileExists(params.get(0))) {
 						System.out.println("File " + params.get(0) + " does not exist");
 					} else {
-						Photo p = albumController.addPhoto(params.get(0), params.get(1), params.get(2), u);
+						IPhoto p = albumController.addPhoto(params.get(0), params.get(1), params.get(2), u);
 						if (p != null) {
 							System.out.println("Added photo " + params.get(0) + ":");
 							System.out.println(p.getCaption() + " - " + "Album: " + params.get(2));
@@ -258,7 +260,7 @@ public class CmdView {
 				params = getQuotedParams(l, 1);
 				if (params.size() == 1) {
 
-					Photo p = u.getPhotos().get(params.get(0));
+					IPhoto p = u.getPhotos().get(params.get(0));
 
 					if (p == null) {
 						System.out.println("Photo " + params.get(0) + " does not exist");
@@ -305,10 +307,10 @@ public class CmdView {
 					Calendar end = parseDate(vals[2]);
 
 					if (start != null && end != null) {
-						SortedSet<Photo> photosByDate = photoController.getPhotosByDate(start, end, u);
+						SortedSet<IPhoto> photosByDate = photoController.getPhotosByDate(start, end, u);
 						
 						System.out.println("Photos for user " + u.getUserID() + " in range " + vals[1] + " to " + vals[2] +":") ;
-						for (Photo p:photosByDate) {
+						for (IPhoto p:photosByDate) {
 							System.out.println(p.getCaption()+ " - Album: " + formatAlbum(p, u.getAlbums()) + " - Date: " + CalendarUtils.toFmtDate(p.getDateTime()));	
 						}
 					}
@@ -324,10 +326,10 @@ public class CmdView {
 
 				if(!tagNames.isEmpty() && !tagValues.isEmpty()) {
 					
-					SortedSet<Photo> photosByDate = photoController.getPhotosByTag(tagNames, tagValues, u);;
+					SortedSet<IPhoto> photosByDate = photoController.getPhotosByTag(tagNames, tagValues, u);;
 					
 					System.out.println("Photos for user " + u.getUserID() + " with tags " + l.trim() + ":") ;
-					for (Photo p:photosByDate) {
+					for (IPhoto p:photosByDate) {
 						System.out.println(p.getCaption()+ " - Album: " + formatAlbum(p, u.getAlbums()) + " - Date: " + CalendarUtils.toFmtDate(p.getDateTime()));	
 					}	
 				}
@@ -345,11 +347,11 @@ public class CmdView {
 		scanner.close();
 	}
 
-	private String formatAlbum(Photo p, Collection<Album> albums) {
+	private String formatAlbum(IPhoto p, Collection<IAlbum> albums) {
 
 		StringBuffer buf = new StringBuffer();
 
-		for (Album a : albums) {
+		for (IAlbum a : albums) {
 			if (a.getPhotos().contains(p)) {
 				buf.append(a.getAlbumName()).append(",");
 			}
@@ -446,9 +448,9 @@ public class CmdView {
 		return strings;
 	}
 
-	private User login(String[] args) {
+	private IUser login(String[] args) {
 
-		User user;
+		IUser user;
 
 		if (args.length != 2) {
 			System.err.println("Error: Usage for login <user id>");

@@ -9,9 +9,11 @@ import java.util.Set;
 
 import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.Backend;
+import cs213.photoAlbum.model.IAlbum;
 import cs213.photoAlbum.model.IBackend;
+import cs213.photoAlbum.model.IPhoto;
+import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
-import cs213.photoAlbum.model.User;
 import cs213.photoAlbum.util.CalendarUtils;
 
 public class AlbumController implements IAlbumController {
@@ -23,12 +25,12 @@ public class AlbumController implements IAlbumController {
 	}
 	
 	@Override
-	public Collection<Album> listAlbums(User user) {
+	public Collection<IAlbum> listAlbums(IUser user) {
 		return user.getAlbums();
 	}
 
 	@Override
-	public boolean createAlbum(String albumName, User user) {
+	public boolean createAlbum(String albumName, IUser user) {
 
 		if (user.containsAlbum(albumName)) {
 			return false;
@@ -39,7 +41,7 @@ public class AlbumController implements IAlbumController {
 	}
 
 	@Override
-	public boolean deleteAlbum(String albumName, User user) {
+	public boolean deleteAlbum(String albumName, IUser user) {
 
 		if (!user.containsAlbum(albumName)) {
 			return false;
@@ -50,23 +52,23 @@ public class AlbumController implements IAlbumController {
 	}
 
 	@Override
-	public Collection<Photo> listPhotos(String albumName, User user) {
+	public Collection<IPhoto> listPhotos(String albumName, IUser user) {
 
 		return user.getAlbum(albumName).getPhotos();
 	}
 	
-	public boolean containsPhoto(String fileName, String albumName, User user) {
-		Album album = user.getAlbum(albumName);		
-		if(album == null || !album.photos.containsKey(fileName)) {
+	public boolean containsPhoto(String fileName, String albumName, IUser user) {
+		IAlbum album = user.getAlbum(albumName);		
+		if(album == null || !album.getPhotoMap().containsKey(fileName)) {
 			return false;
 		}
 		return true;
 	}
 
 	@Override
-	public Photo addPhoto(String fileName, String caption, String albumName, User user) {
+	public IPhoto addPhoto(String fileName, String caption, String albumName, IUser user) {
 		
-		Photo photo = null;
+		IPhoto photo = null;
 		
 		if(user.getPhotos().containsKey(fileName)) {
 			photo = user.getPhotos().get(fileName);
@@ -82,19 +84,19 @@ public class AlbumController implements IAlbumController {
 			user.getPhotos().put(fileName, photo);
 		}
 
-		Album album = user.getAlbum(albumName);		
-		if(album == null || album.photos.containsKey(fileName)) {
+		IAlbum album = user.getAlbum(albumName);		
+		if(album == null || album.getPhotoMap().containsKey(fileName)) {
 			return null;
 		} else {
-			album.photos.put(fileName, photo);
+			album.getPhotoMap().put(fileName, photo);
 		}		
 		return photo;
 	}
 
 	@Override
-	public boolean movePhoto(String fileName, String oldAlbumName, String newAlbumName, User user) {
+	public boolean movePhoto(String fileName, String oldAlbumName, String newAlbumName, IUser user) {
 		
-		Photo p = getPhoto(fileName,oldAlbumName,user);
+		IPhoto p = getPhoto(fileName,oldAlbumName,user);
 		
 		if (p == null) {
 			return false;
@@ -105,9 +107,9 @@ public class AlbumController implements IAlbumController {
 		return p != null;
 	}
 	
-	public Photo getPhoto(String fileName, String albumName, User user){
+	public IPhoto getPhoto(String fileName, String albumName, IUser user){
 		
-		Album album = user.getAlbum(albumName);		
+		IAlbum album = user.getAlbum(albumName);		
 
 		if (album == null) {
 			return null;
@@ -117,9 +119,9 @@ public class AlbumController implements IAlbumController {
 	}
 
 	@Override
-	public boolean removePhoto(String fileName, String albumName, User user) {
+	public boolean removePhoto(String fileName, String albumName, IUser user) {
 		
-		Map<String, Photo> photos = user.getAlbum(albumName).photos;
+		Map<String, IPhoto> photos = user.getAlbum(albumName).getPhotoMap();
 		if(!photos.containsKey(fileName)) {
 			return false;
 		} else {
@@ -127,8 +129,9 @@ public class AlbumController implements IAlbumController {
 		}
 		
 		boolean photoExists = false;
-		for(Album a: user.getAlbums()){
-			if(a.photos.containsKey(fileName)){
+		for(IAlbum a: user.getAlbums()){
+			
+			if(a.getPhotoMap().containsKey(fileName)){
 				photoExists = true;
 				break;
 			}
@@ -142,7 +145,7 @@ public class AlbumController implements IAlbumController {
 	}
 
 	@Override
-	public Album getAlbum(String albumName, User user) {
+	public IAlbum getAlbum(String albumName, IUser user) {
 		return user.getAlbum(albumName);
 	}
 }

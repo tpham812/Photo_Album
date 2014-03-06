@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Set;
 
 import cs213.photoAlbum.model.Album;
+import cs213.photoAlbum.model.IAlbum;
+import cs213.photoAlbum.model.IPhoto;
+import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
-import cs213.photoAlbum.model.User;
 
 /**
  * Controller interface to create/delete {@link Album}, and to manage {@link Photo} in the {@link Album}
@@ -21,7 +23,7 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return the list
 	 */
-	Collection<Album> listAlbums(User user);
+	Collection<IAlbum> listAlbums(IUser user);
 
 	/**
 	 * Creates an album for the user
@@ -30,10 +32,10 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return true, if successful
 	 */
-	boolean createAlbum(String albumName, User user);
+	boolean createAlbum(String albumName, IUser user);
 
 	
-	Album getAlbum(String albumName, User user);
+	IAlbum getAlbum(String albumName, IUser user);
 	
 	
 	/**
@@ -43,7 +45,7 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return true, if successful
 	 */
-	boolean deleteAlbum(String albumName, User user);
+	boolean deleteAlbum(String albumName, IUser user);
 
 	/**
 	 * List all the photos in the album
@@ -52,7 +54,7 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return the list
 	 */
-	Collection<Photo> listPhotos(String albumName, User user);
+	Collection<IPhoto> listPhotos(String albumName, IUser user);
 
 	/**
 	 * Adds the photo to the user
@@ -63,7 +65,7 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return true, if successful
 	 */
-	Photo addPhoto(String fileName, String caption, String albumName, User user);
+	IPhoto addPhoto(String fileName, String caption, String albumName, IUser user);
 
 	/**
 	 * Move the user's photo to a different album
@@ -74,7 +76,7 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return true, if successful
 	 */
-	boolean movePhoto(String fileName, String oldAlbumName, String newAlbumName, User user);
+	boolean movePhoto(String fileName, String oldAlbumName, String newAlbumName, IUser user);
 
 	/**
 	 * Removes the user's photo from the album.
@@ -84,9 +86,9 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return true, if successful
 	 */
-	boolean removePhoto(String fileName, String albumName, User user);
+	boolean removePhoto(String fileName, String albumName, IUser user);
 	
-	boolean containsPhoto(String fileName, String albumName, User user);
+	boolean containsPhoto(String fileName, String albumName, IUser user);
 
 	
 }

@@ -10,8 +10,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import cs213.photoAlbum.model.Backend;
+import cs213.photoAlbum.model.IPhoto;
+import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
-import cs213.photoAlbum.model.User;
 
 public class PhotoController implements IPhotoController {
 
@@ -21,14 +22,14 @@ public class PhotoController implements IPhotoController {
 		this.backend = new Backend();
 	}
 
-	public boolean containsPhoto(String fileName, User user) {
+	public boolean containsPhoto(String fileName, IUser user) {
 		return user.getPhotos().containsKey(fileName);
 	}
 
 	@Override
-	public boolean addTag(String fileName, String tagType, String tagValue, User user) {
+	public boolean addTag(String fileName, String tagType, String tagValue, IUser user) {
 
-		Photo photo = user.getPhotos().get(fileName);
+		IPhoto photo = user.getPhotos().get(fileName);
 		if (photo == null) {
 			return false;
 		}
@@ -53,9 +54,9 @@ public class PhotoController implements IPhotoController {
 	}
 
 	@Override
-	public boolean deleteTag(String fileName, String tagType, String tagValue, User user) {
+	public boolean deleteTag(String fileName, String tagType, String tagValue, IUser user) {
 
-		Photo photo = user.getPhotos().get(fileName);
+		IPhoto photo = user.getPhotos().get(fileName);
 		if (photo == null) {
 			return false;
 		}
@@ -78,11 +79,11 @@ public class PhotoController implements IPhotoController {
 	}
 
 	@Override
-	public SortedSet<Photo> getPhotosByDate(Calendar start, Calendar end, User user) {
+	public SortedSet<IPhoto> getPhotosByDate(Calendar start, Calendar end, IUser user) {
 
-		SortedSet<Photo> result = new TreeSet<Photo>(new PhotoComparator());
+		SortedSet<IPhoto> result = new TreeSet<IPhoto>(new PhotoComparator());
 
-		for (Photo p : user.getPhotos().values()) {
+		for (IPhoto p : user.getPhotos().values()) {
 
 			if (p.getDateTime().equals(start) || p.getDateTime().equals(end)
 					|| (p.getDateTime().after(start) && p.getDateTime().before(end))) {
@@ -95,13 +96,13 @@ public class PhotoController implements IPhotoController {
 	}
 
 	@Override
-	public SortedSet<Photo> getPhotosByTag(List<String> tagNames, List<String> tagValues, User user) {
+	public SortedSet<IPhoto> getPhotosByTag(List<String> tagNames, List<String> tagValues, IUser user) {
 
-		SortedSet<Photo> result = new TreeSet<Photo>(new PhotoComparator());
+		SortedSet<IPhoto> result = new TreeSet<IPhoto>(new PhotoComparator());
 
 		boolean m = false;
 
-		for (Photo p : user.getPhotos().values()) {
+		for (IPhoto p : user.getPhotos().values()) {
 			m = true;
 
 			for (int i = 0; i < tagNames.size(); i++) {
@@ -121,7 +122,7 @@ public class PhotoController implements IPhotoController {
 		return result;
 	}
 
-	private boolean matches(Photo p, String tagName, String tagValue) {
+	private boolean matches(IPhoto p, String tagName, String tagValue) {
 
 		if (tagName.isEmpty()) {
 			for (SortedSet<String> vals : p.getTags().values()) {

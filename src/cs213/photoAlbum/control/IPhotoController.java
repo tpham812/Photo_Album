@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 
+import cs213.photoAlbum.model.IPhoto;
+import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
-import cs213.photoAlbum.model.User;
 
 /**
  * Controller interface for {@link Photo} management, such as adding/deleting tags, get photos by date range/tag.
@@ -24,7 +25,7 @@ public interface IPhotoController {
 	 * @param user the user
 	 * @return true, if successful
 	 */
-	boolean addTag(String fileName, String tagType, String tagValue, User user);
+	boolean addTag(String fileName, String tagType, String tagValue, IUser user);
 
 	/**
 	 * Delete a tag associated with the user's photo
@@ -35,7 +36,7 @@ public interface IPhotoController {
 	 * @param user the user
 	 * @return true, if successful
 	 */
-	boolean deleteTag(String fileName, String tagType, String tagValue, User user);
+	boolean deleteTag(String fileName, String tagType, String tagValue, IUser user);
 
 	/**
 	 * Gets the photos by date range for the user
@@ -45,7 +46,7 @@ public interface IPhotoController {
 	 * @param user the user
 	 * @return the photos by date
 	 */
-	SortedSet<Photo> getPhotosByDate(Calendar start, Calendar end, User user);
+	SortedSet<IPhoto> getPhotosByDate(Calendar start, Calendar end, IUser user);
 
 	/**
 	 * Gets the photos by tag for the user.
@@ -54,9 +55,9 @@ public interface IPhotoController {
 	 * @param user the user
 	 * @return the photos by tag
 	 */
-	SortedSet<Photo> getPhotosByTag(List<String> tagNames, List<String> tagValues , User user);
+	SortedSet<IPhoto> getPhotosByTag(List<String> tagNames, List<String> tagValues , IUser user);
 
-	boolean containsPhoto(String fileName, User user);	
+	boolean containsPhoto(String fileName, IUser user);	
 
 	public boolean fileExists(String fileName);
 }

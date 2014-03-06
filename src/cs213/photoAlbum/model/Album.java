@@ -15,7 +15,7 @@ import java.util.Map;
  * 
  *
  */
-public class Album implements Serializable {
+public class Album implements Serializable, IAlbum {
 	
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class Album implements Serializable {
 	private String name; 
 		
 	/** List of the photos */
-	public Map<String, Photo> photos; 
+	public Map<String, IPhoto> photos; 
 	
 	/**
 	 * Constructor for the album object
@@ -34,47 +34,54 @@ public class Album implements Serializable {
 	 */
 	public Album(String name){
 		this.name = name; 
-		this.photos = new LinkedHashMap<String, Photo>();
+		this.photos = new LinkedHashMap<String, IPhoto>();
 	}
 	
-	/**
-	 * Recaptions the photo
-	 * @return name new name of photo
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IAlbum#recaptionPhoto()
 	 */
+	@Override
 	public String recaptionPhoto(){
 		return name; 
 		
 	}
 	
-	/**
-	 * Returns the list of photos
-	 * @return photoList the list of photos
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IAlbum#getPhotos()
 	 */
-	public Collection<Photo> getPhotos(){
+	@Override
+	public Collection<IPhoto> getPhotos(){
 		return photos.values(); 
 	}
 	
-	public Photo getPhoto(String name) {
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IAlbum#getPhoto(java.lang.String)
+	 */
+	@Override
+	public IPhoto getPhoto(String name) {
 		return photos.get(name);
 	}
 	
 	
-	/**
-	 * Sets the name of the album
-	 * @param name name of album
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IAlbum#setAlbumName(java.lang.String)
 	 */
+	@Override
 	public void setAlbumName(String name){
 		this.name=name;
 	}
 	
-	/**
-	 * Returns the name of the album
-	 * @return name name of album
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IAlbum#getAlbumName()
 	 */
+	@Override
 	public String getAlbumName(){
 		return name; 
 	}
 	
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IAlbum#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -83,6 +90,9 @@ public class Album implements Serializable {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IAlbum#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -100,11 +110,15 @@ public class Album implements Serializable {
 		return true;
 	}
 	
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IAlbum#maxPhotoDate()
+	 */
+	@Override
 	public Calendar maxPhotoDate(){
 		
 		Calendar cal = null;
 		
-		for(Photo p: photos.values()){
+		for(IPhoto p: photos.values()){
 			
 			if(cal == null) {
 				cal = p.getDateTime();
@@ -117,11 +131,15 @@ public class Album implements Serializable {
 	}
 
 	
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IAlbum#minPhotoDate()
+	 */
+	@Override
 	public Calendar minPhotoDate(){
 		
 		Calendar cal = null;
 		
-		for(Photo p: photos.values()){
+		for(IPhoto p: photos.values()){
 			
 			if(cal == null) {
 				cal = p.getDateTime();
@@ -130,6 +148,11 @@ public class Album implements Serializable {
 			}			
 		}		
 		return cal;		
+	}
+
+	@Override
+	public Map<String, IPhoto> getPhotoMap() {
+		return photos;
 	}
 	
 	

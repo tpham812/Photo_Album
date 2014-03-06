@@ -2,6 +2,7 @@ package cs213.photoAlbum.control;
 
 import java.util.List;
 
+import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.User;
 
 /**
@@ -41,11 +42,11 @@ public interface IUserController {
 	 * @param userId the user id
 	 * @return the user
 	 */
-	User login(String userId);
+	IUser login(String userId);
 
 	/**
 	 * Logout.
 	 */
-	void logout(User u);
+	void logout(IUser u);
 
 }

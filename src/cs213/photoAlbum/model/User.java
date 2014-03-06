@@ -13,7 +13,7 @@ import java.util.Set;
  * 
  * @author brett
  **/
-public class User implements Serializable {
+public class User implements Serializable, IUser {
 
 	/**
 	 * 
@@ -27,10 +27,10 @@ public class User implements Serializable {
 	private String fname;
 
 	/** List of albums. */
-	public Map<String, Album> albumList;
+	public Map<String, IAlbum> albumList;
 
 	/** User's photos indexed by the name of the file. */
-	Map<String, Photo> photos;
+	Map<String, IPhoto> photos;
 
 	/**
 	 * Constructor for the User object of the User class.
@@ -45,121 +45,123 @@ public class User implements Serializable {
 		this.id = id;
 		/** Users full name */
 		this.fname = fname;
-		this.albumList = new LinkedHashMap<String, Album>();
-		this.photos = new LinkedHashMap<String, Photo>();
+		this.albumList = new LinkedHashMap<String, IAlbum>();
+		this.photos = new LinkedHashMap<String, IPhoto>();
 	}
 
-	/**
-	 * Adds new album to the list of albums.
-	 * 
-	 * @param user
-	 *            The user
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#addAlbum(cs213.photoAlbum.model.Album)
 	 */
+	@Override
 	public void addAlbum(Album album) {		
 		
 		albumList.put(album.getAlbumName(), album);				
 	}
 	
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#containsAlbum(java.lang.String)
+	 */
+	@Override
 	public boolean containsAlbum(String albumName) {
 		return albumList.containsKey(albumName);
 	}
 	
-	public Album getAlbum(String albumName) {
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#getAlbum(java.lang.String)
+	 */
+	@Override
+	public IAlbum getAlbum(String albumName) {
 		return albumList.get(albumName);
 	}
 
-	public void addPhoto(Photo photo, Album album) {
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#addPhoto(cs213.photoAlbum.model.Photo, cs213.photoAlbum.model.Album)
+	 */
+	@Override
+	public void addPhoto(Photo photo, IAlbum album) {
 		
 		photos.put(photo.getName(), photo);		
 	}
 	
 	
-	/**
-	 * deletes album .
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#deleteAlbum(java.lang.String)
 	 */
+	@Override
 	public void deleteAlbum(String albumName) {				
 		albumList.remove(albumName);
 	}
 
-	/**
-	 * Renames the specified album.
-	 * 
-	 * @param album
-	 *            The album title which is to be renamed
-	 * @return album The newly created album title
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#rename(cs213.photoAlbum.model.Album)
 	 */
-	public String rename(Album album) {
+	@Override
+	public String rename(IAlbum album) {
 		return id;
 
 	}
 
-	/**
-	 * To string.
-	 * 
-	 * @return id The users unique string ID
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#toString()
 	 */
+	@Override
 	public String toString() {
 		return id;
 	}
 
-	/**
-	 * Sets the users ID.
-	 * 
-	 * @param id
-	 *            Users ID
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#setUserID(java.lang.String)
 	 */
+	@Override
 	public void setUserID(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * Sets the users full name.
-	 * 
-	 * @param fname
-	 *            Users full name
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#setUserFullName(java.lang.String)
 	 */
+	@Override
 	public void setUserFullName(String fname) {
 		this.fname = fname;
 	}
 
-	/**
-	 * Returns the users id.
-	 * 
-	 * @return id users id
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#getUserID()
 	 */
+	@Override
 	public String getUserID() {
 		return id;
 	}
 
-	/**
-	 * Returns the users full name.
-	 * 
-	 * @return fname Users full name
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#getUserFullName()
 	 */
+	@Override
 	public String getUserFullName() {
 		return fname;
 	}
 
-	public Collection<Album> getAlbums() {		
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#getAlbums()
+	 */
+	@Override
+	public Collection<IAlbum> getAlbums() {		
 		return albumList.values(); 		
 	}
 
-	/**
-	 * Gets the photos.
-	 * 
-	 * @return the photos
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#getPhotos()
 	 */
-	public Map<String, Photo> getPhotos() {
+	@Override
+	public Map<String, IPhoto> getPhotos() {
 		return photos;
 	}
 
-	/**
-	 * Sets the photos.
-	 * 
-	 * @param photos
-	 *            the photos
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IUser#setPhotos(java.util.Map)
 	 */
-	public void setPhotos(Map<String, Photo> photos) {
+	@Override
+	public void setPhotos(Map<String, IPhoto> photos) {
 		this.photos = photos;
 	}
 

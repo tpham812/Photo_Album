@@ -12,7 +12,7 @@ import java.util.List;
 public class Backend implements IBackend {
 
 	@Override
-	public File retrievePhotoFile(Photo photo, User user) {
+	public File retrievePhotoFile(IPhoto photo, IUser user) {
 		return getFile(photo.getName());
 	}
 	
@@ -64,7 +64,7 @@ public class Backend implements IBackend {
 	}
 
 	@Override
-	public boolean  writeUser(User u) {
+	public boolean  writeUser(IUser u) {
 
 		FileOutputStream fileOut = null;
 		ObjectOutputStream out = null;
