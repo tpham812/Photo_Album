@@ -151,7 +151,7 @@ public class CmdView {
 							System.out.println("Photos for album " + a.getAlbumName() + ":");
 
 							for (Photo p : photos) {
-								System.out.println(p.getName() + " - " + p.getDateTime());
+								System.out.println(p.getName() + " - " + CalendarUtils.toFmtDate(p.getDateTime()));
 							}
 						}
 					}
