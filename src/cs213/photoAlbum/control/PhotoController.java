@@ -1,10 +1,13 @@
 package cs213.photoAlbum.control;
 
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import cs213.photoAlbum.model.Backend;
 import cs213.photoAlbum.model.Photo;
@@ -21,7 +24,6 @@ public class PhotoController implements IPhotoController {
 	public boolean containsPhoto(String fileName, User user) {
 		return user.getPhotos().containsKey(fileName);
 	}
-	
 
 	@Override
 	public boolean addTag(String fileName, String tagType, String tagValue, User user) {
@@ -68,7 +70,7 @@ public class PhotoController implements IPhotoController {
 		if (tags.remove(tagValue)) {
 
 			if (tags.isEmpty()) {
-				 tagMap.remove(tagType);
+				tagMap.remove(tagType);
 			}
 			return true;
 		}
@@ -76,21 +78,32 @@ public class PhotoController implements IPhotoController {
 	}
 
 	@Override
-	public Map<String, String> listPhotoInfo(String fileName, User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public SortedSet<Photo> getPhotosByDate(Calendar start, Calendar end, User user) {
+
+		SortedSet<Photo> result = new TreeSet<Photo>(new PhotoComparator());
+
+		for (Photo p : user.getPhotos().values()) {
+
+			if (p.getDateTime().equals(start) || p.getDateTime().equals(end)
+					|| (p.getDateTime().after(start) && p.getDateTime().before(end))) {
+
+				result.add(p);
+			}
+		}
+
+		return result;
 	}
 
 	@Override
-	public List<Photo> getPhotosByDate(Calendar start, Calendar end, User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Photo> getPhotosByTag(List<String> tagNames, List<String> tagValues, User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public SortedSet<Photo> getPhotosByTag(List<String> tagNames, List<String> tagValues, User user) {
+		
+		SortedSet<Photo> result = new TreeSet<Photo>(new PhotoComparator());
+		
+		for (Photo p : user.getPhotos().values()) {
+			
+		}
+		
+		return result;
 	}
 
 	public boolean fileExists(String fileName) {
