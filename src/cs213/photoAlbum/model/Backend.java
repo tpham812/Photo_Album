@@ -13,11 +13,15 @@ public class Backend implements IBackend {
 
 	@Override
 	public File retrievePhotoFile(Photo photo, User user) {
-		return new File(photo.getName());
+		return getFile(photo.getName());
 	}
 	
 	public boolean fileExists(String name){
-		return new File(name).exists();
+		return getFile(name).exists();
+	}
+	
+	public File getFile(String name){
+		return new File(name);
 	}
 
 	@Override

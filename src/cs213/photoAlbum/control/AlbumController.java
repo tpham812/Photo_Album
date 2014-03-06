@@ -1,5 +1,7 @@
 package cs213.photoAlbum.control;
 
+import java.io.File;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -7,11 +9,18 @@ import java.util.Set;
 
 import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.Backend;
+import cs213.photoAlbum.model.IBackend;
 import cs213.photoAlbum.model.Photo;
 import cs213.photoAlbum.model.User;
+import cs213.photoAlbum.util.CalendarUtils;
 
 public class AlbumController implements IAlbumController {
 
+	private IBackend backend;
+	
+	public AlbumController() {
+		this.backend = new Backend();
+	}
 	
 	@Override
 	public Collection<Album> listAlbums(User user) {
@@ -66,6 +75,10 @@ public class AlbumController implements IAlbumController {
 			photo = new Photo();
 			photo.setName(fileName);
 			photo.setCaption(caption);
+			
+			File file = backend.getFile(fileName);			
+			photo.setDateTime(CalendarUtils.toCalendar(file.lastModified()));
+			
 			user.getPhotos().put(fileName, photo);
 		}
 
