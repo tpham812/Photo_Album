@@ -7,7 +7,9 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
 import cs213.photoAlbum.control.AlbumController;
 import cs213.photoAlbum.control.IAlbumController;
@@ -18,6 +20,7 @@ import cs213.photoAlbum.control.UserController;
 import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.Photo;
 import cs213.photoAlbum.model.User;
+import cs213.photoAlbum.util.CalendarUtils;
 
 public class CmdView {
 
@@ -95,8 +98,8 @@ public class CmdView {
 
 				params = getQuotedParams(l, 1);
 				if (params.size() == 1) {
-					if(albumController.createAlbum(params.get(0), u)){
-						System.out.println("created album for user " + u.getUserID() + ":");						
+					if (albumController.createAlbum(params.get(0), u)) {
+						System.out.println("created album for user " + u.getUserID() + ":");
 					} else {
 						System.out.println("album exists for user " + u.getUserID() + ":");
 					}
@@ -107,47 +110,47 @@ public class CmdView {
 
 				params = getQuotedParams(l, 1);
 				if (params.size() == 1) {
-					if(albumController.deleteAlbum(params.get(0), u)){
-						System.out.println("deleted album from user " + u.getUserID() + ":");						
+					if (albumController.deleteAlbum(params.get(0), u)) {
+						System.out.println("deleted album from user " + u.getUserID() + ":");
 					} else {
 						System.out.println("album does not exist for user " + u.getUserID() + ":");
-					}	
+					}
 					System.out.println(params.get(0));
 				}
 
 			} else if (l.startsWith("listAlbums")) {
 
 				Collection<Album> albums = albumController.listAlbums(u);
-				
-				if(albums.isEmpty()){
+
+				if (albums.isEmpty()) {
 					System.out.println("No albums exist for user " + u.getUserID());
 				} else {
 					System.out.println("Albums for user " + u.getUserID() + ":");
-					for(Album a:albums) {
-						System.out.println(a.getAlbumName() + " number of photos: " + a.getPhotos().size() + ", " );
+					for (Album a : albums) {
+						System.out.println(a.getAlbumName() + " number of photos: " + a.getPhotos().size() + ", ");
 					}
-				}				
+				}
 
 			} else if (l.startsWith("listPhotos")) {
 
 				params = getQuotedParams(l, 1);
 				if (params.size() == 1) {
-					
+
 					Album a = albumController.getAlbum(params.get(0), u);
-					
-					if(a == null) {
-						System.out.println("album does not exist for user " + u.getUserID() +":");
+
+					if (a == null) {
+						System.out.println("album does not exist for user " + u.getUserID() + ":");
 						System.out.println(params.get(1));
 					} else {
 						Collection<Photo> photos = albumController.listPhotos(params.get(0), u);
-						
-						if(photos.isEmpty()) {
+
+						if (photos.isEmpty()) {
 							System.out.println("No photos exist for album " + a.getAlbumName());
 
 						} else {
 							System.out.println("Photos for album " + a.getAlbumName() + ":");
-							
-							for(Photo p: photos){								
+
+							for (Photo p : photos) {
 								System.out.println(p.getName() + " - " + p.getDateTime());
 							}
 						}
@@ -158,16 +161,16 @@ public class CmdView {
 
 				params = getQuotedParams(l, 3);
 				if (params.size() == 3) {
-					
-					if(!photoController.fileExists(params.get(0))) {
+
+					if (!photoController.fileExists(params.get(0))) {
 						System.out.println("File " + params.get(0) + " does not exist");
 					} else {
 						Photo p = albumController.addPhoto(params.get(0), params.get(1), params.get(2), u);
-						if(p != null) {
+						if (p != null) {
 							System.out.println("Added photo " + params.get(0) + ":");
 							System.out.println(p.getCaption() + " - " + "Album: " + params.get(2));
 						} else {
-							System.out.println("Photo " + params.get(0) + " already exists in album "+ params.get(2));
+							System.out.println("Photo " + params.get(0) + " already exists in album " + params.get(2));
 						}
 					}
 				}
@@ -175,16 +178,16 @@ public class CmdView {
 			} else if (l.startsWith("movePhoto")) {
 				params = getQuotedParams(l, 3);
 				if (params.size() == 3) {
-					
-					
-					if(!albumController.containsPhoto(params.get(0), params.get(2), u)) {
-						
-						if(albumController.movePhoto(params.get(0), params.get(1), params.get(2), u)){
-							
+
+					if (!albumController.containsPhoto(params.get(0), params.get(2), u)) {
+
+						if (albumController.movePhoto(params.get(0), params.get(1), params.get(2), u)) {
+
 							System.out.println("Moved photo " + params.get(0) + ":");
-							System.out.println(params.get(0) + " - From album "+ params.get(1) + " to album " + params.get(2));
+							System.out.println(params.get(0) + " - From album " + params.get(1) + " to album "
+									+ params.get(2));
 						} else {
-							System.out.println("Photo "  + params.get(0) + " does not exist in "+ params.get(1));
+							System.out.println("Photo " + params.get(0) + " does not exist in " + params.get(1));
 						}
 					}
 				}
@@ -192,16 +195,16 @@ public class CmdView {
 
 				params = getQuotedParams(l, 2);
 				if (params.size() == 2) {
-					if (albumController.removePhoto(params.get(0), params.get(1), u)){
+					if (albumController.removePhoto(params.get(0), params.get(1), u)) {
 						System.out.println("Removed photo:");
-						System.out.println(params.get(0) + " - From album "+ params.get(1));
+						System.out.println(params.get(0) + " - From album " + params.get(1));
 					} else {
-						System.out.println("Photo "  + params.get(0) + " is not in album "+ params.get(1));
+						System.out.println("Photo " + params.get(0) + " is not in album " + params.get(1));
 					}
 				}
 
 			} else if (l.startsWith("addTag") || l.startsWith("deleteTag")) {
-
+				boolean addPhoto = l.startsWith("addTag");
 				params = getQuotedParams(l, 1);
 				if (params.size() == 1) {
 					String photo = params.get(0);
@@ -210,23 +213,55 @@ public class CmdView {
 					StringBuffer tagValue = new StringBuffer();
 					parseTag(l, tagName, tagValue);
 
-					if (tagName.length() > 0 && tagValue.length() > 0) {
-						
-						System.out.println(photo + " " + tagName + " " + tagValue);
+					if (!photoController.containsPhoto(photo, u)) {
+						System.out.println("Error: Photo " + photo + " does not exist");
 
-						if (l.startsWith("addTag")) {
-							photoController.addTag(photo, tagName.toString(), tagValue.toString(), u);
+					} else if (tagName.length() > 0 && tagValue.length() > 0) {
+						if (addPhoto) {
+							if (photoController.addTag(photo, tagName.toString(), tagValue.toString(), u)) {
+
+								System.out.println("Added tag:");
+								System.out.println(photo + " " + tagName + ":" + tagValue);
+							} else {
+								System.out.println("Tag already exists for " + photo + " " + tagName + ":" + tagValue);
+							}
 						} else {
-							photoController.deleteTag(photo, tagName.toString(), tagValue.toString(), u);
+
+							if (photoController.deleteTag(photo, tagName.toString(), tagValue.toString(), u)) {
+
+								System.out.println("Deleted tag:");
+								System.out.println(photo + " " + tagName + ":" + tagValue);
+							} else {
+								System.out.println("Tag does not exist for " + photo + " " + tagName + ":" + tagValue);
+							}
+
 						}
 					}
+
 				}
 
 			} else if (l.startsWith("listPhotoInfo")) {
 
 				params = getQuotedParams(l, 1);
 				if (params.size() == 1) {
-					photoController.listPhotoInfo(params.get(0), u);
+
+					Photo p = u.getPhotos().get(params.get(0));
+
+					if (p == null) {
+						System.out.println("Photo " + params.get(0) + " does not exist");
+					} else {
+
+						System.out.println("Photo file name: " + p.getName());
+						System.out.println("Album: " + formatAlbum(p, u.getAlbums()));
+						System.out.println("Date: " + CalendarUtils.toFmtDate(p.getDateTime()));
+						System.out.println("Caption: " + p.getCaption());
+						System.out.println("Tags:");
+						for (Entry<String, Set<String>> e : p.getTags().entrySet()) {
+							for (String val : e.getValue()) {
+								System.out.println(e.getKey() + ":" + val);
+							}
+						}
+					}
 				}
 
 			} else if (l.startsWith("getPhotosByDate")) {
@@ -236,22 +271,21 @@ public class CmdView {
 					Calendar start = parseDate(vals[1]);
 					Calendar end = parseDate(vals[2]);
 
-					if (start != null && end != null) {												
+					if (start != null && end != null) {
 						photoController.getPhotosByDate(start, end, u);
 					}
 				}
 
 			} else if (l.startsWith("getPhotosByTag")) {
-				
+
 				List<String> tagNames = new ArrayList<String>();
 				List<String> tagValues = new ArrayList<String>();
-				
-				l = l.replaceAll("getPhotosByTag", "");				
+
+				l = l.replaceAll("getPhotosByTag", "");
 				parseTag(l, tagNames, tagValues);
-				
+
 				photoController.getPhotosByTag(tagNames, tagValues, u);
-				
-				
+
 			} else if (l.startsWith("logout")) {
 				userController.logout(u);
 				break;
@@ -263,31 +297,48 @@ public class CmdView {
 
 		scanner.close();
 	}
-	
+
+	private String formatAlbum(Photo p, Collection<Album> albums) {
+
+		StringBuffer buf = new StringBuffer();
+
+		for (Album a : albums) {
+			if (a.getPhotos().contains(p)) {
+				buf.append(a.getAlbumName()).append(",");
+			}
+		}
+
+		if (buf.length() > 0) {
+			buf.setLength(buf.length() - 1);
+		}
+
+		return buf.toString();
+	}
+
 	private void parseTag(String l, List<String> tagNames, List<String> tagValues) {
 
-		while(l.length() > 0) {
+		while (l.length() > 0) {
 			StringBuffer tagName = new StringBuffer();
 			StringBuffer tagValue = new StringBuffer();
-			
+
 			int i1 = l.indexOf('"');
 			int i2 = l.indexOf('"', i1 + 1);
 			String l1 = l.substring(0, i2 + 1);
-			
+
 			parseTag(l1, tagName, tagValue);
 
-			if(tagValue.length() != 0) {
-				
+			if (tagValue.length() != 0) {
+
 				tagNames.add(tagName.toString());
-				tagValues.add(tagValue.toString());				
+				tagValues.add(tagValue.toString());
 				l = l.substring(i2 + 1);
-				
+
 			} else {
 				break;
 			}
-		
+
 			l = l.substring(l.indexOf(',') + 1);
-		}		
+		}
 	}
 
 	private void parseTag(String l, StringBuffer tagName, StringBuffer tagValue) {
@@ -313,19 +364,14 @@ public class CmdView {
 
 	private Calendar parseDate(String string) {
 
-		Calendar cal = Calendar.getInstance();
-
-		Date dateStr = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy-HH:mm:ss");
+		Calendar cal = null;
 
 		try {
-			dateStr = formatter.parse(string);
-			cal.setTime(dateStr);
-			cal.set(Calendar.MILLISECOND, 0);
-		} catch (ParseException e) {
-			System.err.println("Failed to parse date " + string);
-		}
+			cal = CalendarUtils.parseDate(string);
 
+		} catch (ParseException e) {
+			System.out.println("Error: Failed to parse date " + string);
+		}
 		return cal;
 	}
 

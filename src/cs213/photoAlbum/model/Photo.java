@@ -2,6 +2,7 @@ package cs213.photoAlbum.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,11 +28,12 @@ public class Photo implements Serializable {
 	private Calendar dateTime;
 
 	/**  Tags associated with the photo. */
-	private Map<String,String> tags;
+	private Map<String,Set<String>> tags;
 	
-	/** The person tags. */
-	private Set<String> personTags;
-
+	public Photo(){
+		this.tags = new LinkedHashMap<String, Set<String>>();
+	}
+	
 	/**
 	 * Gets the name.
 	 * 
@@ -95,7 +97,7 @@ public class Photo implements Serializable {
 	 *
 	 * @return the tags
 	 */
-	public Map<String, String> getTags() {
+	public Map<String, Set<String>> getTags() {
 		return tags;
 	}
 
@@ -104,27 +106,8 @@ public class Photo implements Serializable {
 	 *
 	 * @param tags the tags
 	 */
-	public void setTags(Map<String, String> tags) {
+	public void setTags(Map<String, Set<String>> tags) {
 		this.tags = tags;
 	}
-
-	/**
-	 * Gets the person tags.
-	 *
-	 * @return the person tags
-	 */
-	public Set<String> getPersonTags() {
-		return personTags;
-	}
-
-	/**
-	 * Sets the person tags.
-	 *
-	 * @param personTags the new person tags
-	 */
-	public void setPersonTags(Set<String> personTags) {
-		this.personTags = personTags;
-	}
-
 
 }

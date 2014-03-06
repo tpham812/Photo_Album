@@ -48,4 +48,6 @@ public interface IBackend {
 	 */
 	List<User> getUser(List<String> userIds);
 
+	File getFile(String fileName);
+
 }
