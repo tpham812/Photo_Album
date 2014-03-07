@@ -4,10 +4,6 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.SortedSet;
 
-
-/**
- * The Interface IPhoto.
- */
 public interface IPhoto {
 
 	/**

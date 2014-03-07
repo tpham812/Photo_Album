@@ -6,26 +6,28 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
 /**
- * Album of a {@link User} containing multiple {@link Photo}s.
- *
+ * Album of a {@link User} containing multiple {@link Photo}s
+ * 
  * @author brett
+ * 
+ *
  */
 public class Album implements Serializable, IAlbum {
 	
-	/** The Constant serialVersionUID. */
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
-	/**  Name of the album. */
+	/** Name of the album */
 	private String name; 
 		
-	/**  List of the photos. */
+	/** List of the photos */
 	public Map<String, IPhoto> photos; 
 	
 	/**
-	 * Constructor for the album object.
-	 *
+	 * Constructor for the album object
 	 * @param name name of the album
 	 */
 	public Album(String name){
@@ -146,9 +148,6 @@ public class Album implements Serializable, IAlbum {
 		return cal;		
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IAlbum#getPhotoMap()
-	 */
 	@Override
 	public Map<String, IPhoto> getPhotoMap() {
 		return photos;
