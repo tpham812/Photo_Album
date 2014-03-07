@@ -15,14 +15,24 @@ import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
 import cs213.photoAlbum.util.CalendarUtils;
 
+/**
+ * The Class AlbumController.
+ */
 public class AlbumController implements IAlbumController {
 
+	/** The backend. */
 	private IBackend backend;
 	
+	/**
+	 * Instantiates a new album controller.
+	 */
 	public AlbumController() {
 		this.backend = new Backend();
 	}
 	
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IAlbumController#listAlbums(cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public SortedSet<IAlbum> listAlbums(IUser user) {
 		
@@ -31,6 +41,9 @@ public class AlbumController implements IAlbumController {
 		return albums;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IAlbumController#createAlbum(java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public boolean createAlbum(String albumName, IUser user) {
 
@@ -42,6 +55,9 @@ public class AlbumController implements IAlbumController {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IAlbumController#deleteAlbum(java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public boolean deleteAlbum(String albumName, IUser user) {
 
@@ -57,12 +73,18 @@ public class AlbumController implements IAlbumController {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IAlbumController#listPhotos(java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public Collection<IPhoto> listPhotos(String albumName, IUser user) {
 
 		return user.getAlbum(albumName).getPhotos();
 	}
 	
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IAlbumController#containsPhoto(java.lang.String, java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	public boolean containsPhoto(String fileName, String albumName, IUser user) {
 		IAlbum album = user.getAlbum(albumName);		
 		if(album == null || !album.getPhotoMap().containsKey(fileName)) {
@@ -71,6 +93,9 @@ public class AlbumController implements IAlbumController {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IAlbumController#addPhoto(java.lang.String, java.lang.String, java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public IPhoto addPhoto(String fileName, String caption, String albumName, IUser user) {
 		
@@ -99,6 +124,9 @@ public class AlbumController implements IAlbumController {
 		return photo;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IAlbumController#movePhoto(java.lang.String, java.lang.String, java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public boolean movePhoto(String fileName, String oldAlbumName, String newAlbumName, IUser user) {
 		
@@ -113,6 +141,14 @@ public class AlbumController implements IAlbumController {
 		return p != null;
 	}
 	
+	/**
+	 * Gets the photo.
+	 *
+	 * @param fileName the file name
+	 * @param albumName the album name
+	 * @param user the user
+	 * @return the photo
+	 */
 	public IPhoto getPhoto(String fileName, String albumName, IUser user){
 		
 		IAlbum album = user.getAlbum(albumName);		
@@ -124,6 +160,9 @@ public class AlbumController implements IAlbumController {
 		return album.getPhoto(fileName);
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IAlbumController#removePhoto(java.lang.String, java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public boolean removePhoto(String fileName, String albumName, IUser user) {
 		
@@ -139,6 +178,12 @@ public class AlbumController implements IAlbumController {
 		return true;
 	}
 
+	/**
+	 * Removes the photo if not in an album.
+	 *
+	 * @param fileName the file name
+	 * @param user the user
+	 */
 	private void removePhotoIfNotInAnAlbum(String fileName, IUser user) {
 		
 		boolean photoExists = false;
@@ -155,6 +200,9 @@ public class AlbumController implements IAlbumController {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IAlbumController#getAlbum(java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public IAlbum getAlbum(String albumName, IUser user) {
 		return user.getAlbum(albumName);

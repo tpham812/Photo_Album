@@ -4,6 +4,9 @@ import java.util.Comparator;
 
 import cs213.photoAlbum.model.IAlbum;
 
+/**
+ * AlbumComparator to sort by album name
+ */
 public class AlbumComparator implements Comparator<IAlbum> {
 
 	@Override

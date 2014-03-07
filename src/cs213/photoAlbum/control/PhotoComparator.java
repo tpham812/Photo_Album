@@ -4,6 +4,9 @@ import java.util.Comparator;
 
 import cs213.photoAlbum.model.IPhoto;
 
+/**
+ * PhotoComparator to sort photo by datetime, name
+ */
 public class PhotoComparator implements Comparator<IPhoto> {
 	
 	@Override
