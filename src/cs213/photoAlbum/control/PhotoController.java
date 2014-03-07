@@ -11,18 +11,32 @@ import cs213.photoAlbum.model.Backend;
 import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
 
+
+/**
+ * The Class PhotoController.
+ */
 public class PhotoController implements IPhotoController {
 
+	/** The backend. */
 	private Backend backend;
 
+	/**
+	 * Instantiates a new photo controller.
+	 */
 	public PhotoController() {
 		this.backend = new Backend();
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IPhotoController#containsPhoto(java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	public boolean containsPhoto(String fileName, IUser user) {
 		return user.getPhotos().containsKey(fileName);
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IPhotoController#addTag(java.lang.String, java.lang.String, java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public boolean addTag(String fileName, String tagType, String tagValue, IUser user) {
 
@@ -50,6 +64,9 @@ public class PhotoController implements IPhotoController {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IPhotoController#deleteTag(java.lang.String, java.lang.String, java.lang.String, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public boolean deleteTag(String fileName, String tagType, String tagValue, IUser user) {
 
@@ -75,6 +92,9 @@ public class PhotoController implements IPhotoController {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IPhotoController#getPhotosByDate(java.util.Calendar, java.util.Calendar, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public SortedSet<IPhoto> getPhotosByDate(Calendar start, Calendar end, IUser user) {
 
@@ -92,6 +112,9 @@ public class PhotoController implements IPhotoController {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IPhotoController#getPhotosByTag(java.util.List, java.util.List, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public SortedSet<IPhoto> getPhotosByTag(List<String> tagNames, List<String> tagValues, IUser user) {
 
@@ -119,6 +142,14 @@ public class PhotoController implements IPhotoController {
 		return result;
 	}
 
+	/**
+	 * Matches.
+	 *
+	 * @param p the p
+	 * @param tagName the tag name
+	 * @param tagValue the tag value
+	 * @return true, if successful
+	 */
 	private boolean matches(IPhoto p, String tagName, String tagValue) {
 
 		if (tagName.isEmpty()) {
@@ -136,6 +167,9 @@ public class PhotoController implements IPhotoController {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.control.IPhotoController#fileExists(java.lang.String)
+	 */
 	public boolean fileExists(String fileName) {
 		return backend.fileExists(fileName);
 	}

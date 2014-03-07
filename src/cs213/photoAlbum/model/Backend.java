@@ -9,21 +9,40 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * The Class Backend.
+ */
 public class Backend implements IBackend {
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#retrievePhotoFile(cs213.photoAlbum.model.IPhoto, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public File retrievePhotoFile(IPhoto photo, IUser user) {
 		return getFile(photo.getName());
 	}
 	
+	/**
+	 * File exists.
+	 *
+	 * @param name the name
+	 * @return true, if successful
+	 */
 	public boolean fileExists(String name){
 		return getFile(name).exists();
 	}
 	
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#getFile(java.lang.String)
+	 */
 	public File getFile(String name){
 		return new File(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#readUser(java.lang.String)
+	 */
 	@Override
 	public User readUser(String userId) {
 
@@ -49,6 +68,11 @@ public class Backend implements IBackend {
 		return user;
 	}
 	
+	/**
+	 * List users.
+	 *
+	 * @return the list
+	 */
 	public List<String> listUsers(){
 		
 		List<String> users = new ArrayList<String>();		
@@ -65,6 +89,9 @@ public class Backend implements IBackend {
 		return users;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#writeUser(cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public boolean  writeUser(IUser u) {
 
@@ -85,16 +112,28 @@ public class Backend implements IBackend {
 		}		
 	}
 
+	/**
+	 * Gets the serialized file.
+	 *
+	 * @param userId the user id
+	 * @return the serialized file
+	 */
 	private String getSerializedFile(String userId) {
 		return "data/" + userId + ".ser";
 	}
 	
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#deleteUser(java.lang.String)
+	 */
 	@Override
 	public boolean deleteUser(String userId) {
 
 		return new File(getSerializedFile(userId)).delete();
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#getUser(java.util.List)
+	 */
 	@Override
 	public List<User> getUser(List<String> userIds) {
 
@@ -105,6 +144,12 @@ public class Backend implements IBackend {
 		return users;
 	}
 
+	/**
+	 * Close.
+	 *
+	 * @param in the in
+	 * @param userId the user id
+	 */
 	private void close(ObjectInputStream in, String userId) {
 		try {
 			if (in != null) {
@@ -117,6 +162,12 @@ public class Backend implements IBackend {
 	}
 
 
+	/**
+	 * Close.
+	 *
+	 * @param out the out
+	 * @param userId the user id
+	 */
 	private void close(ObjectOutputStream out, String userId) {
 		try {
 			if (out != null) {
