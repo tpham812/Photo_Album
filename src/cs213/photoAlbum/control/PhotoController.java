@@ -1,8 +1,6 @@
 package cs213.photoAlbum.control;
 
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +10,6 @@ import java.util.TreeSet;
 import cs213.photoAlbum.model.Backend;
 import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
-import cs213.photoAlbum.model.Photo;
 
 public class PhotoController implements IPhotoController {
 

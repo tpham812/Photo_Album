@@ -3,9 +3,7 @@ package cs213.photoAlbum.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Represents the User, containing a unique ID, their full name, and the
