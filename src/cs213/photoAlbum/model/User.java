@@ -47,34 +47,22 @@ public class User implements Serializable, IUser {
 		this.photos = new LinkedHashMap<String, IPhoto>();
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#addAlbum(cs213.photoAlbum.model.Album)
-	 */
 	@Override
 	public void addAlbum(Album album) {		
 		
 		albumList.put(album.getAlbumName(), album);				
 	}
 	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#containsAlbum(java.lang.String)
-	 */
 	@Override
 	public boolean containsAlbum(String albumName) {
 		return albumList.containsKey(albumName);
 	}
 	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#getAlbum(java.lang.String)
-	 */
 	@Override
 	public IAlbum getAlbum(String albumName) {
 		return albumList.get(albumName);
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#addPhoto(cs213.photoAlbum.model.Photo, cs213.photoAlbum.model.Album)
-	 */
 	@Override
 	public void addPhoto(Photo photo, IAlbum album) {
 		
@@ -82,82 +70,52 @@ public class User implements Serializable, IUser {
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#deleteAlbum(java.lang.String)
-	 */
 	@Override
 	public void deleteAlbum(String albumName) {				
 		albumList.remove(albumName);
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#rename(cs213.photoAlbum.model.Album)
-	 */
 	@Override
 	public String rename(IAlbum album) {
 		return id;
 
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#toString()
-	 */
 	@Override
 	public String toString() {
 		return id;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#setUserID(java.lang.String)
-	 */
 	@Override
 	public void setUserID(String id) {
 		this.id = id;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#setUserFullName(java.lang.String)
-	 */
 	@Override
 	public void setUserFullName(String fname) {
 		this.fname = fname;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#getUserID()
-	 */
 	@Override
 	public String getUserID() {
 		return id;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#getUserFullName()
-	 */
 	@Override
 	public String getUserFullName() {
 		return fname;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#getAlbums()
-	 */
 	@Override
 	public Collection<IAlbum> getAlbums() {		
 		return albumList.values(); 		
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#getPhotos()
-	 */
 	@Override
 	public Map<String, IPhoto> getPhotos() {
 		return photos;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IUser#setPhotos(java.util.Map)
-	 */
 	@Override
 	public void setPhotos(Map<String, IPhoto> photos) {
 		this.photos = photos;

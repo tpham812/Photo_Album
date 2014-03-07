@@ -5,10 +5,21 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CalendarUtils.
+ */
 public class CalendarUtils {
 
+	/** The Constant DATE_FMT. */
 	private static final String DATE_FMT = "MM/dd/yyyy-HH:mm:ss";
 
+	/**
+	 * To calendar.
+	 *
+	 * @param time the time
+	 * @return the calendar
+	 */
 	public static Calendar toCalendar(long time) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(time);
@@ -16,6 +27,13 @@ public class CalendarUtils {
 		return cal;
 	}
 	
+	/**
+	 * Parses the date.
+	 *
+	 * @param string the string
+	 * @return the calendar
+	 * @throws ParseException the parse exception
+	 */
 	public static Calendar parseDate(String string) throws ParseException {
 
 		Calendar cal = Calendar.getInstance();
@@ -28,6 +46,12 @@ public class CalendarUtils {
 		return cal;
 	}
 	
+	/**
+	 * To fmt date.
+	 *
+	 * @param cal the cal
+	 * @return the string
+	 */
 	public static String toFmtDate(Calendar cal) {
 		
 		SimpleDateFormat formatter = new SimpleDateFormat(DATE_FMT);

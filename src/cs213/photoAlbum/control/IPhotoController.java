@@ -8,6 +8,7 @@ import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
 
+// TODO: Auto-generated Javadoc
 /**
  * Controller interface for {@link Photo} management, such as adding/deleting tags, get photos by date range/tag.
  * @author dheeptha
@@ -27,7 +28,7 @@ public interface IPhotoController {
 	boolean addTag(String fileName, String tagType, String tagValue, IUser user);
 
 	/**
-	 * Delete a tag associated with the user's photo
+	 * Delete a tag associated with the user's photo.
 	 *
 	 * @param fileName the file name
 	 * @param tagType the tag type
@@ -38,7 +39,7 @@ public interface IPhotoController {
 	boolean deleteTag(String fileName, String tagType, String tagValue, IUser user);
 
 	/**
-	 * Gets the photos by date range for the user
+	 * Gets the photos by date range for the user.
 	 *
 	 * @param start the start
 	 * @param end the end
@@ -50,13 +51,27 @@ public interface IPhotoController {
 	/**
 	 * Gets the photos by tag for the user.
 	 *
-	 * @param tags the tags
+	 * @param tagNames the tag names
+	 * @param tagValues the tag values
 	 * @param user the user
 	 * @return the photos by tag
 	 */
 	SortedSet<IPhoto> getPhotosByTag(List<String> tagNames, List<String> tagValues , IUser user);
 
+	/**
+	 * Contains photo.
+	 *
+	 * @param fileName the file name
+	 * @param user the user
+	 * @return true, if successful
+	 */
 	boolean containsPhoto(String fileName, IUser user);	
 
+	/**
+	 * File exists.
+	 *
+	 * @param fileName the file name
+	 * @return true, if successful
+	 */
 	public boolean fileExists(String fileName);
 }
