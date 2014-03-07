@@ -5,7 +5,7 @@ import java.util.List;
 import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.User;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Controller interface for {@link User} functions such as login, logout, add/delete/list users.
  *

@@ -155,6 +155,7 @@ public class CmdView {
 			} else {
 				System.out.println("Error: invalid command " + cmd);
 			}
+			System.out.println("");
 		}
 		scanner.close();
 	}
@@ -292,7 +293,7 @@ public class CmdView {
 					if (photoController.addTag(photo, tagName.toString(), tagValue.toString(), u)) {
 
 						System.out.println("Added tag:");
-						System.out.println(photo + " " + tagName + ":" + tagValue);
+						System.out.println(photo + " " + tagName + ":\"" + tagValue + "\"");
 					} else {
 						System.out.println("Tag already exists for " + photo + " " + tagName + ":" + tagValue);
 					}
@@ -301,7 +302,7 @@ public class CmdView {
 					if (photoController.deleteTag(photo, tagName.toString(), tagValue.toString(), u)) {
 
 						System.out.println("Deleted tag:");
-						System.out.println(photo + " " + tagName + ":" + tagValue);
+						System.out.println(photo + " " + tagName + ":\"" + tagValue + "\"");
 					} else {
 						System.out.println("Tag does not exist for " + photo + " " + tagName + ":" + tagValue);
 					}

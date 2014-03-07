@@ -8,7 +8,7 @@ import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Controller interface for {@link Photo} management, such as adding/deleting tags, get photos by date range/tag.
  * @author dheeptha
