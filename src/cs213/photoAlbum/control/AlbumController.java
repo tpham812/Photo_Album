@@ -2,7 +2,6 @@ package cs213.photoAlbum.control;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
