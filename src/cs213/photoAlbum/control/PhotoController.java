@@ -10,9 +10,12 @@ import java.util.TreeSet;
 import cs213.photoAlbum.model.Backend;
 import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
+import cs213.photoAlbum.model.Photo;
 
 /**
- * The Class PhotoController.
+ * Controller interface for {@link Photo} management, such as adding/deleting tags, get photos by date range/tag.
+ * @author dheeptha
+ * 
  */
 public class PhotoController implements IPhotoController {
 
@@ -26,16 +29,11 @@ public class PhotoController implements IPhotoController {
 		this.backend = new Backend();
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IPhotoController#containsPhoto(java.lang.String, cs213.photoAlbum.model.IUser)
-	 */
+	@Override
 	public boolean containsPhoto(String fileName, IUser user) {
 		return user.getPhotos().containsKey(fileName);
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IPhotoController#addTag(java.lang.String, java.lang.String, java.lang.String, cs213.photoAlbum.model.IUser)
-	 */
 	@Override
 	public boolean addTag(String fileName, String tagType, String tagValue, IUser user) {
 
@@ -63,9 +61,6 @@ public class PhotoController implements IPhotoController {
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IPhotoController#deleteTag(java.lang.String, java.lang.String, java.lang.String, cs213.photoAlbum.model.IUser)
-	 */
 	@Override
 	public boolean deleteTag(String fileName, String tagType, String tagValue, IUser user) {
 
@@ -91,9 +86,6 @@ public class PhotoController implements IPhotoController {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IPhotoController#getPhotosByDate(java.util.Calendar, java.util.Calendar, cs213.photoAlbum.model.IUser)
-	 */
 	@Override
 	public SortedSet<IPhoto> getPhotosByDate(Calendar start, Calendar end, IUser user) {
 
@@ -111,9 +103,6 @@ public class PhotoController implements IPhotoController {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IPhotoController#getPhotosByTag(java.util.List, java.util.List, cs213.photoAlbum.model.IUser)
-	 */
 	@Override
 	public SortedSet<IPhoto> getPhotosByTag(List<String> tagNames, List<String> tagValues, IUser user) {
 
@@ -142,7 +131,7 @@ public class PhotoController implements IPhotoController {
 	}
 
 	/**
-	 * Matches.
+	 * Photo matches tagName and tagValue
 	 *
 	 * @param p the p
 	 * @param tagName the tag name
@@ -166,9 +155,7 @@ public class PhotoController implements IPhotoController {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IPhotoController#fileExists(java.lang.String)
-	 */
+	@Override
 	public boolean fileExists(String fileName) {
 		return backend.fileExists(fileName);
 	}
