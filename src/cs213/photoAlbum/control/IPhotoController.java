@@ -2,7 +2,6 @@ package cs213.photoAlbum.control;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 import java.util.SortedSet;
 
 import cs213.photoAlbum.model.IPhoto;

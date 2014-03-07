@@ -1,18 +1,13 @@
 package cs213.photoAlbum.simpleview;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
 
@@ -22,11 +17,9 @@ import cs213.photoAlbum.control.IPhotoController;
 import cs213.photoAlbum.control.IUserController;
 import cs213.photoAlbum.control.PhotoController;
 import cs213.photoAlbum.control.UserController;
-import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.IAlbum;
 import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
-import cs213.photoAlbum.model.Photo;
 import cs213.photoAlbum.util.CalendarUtils;
 
 public class CmdView {

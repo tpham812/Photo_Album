@@ -1,8 +1,6 @@
 package cs213.photoAlbum.control;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.IAlbum;

@@ -3,7 +3,6 @@ package cs213.photoAlbum.control;
 import java.util.Comparator;
 
 import cs213.photoAlbum.model.IPhoto;
-import cs213.photoAlbum.model.Photo;
 
 public class PhotoComparator implements Comparator<IPhoto> {
 	

@@ -1,11 +1,8 @@
 package cs213.photoAlbum.control;
 
 import java.io.File;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.Backend;
