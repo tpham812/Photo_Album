@@ -5,10 +5,10 @@ import java.util.Map;
 
 /**
  * Represents the IUser, containing a unique ID, their full name, and the
- * album(s) of the user
- * 
+ * album(s) of the user.
+ *
  * @author brett
- **/
+ */
 public interface IUser {
 
 	/**
@@ -46,6 +46,7 @@ public interface IUser {
 	 * deletes album .
 	 *
 	 * @param albumName the album name
+	 * @return the i album
 	 */
 	abstract IAlbum deleteAlbum(String albumName);
 
