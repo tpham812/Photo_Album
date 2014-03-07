@@ -37,7 +37,7 @@ public class Backend implements IBackend {
 		User user = null;
 
 		try {
-			File f = new File(getSerializedFile(userId));			
+			File f = getSerializedFile(userId);			
 			if(!f.exists()) {
 				return null;
 			}
@@ -57,7 +57,7 @@ public class Backend implements IBackend {
 	public List<String> listUsers(){
 		
 		List<String> users = new ArrayList<String>();		
-		File f = new File("data");
+		File f = getDataDir();
 		
 	    for (File e : f.listFiles()) {
 	        
@@ -68,6 +68,15 @@ public class Backend implements IBackend {
 	    	}
 	    }
 		return users;
+	}
+
+	private File getDataDir() {
+		File f = new File("data");
+		
+		if(!f.exists()){
+			f.mkdir();
+		}
+		return f;
 	}
 
 	@Override
@@ -90,14 +99,21 @@ public class Backend implements IBackend {
 		}		
 	}
 
-	private String getSerializedFile(String userId) {
-		return "data/" + userId + ".ser";
+	private File getSerializedFile(String userId) {
+		
+		File dataDir = new File("data");
+		
+		if(!dataDir.exists()) {
+			dataDir.mkdir();
+		}
+		
+		return new File("data/" + userId + ".ser");
 	}
 	
 	@Override
 	public boolean deleteUser(String userId) {
 
-		return new File(getSerializedFile(userId)).delete();
+		return getSerializedFile(userId).delete();
 	}
 
 	@Override

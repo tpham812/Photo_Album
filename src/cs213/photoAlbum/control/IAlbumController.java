@@ -1,6 +1,7 @@
 package cs213.photoAlbum.control;
 
 import java.util.Collection;
+import java.util.SortedSet;
 
 import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.IAlbum;
@@ -8,7 +9,7 @@ import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Controller interface to create/delete {@link Album}, and to manage {@link Photo} in the {@link Album}.
  *
@@ -23,7 +24,7 @@ public interface IAlbumController {
 	 * @param user the user
 	 * @return the list
 	 */
-	Collection<IAlbum> listAlbums(IUser user);
+	SortedSet<IAlbum> listAlbums(IUser user);
 
 	/**
 	 * Creates an album for the user.

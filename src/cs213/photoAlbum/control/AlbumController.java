@@ -2,7 +2,10 @@ package cs213.photoAlbum.control;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.Backend;
@@ -22,8 +25,11 @@ public class AlbumController implements IAlbumController {
 	}
 	
 	@Override
-	public Collection<IAlbum> listAlbums(IUser user) {
-		return user.getAlbums();
+	public SortedSet<IAlbum> listAlbums(IUser user) {
+		
+		SortedSet<IAlbum> albums = new TreeSet<IAlbum>(new AlbumComparator());		
+		albums.addAll(user.getAlbums());
+		return albums;
 	}
 
 	@Override
