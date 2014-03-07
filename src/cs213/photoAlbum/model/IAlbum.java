@@ -48,38 +48,38 @@ public interface IAlbum {
 	abstract void setAlbumName(String name);
 
 	/**
-	 * Returns the name of the album.
+	 * Returns the name of the album
 	 *
 	 * @return name name of album
 	 */
 	abstract String getAlbumName();
 
 	/**
-	 * Hash code.
+	 * Generates the hash value
 	 *
-	 * @return the int
+	 * @return the integer hash value
 	 */
 	abstract int hashCode();
 
 	/**
-	 * Equals.
+	 * Determines if two objects are equal
 	 *
-	 * @param obj the obj
+	 * @param obj the object
 	 * @return true, if successful
 	 */
 	abstract boolean equals(Object obj);
 
 	/**
-	 * Max photo date.
+	 * Determines the max photo date in the album
 	 *
-	 * @return the calendar
+	 * @return the date of the latest photo taken
 	 */
 	abstract Calendar maxPhotoDate();
 
 	/**
-	 * Min photo date.
+	 * Determines the minimum photo date
 	 *
-	 * @return the calendar
+	 * @return the date of the earliest taken photo
 	 */
 	abstract Calendar minPhotoDate();
 

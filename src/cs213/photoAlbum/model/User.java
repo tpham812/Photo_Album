@@ -31,17 +31,17 @@ public class User implements Serializable, IUser {
 	/**
 	 * Constructor for the User object of the User class.
 	 * 
-	 * @param id
-	 *            The users unique string ID
-	 * @param fname
-	 *            The users full name
+	 * @param id The users unique string ID
+	 * @param fname The users full name
 	 */
 	public User(String id, String fname) {
 		/** Users ID */
 		this.id = id;
 		/** Users full name */
 		this.fname = fname;
+		/** Instantiates the albumList */
 		this.albumList = new LinkedHashMap<String, IAlbum>();
+		/** Instantiates the photo list*/
 		this.photos = new LinkedHashMap<String, IPhoto>();
 	}
 

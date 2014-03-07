@@ -14,7 +14,7 @@ import cs213.photoAlbum.model.User;
 public interface IUserController {
 
 	/**
-	 * List users.
+	 * Provides a list of all current users
 	 *
 	 * @return the list
 	 */
@@ -30,7 +30,7 @@ public interface IUserController {
 	boolean addUser(String userId, String userName);
 
 	/**
-	 * Delete the user.
+	 * Deletes the user.
 	 *
 	 * @param userId the user id
 	 * @return true, if successful
@@ -38,7 +38,7 @@ public interface IUserController {
 	boolean deleteUser(String userId);
 
 	/**
-	 * Login.
+	 * Logs in the user
 	 *
 	 * @param userId the user id
 	 * @return the user
@@ -46,9 +46,9 @@ public interface IUserController {
 	IUser login(String userId);
 
 	/**
-	 * Logout.
+	 * Logs out the users
 	 *
-	 * @param u the u
+	 * @param u the IUser object
 	 */
 	void logout(IUser u);
 

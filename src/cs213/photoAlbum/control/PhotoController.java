@@ -131,7 +131,7 @@ public class PhotoController implements IPhotoController {
 	}
 
 	/**
-	 * Photo matches tagName and tagValue
+	 * Determines if the photos tag values match
 	 *
 	 * @param p the p
 	 * @param tagName the tag name

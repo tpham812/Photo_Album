@@ -49,7 +49,7 @@ public class CmdView {
 	}
 
 	/**
-	 * The main method.
+	 * The main method the creates a CmdView object and calls the process arguments method
 	 *
 	 * @param args the arguments
 	 */
@@ -60,9 +60,9 @@ public class CmdView {
 	}
 
 	/**
-	 * Process input args.
+	 * Processes input arguments 
 	 *
-	 * @param args the args
+	 * @param args the arguments
 	 */
 	public void processArgs(String[] args) {
 
@@ -95,9 +95,9 @@ public class CmdView {
 	}
 
 	/**
-	 * Launch interactive mode.
+	 * Launches interactive mode once the user logs in
 	 *
-	 * @param u the u
+	 * @param u the IUser
 	 */
 	private void launchInteractiveMode(IUser u) {
 
@@ -163,11 +163,11 @@ public class CmdView {
 
 
 	/**
-	 * Gets the photos by tag.
+	 * Gets the photos by tag
 	 *
-	 * @param u the u
-	 * @param cmd the cmd
-	 * @return the photos by tag
+	 * @param u the IUser
+	 * @param cmd the command
+	 * @return the list of photos by tag
 	 */
 	private void getPhotosByTag(IUser u, String cmd) {
 		List<String> tagNames = new ArrayList<String>();
@@ -190,10 +190,10 @@ public class CmdView {
 	}
 
 	/**
-	 * Gets the photos by date.
+	 * Gets the photos by date
 	 *
-	 * @param u the u
-	 * @param cmd the cmd
+	 * @param u the IUser
+	 * @param cmd the Commans
 	 * @return the photos by date
 	 */
 	private void getPhotosByDate(IUser u, String cmd) {
@@ -216,10 +216,10 @@ public class CmdView {
 	}
 
 	/**
-	 * List photo info.
+	 * Lists photo information
 	 *
-	 * @param u the u
-	 * @param cmd the cmd
+	 * @param u the IUser
+	 * @param cmd the command
 	 */
 	private void listPhotoInfo(IUser u, String cmd) {
 		List<String> params;
@@ -269,10 +269,10 @@ public class CmdView {
 	}
 
 	/**
-	 * Adds the or delete tag.
+	 * Checks if the add or delete method completes successfully and prints appropriate message to user
 	 *
-	 * @param u the u
-	 * @param cmd the cmd
+	 * @param u the IUser
+	 * @param cmd the command
 	 */
 	private void addOrDeleteTag(IUser u, String cmd) {
 		List<String> params;
@@ -322,10 +322,10 @@ public class CmdView {
 	}
 
 	/**
-	 * Removes the photo.
+	 * Checks if the removePhoto method completes successfully and prints appropriate message to user
 	 *
-	 * @param u the u
-	 * @param cmd the cmd
+	 * @param u the IUser
+	 * @param cmd the command
 	 */
 	private void removePhoto(IUser u, String cmd) {
 		List<String> params;
@@ -343,10 +343,10 @@ public class CmdView {
 	}
 
 	/**
-	 * Move photo.
+	 * Checks if the movePhoto method completes successfully and prints appropriate message to user
 	 *
-	 * @param u the u
-	 * @param cmd the cmd
+	 * @param u the IUser
+	 * @param cmd the command
 	 */
 	private void movePhoto(IUser u, String cmd) {
 		List<String> params;
@@ -370,10 +370,10 @@ public class CmdView {
 	}
 
 	/**
-	 * Adds the photo.
+	 * Checks if the addPhoto method completes successfully and prints appropriate message to userr
 	 *
-	 * @param u the u
-	 * @param cmd the cmd
+	 * @param u the IUser
+	 * @param cmd the command
 	 */
 	private void addPhoto(IUser u, String cmd) {
 		List<String> params;
@@ -397,10 +397,10 @@ public class CmdView {
 	}
 
 	/**
-	 * List photos.
+	 * Checks if the listPhotos method completes successfully and prints appropriate message to user
 	 *
-	 * @param u the u
-	 * @param cmd the cmd
+	 * @param u the IUser
+	 * @param cmd the command
 	 */
 	private void listPhotos(IUser u, String cmd) {
 		List<String> params;
@@ -432,7 +432,7 @@ public class CmdView {
 	}
 
 	/**
-	 * List albums.
+	 * Checks if the listAlbums method completes successfully and prints appropriate message to user
 	 *
 	 * @param u the u
 	 */
@@ -458,7 +458,7 @@ public class CmdView {
 	}
 
 	/**
-	 * Delete album.
+	 * Checks if the deleteAlbum method completes successfully and prints appropriate message to user
 	 *
 	 * @param u the u
 	 * @param cmd the cmd
@@ -479,10 +479,10 @@ public class CmdView {
 	}
 
 	/**
-	 * Creates the album.
+	 * Checks if the createAlbum method completes successfully and prints appropriate message to user
 	 *
-	 * @param u the u
-	 * @param cmd the cmd
+	 * @param u the IUser
+	 * @param cmd the command
 	 */
 	private void createAlbum(IUser u, String cmd) {
 		List<String> params;
@@ -500,11 +500,11 @@ public class CmdView {
 	}
 
 	/**
-	 * Format album.
+	 * Correctly formats the albums
 	 *
-	 * @param p the p
+	 * @param p the IPhoto
 	 * @param albums the albums
-	 * @return the string
+	 * @return the album string
 	 */
 	private String formatAlbum(IPhoto p, Collection<IAlbum> albums) {
 
@@ -524,9 +524,9 @@ public class CmdView {
 	}
 
 	/**
-	 * Parses the tag.
+	 * Parses the tag
 	 *
-	 * @param l the l
+	 * @param l the string
 	 * @param tagNames the tag names
 	 * @param tagValues the tag values
 	 */
@@ -557,9 +557,9 @@ public class CmdView {
 	}
 
 	/**
-	 * Parses the tag.
+	 * Parses the tag
 	 *
-	 * @param l the l
+	 * @param l the string
 	 * @param tagName the tag name
 	 * @param tagValue the tag value
 	 */
@@ -585,7 +585,7 @@ public class CmdView {
 	}
 
 	/**
-	 * Parses the date.
+	 * Parses the date
 	 *
 	 * @param string the string
 	 * @return the calendar
@@ -604,11 +604,11 @@ public class CmdView {
 	}
 
 	/**
-	 * Gets the quoted params.
+	 * Gets the quoted parameters
 	 *
 	 * @param l the l
-	 * @param numParams the num params
-	 * @return the quoted params
+	 * @param numParams the number of params
+	 * @return the string of parameters
 	 */
 	private List<String> getQuotedParams(String l, int numParams) {
 
@@ -635,10 +635,10 @@ public class CmdView {
 	}
 
 	/**
-	 * Login.
+	 * Processes the arguments and calls the login method, prints out appropriate message
 	 *
-	 * @param args the args
-	 * @return the i user
+	 * @param args the arguments
+	 * @return the IUser
 	 */
 	private IUser login(String[] args) {
 
@@ -658,7 +658,7 @@ public class CmdView {
 	}
 
 	/**
-	 * Delete user.
+	 * Process the arguments and calls the delete user method, prints out appropriate message
 	 *
 	 * @param args the args
 	 */
@@ -679,7 +679,7 @@ public class CmdView {
 	}
 
 	/**
-	 * Adds the user.
+	 * Process the arguments and calls the addUser method, prints out appropriate message
 	 *
 	 * @param args the args
 	 */
@@ -702,7 +702,8 @@ public class CmdView {
 	}
 
 	/**
-	 * List users.
+	 * Calls the listUsers method and prints them out, or if empty, prints 
+	 * that no users exist
 	 */
 	private void listUsers() {
 		List<String> users = userController.listUsers();

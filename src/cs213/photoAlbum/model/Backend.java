@@ -22,7 +22,7 @@ public class Backend implements IBackend {
 	}
 	
 	/**
-	 * File exists.
+	 * Determines if the file exists
 	 *
 	 * @param name the name
 	 * @return true, if successful
@@ -30,6 +30,13 @@ public class Backend implements IBackend {
 	public boolean fileExists(String name){
 		return getFile(name).exists();
 	}
+	
+	/**
+	 * Creates the file associated with the file name
+	 * 
+	 * @param name name of the file
+	 * @return new file 
+	 */
 	
 	public File getFile(String name){
 		return new File(name);
@@ -61,9 +68,9 @@ public class Backend implements IBackend {
 	}
 	
 	/**
-	 * List users.
+	 * Lists the users
 	 *
-	 * @return the list
+	 * @return the list of all current users
 	 */
 	public List<String> listUsers(){
 		
@@ -82,9 +89,9 @@ public class Backend implements IBackend {
 	}
 
 	/**
-	 * Gets the data dir.
+	 * Gets the data directory
 	 *
-	 * @return the data dir
+	 * @return the data directory
 	 */
 	private File getDataDir() {
 		File f = new File("data");
@@ -149,7 +156,7 @@ public class Backend implements IBackend {
 	}
 
 	/**
-	 * Close.
+	 * Closes the programs inputstream
 	 *
 	 * @param in the in
 	 * @param userId the user id
@@ -167,9 +174,9 @@ public class Backend implements IBackend {
 
 
 	/**
-	 * Close.
+	 * Closes the programs output stream
 	 *
-	 * @param out the out
+	 * @param out the output stream
 	 * @param userId the user id
 	 */
 	private void close(ObjectOutputStream out, String userId) {
