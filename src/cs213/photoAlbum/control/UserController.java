@@ -23,17 +23,11 @@ public class UserController implements IUserController {
 		this.backend = new Backend();		
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IUserController#listUsers()
-	 */
 	@Override
 	public List<String> listUsers() {
 		return backend.listUsers();
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IUserController#addUser(java.lang.String, java.lang.String)
-	 */
 	@Override
 	public boolean addUser(String userId, String userName) {
 
@@ -46,25 +40,16 @@ public class UserController implements IUserController {
 		return backend.writeUser(u);		
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IUserController#deleteUser(java.lang.String)
-	 */
 	@Override
 	public boolean deleteUser(String userId) {
 		return backend.deleteUser(userId);
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IUserController#login(java.lang.String)
-	 */
 	@Override
 	public IUser login(String userId) {
 		return backend.readUser(userId);
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.control.IUserController#logout(cs213.photoAlbum.model.IUser)
-	 */
 	@Override
 	public void logout(IUser u) {
 		backend.writeUser(u);		
