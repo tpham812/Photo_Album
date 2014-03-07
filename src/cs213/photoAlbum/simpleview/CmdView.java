@@ -22,31 +22,15 @@ import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.util.CalendarUtils;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class CmdView.
+ * CmdView class is the text interface for managing the album.
+ * @author dheeptha
  */
 public class CmdView {
 
 	/**
-	 * java cs213.photoAlbum.simpleview.CmdView listusers java
-	 * cs213.photoAlbum.simpleview.CmdView adduser <user id> "<user name>" java
-	 * cs213.photoAlbum.simpleview.CmdView deleteuser <user id> java
-	 * cs213.photoAlbum.simpleview.CmdView login <user id> 
-	 * createAlbum "<name>"
-	 * deleteAlbum "<name>" 
-	 * listAlbums listPhotos "<name>" 
-	 * addPhoto "<fileName>" "<caption>" "<albumName>" 
-	 * movePhoto "<fileName>" "<oldAlbumName>" "<newAlbumName>" 
-	 * removePhoto "<fileName>" "<albumName>" 
-	 * addTag "<fileName>" <tagType>:"<tagValue>" 
-	 * deleteTag "<fileName>" <tagType>:"<tagValue>" 
-	 * listPhotoInfo "<fileName>" 
-	 * getPhotosByDate <start date> <end date> 
-	 * getPhotosByTag [<tagType>:]"<tagValue>" [,[<tagType>:]"<tagValue>"]
-	 * logout
+	 * Controller to manage user admin. 
 	 */
-
 	private IUserController userController;
 
 	/** The photo controller. */
@@ -76,7 +60,7 @@ public class CmdView {
 	}
 
 	/**
-	 * Process args.
+	 * Process input args.
 	 *
 	 * @param args the args
 	 */

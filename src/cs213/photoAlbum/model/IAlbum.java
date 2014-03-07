@@ -4,9 +4,10 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface IAlbum.
+ * Album of a {@link IUser} containing multiple {@link IPhoto}s
+ * 
+ * @author brett
  */
 public interface IAlbum {
 

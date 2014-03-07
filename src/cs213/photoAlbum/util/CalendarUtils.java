@@ -5,9 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class CalendarUtils.
+ * Utility class to process Calendar.
+ * @author dheeptha
  */
 public class CalendarUtils {
 
