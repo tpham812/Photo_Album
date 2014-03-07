@@ -47,7 +47,7 @@ public interface IUser {
 	 *
 	 * @param albumName the album name
 	 */
-	abstract void deleteAlbum(String albumName);
+	abstract IAlbum deleteAlbum(String albumName);
 
 	/**
 	 * Renames the specified album.

@@ -71,8 +71,8 @@ public class User implements Serializable, IUser {
 	
 	
 	@Override
-	public void deleteAlbum(String albumName) {				
-		albumList.remove(albumName);
+	public IAlbum deleteAlbum(String albumName) {				
+		return albumList.remove(albumName);
 	}
 
 	@Override

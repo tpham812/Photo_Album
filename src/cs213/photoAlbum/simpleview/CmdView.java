@@ -152,7 +152,7 @@ public class CmdView {
 			} else if (cmd.startsWith("logout")) {
 				userController.logout(u);
 				break;
-			} else {
+			} else if(cmd.trim().length() > 0){
 				System.out.println("Error: invalid command " + cmd);
 			}
 			System.out.println("");
@@ -411,7 +411,7 @@ public class CmdView {
 
 			if (a == null) {
 				System.out.println("album does not exist for user " + u.getUserID() + ":");
-				System.out.println(params.get(1));
+				System.out.println(params.get(0));
 			} else {
 				Collection<IPhoto> photos = albumController.listPhotos(params.get(0), u);
 
