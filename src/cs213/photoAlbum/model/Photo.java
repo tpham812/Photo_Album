@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.SortedSet;
 
-
 /**
  * Photo owned by a {@link User} and part of multiple {@link Album}s.
  * @author dheeptha
@@ -14,7 +13,9 @@ import java.util.SortedSet;
  **/
 public class Photo implements Serializable, IPhoto {
 
-	/** The Constant serialVersionUID. */
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/** Name of the photo. */
@@ -29,9 +30,6 @@ public class Photo implements Serializable, IPhoto {
 	/**  Tags associated with the photo. */
 	private Map<String,SortedSet<String>> tags;
 	
-	/**
-	 * Instantiates a new photo.
-	 */
 	public Photo(){
 		this.tags = new LinkedHashMap<String, SortedSet<String>>();
 	}
