@@ -5,17 +5,16 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
 /**
  * Represents the User, containing a unique ID, their full name, and the
- * album(s) of the user
- * 
+ * album(s) of the user.
+ *
  * @author brett
- **/
+ */
 public class User implements Serializable, IUser {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** ID of the user. */
