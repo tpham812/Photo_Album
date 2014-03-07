@@ -8,15 +8,17 @@ import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
 
+// TODO: Auto-generated Javadoc
 /**
- * Controller interface to create/delete {@link Album}, and to manage {@link Photo} in the {@link Album}
+ * Controller interface to create/delete {@link Album}, and to manage {@link Photo} in the {@link Album}.
+ *
  * @author dheeptha
  * .
  */
 public interface IAlbumController {
 
 	/**
-	 * List the user's albums
+	 * List the user's albums.
 	 *
 	 * @param user the user
 	 * @return the list
@@ -24,7 +26,7 @@ public interface IAlbumController {
 	Collection<IAlbum> listAlbums(IUser user);
 
 	/**
-	 * Creates an album for the user
+	 * Creates an album for the user.
 	 *
 	 * @param albumName the album name
 	 * @param user the user
@@ -33,11 +35,18 @@ public interface IAlbumController {
 	boolean createAlbum(String albumName, IUser user);
 
 	
+	/**
+	 * Gets the album.
+	 *
+	 * @param albumName the album name
+	 * @param user the user
+	 * @return the album
+	 */
 	IAlbum getAlbum(String albumName, IUser user);
 	
 	
 	/**
-	 * Deletes the user's album 
+	 * Deletes the user's album .
 	 *
 	 * @param albumName the album name
 	 * @param user the user
@@ -46,7 +55,7 @@ public interface IAlbumController {
 	boolean deleteAlbum(String albumName, IUser user);
 
 	/**
-	 * List all the photos in the album
+	 * List all the photos in the album.
 	 *
 	 * @param albumName the album name
 	 * @param user the user
@@ -55,7 +64,7 @@ public interface IAlbumController {
 	Collection<IPhoto> listPhotos(String albumName, IUser user);
 
 	/**
-	 * Adds the photo to the user
+	 * Adds the photo to the user.
 	 *
 	 * @param fileName the file name
 	 * @param caption the caption
@@ -66,7 +75,7 @@ public interface IAlbumController {
 	IPhoto addPhoto(String fileName, String caption, String albumName, IUser user);
 
 	/**
-	 * Move the user's photo to a different album
+	 * Move the user's photo to a different album.
 	 *
 	 * @param fileName the file name
 	 * @param oldAlbumName the old album name
@@ -86,6 +95,14 @@ public interface IAlbumController {
 	 */
 	boolean removePhoto(String fileName, String albumName, IUser user);
 	
+	/**
+	 * Contains photo.
+	 *
+	 * @param fileName the file name
+	 * @param albumName the album name
+	 * @param user the user
+	 * @return true, if successful
+	 */
 	boolean containsPhoto(String fileName, String albumName, IUser user);
 
 	

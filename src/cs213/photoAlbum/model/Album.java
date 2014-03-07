@@ -35,51 +35,34 @@ public class Album implements Serializable, IAlbum {
 		this.photos = new LinkedHashMap<String, IPhoto>();
 	}
 	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IAlbum#recaptionPhoto()
-	 */
+	
 	@Override
 	public String recaptionPhoto(){
 		return name; 
 		
 	}
 	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IAlbum#getPhotos()
-	 */
 	@Override
 	public Collection<IPhoto> getPhotos(){
 		return photos.values(); 
 	}
 	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IAlbum#getPhoto(java.lang.String)
-	 */
 	@Override
 	public IPhoto getPhoto(String name) {
 		return photos.get(name);
 	}
 	
-	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IAlbum#setAlbumName(java.lang.String)
-	 */
+
 	@Override
 	public void setAlbumName(String name){
 		this.name=name;
 	}
 	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IAlbum#getAlbumName()
-	 */
 	@Override
 	public String getAlbumName(){
 		return name; 
 	}
 	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IAlbum#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,9 +71,6 @@ public class Album implements Serializable, IAlbum {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IAlbum#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -108,9 +88,6 @@ public class Album implements Serializable, IAlbum {
 		return true;
 	}
 	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IAlbum#maxPhotoDate()
-	 */
 	@Override
 	public Calendar maxPhotoDate(){
 		
@@ -129,9 +106,6 @@ public class Album implements Serializable, IAlbum {
 	}
 
 	
-	/* (non-Javadoc)
-	 * @see cs213.photoAlbum.model.IAlbum#minPhotoDate()
-	 */
 	@Override
 	public Calendar minPhotoDate(){
 		

@@ -5,10 +5,11 @@ import java.util.List;
 import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.User;
 
+// TODO: Auto-generated Javadoc
 /**
- * Controller interface for {@link User} functions such as login, logout, add/delete/list users
+ * Controller interface for {@link User} functions such as login, logout, add/delete/list users.
+ *
  * @author dheeptha
- * 
  */
 public interface IUserController {
 
@@ -46,6 +47,8 @@ public interface IUserController {
 
 	/**
 	 * Logout.
+	 *
+	 * @param u the u
 	 */
 	void logout(IUser u);
 

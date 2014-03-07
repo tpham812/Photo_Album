@@ -3,24 +3,47 @@ package cs213.photoAlbum.model;
 import java.util.Collection;
 import java.util.Map;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface IUser.
+ */
 public interface IUser {
 
 	/**
 	 * Adds new album to the list of albums.
-	 * 
-	 * @param user
-	 *            The user
+	 *
+	 * @param album the album
 	 */
 	abstract void addAlbum(Album album);
 
+	/**
+	 * Contains album.
+	 *
+	 * @param albumName the album name
+	 * @return true, if successful
+	 */
 	abstract boolean containsAlbum(String albumName);
 
+	/**
+	 * Gets the album.
+	 *
+	 * @param albumName the album name
+	 * @return the album
+	 */
 	abstract IAlbum getAlbum(String albumName);
 
+	/**
+	 * Adds the photo.
+	 *
+	 * @param photo the photo
+	 * @param album the album
+	 */
 	abstract void addPhoto(Photo photo, IAlbum album);
 
 	/**
 	 * deletes album .
+	 *
+	 * @param albumName the album name
 	 */
 	abstract void deleteAlbum(String albumName);
 
@@ -70,6 +93,11 @@ public interface IUser {
 	 */
 	abstract String getUserFullName();
 
+	/**
+	 * Gets the albums.
+	 *
+	 * @return the albums
+	 */
 	abstract Collection<IAlbum> getAlbums();
 
 	/**

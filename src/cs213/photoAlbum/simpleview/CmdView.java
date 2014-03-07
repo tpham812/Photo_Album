@@ -22,6 +22,10 @@ import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.util.CalendarUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CmdView.
+ */
 public class CmdView {
 
 	/**
@@ -45,22 +49,37 @@ public class CmdView {
 
 	private IUserController userController;
 
+	/** The photo controller. */
 	private IPhotoController photoController;
 
+	/** The album controller. */
 	private IAlbumController albumController;
 
+	/**
+	 * Instantiates a new cmd view.
+	 */
 	public CmdView() {
 		this.userController = new UserController();
 		this.photoController = new PhotoController();
 		this.albumController = new AlbumController();
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 
 		CmdView cmdView = new CmdView();
 		cmdView.processArgs(args);
 	}
 
+	/**
+	 * Process args.
+	 *
+	 * @param args the args
+	 */
 	public void processArgs(String[] args) {
 
 		if (args.length == 0) {
@@ -91,6 +110,11 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Launch interactive mode.
+	 *
+	 * @param u the u
+	 */
 	private void launchInteractiveMode(IUser u) {
 
 		Scanner scanner = new Scanner(System.in);
@@ -153,6 +177,13 @@ public class CmdView {
 	
 
 
+	/**
+	 * Gets the photos by tag.
+	 *
+	 * @param u the u
+	 * @param cmd the cmd
+	 * @return the photos by tag
+	 */
 	private void getPhotosByTag(IUser u, String cmd) {
 		List<String> tagNames = new ArrayList<String>();
 		List<String> tagValues = new ArrayList<String>();
@@ -173,6 +204,13 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Gets the photos by date.
+	 *
+	 * @param u the u
+	 * @param cmd the cmd
+	 * @return the photos by date
+	 */
 	private void getPhotosByDate(IUser u, String cmd) {
 		String vals[] = cmd.split(" ");
 		if (vals.length == 3) {
@@ -192,6 +230,12 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * List photo info.
+	 *
+	 * @param u the u
+	 * @param cmd the cmd
+	 */
 	private void listPhotoInfo(IUser u, String cmd) {
 		List<String> params;
 		params = getQuotedParams(cmd, 1);
@@ -239,6 +283,12 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Adds the or delete tag.
+	 *
+	 * @param u the u
+	 * @param cmd the cmd
+	 */
 	private void addOrDeleteTag(IUser u, String cmd) {
 		List<String> params;
 		boolean addTag = cmd.startsWith("addTag");
@@ -286,6 +336,12 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Removes the photo.
+	 *
+	 * @param u the u
+	 * @param cmd the cmd
+	 */
 	private void removePhoto(IUser u, String cmd) {
 		List<String> params;
 		params = getQuotedParams(cmd, 2);
@@ -301,6 +357,12 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Move photo.
+	 *
+	 * @param u the u
+	 * @param cmd the cmd
+	 */
 	private void movePhoto(IUser u, String cmd) {
 		List<String> params;
 		params = getQuotedParams(cmd, 3);
@@ -322,6 +384,12 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Adds the photo.
+	 *
+	 * @param u the u
+	 * @param cmd the cmd
+	 */
 	private void addPhoto(IUser u, String cmd) {
 		List<String> params;
 		params = getQuotedParams(cmd, 3);
@@ -343,6 +411,12 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * List photos.
+	 *
+	 * @param u the u
+	 * @param cmd the cmd
+	 */
 	private void listPhotos(IUser u, String cmd) {
 		List<String> params;
 		params = getQuotedParams(cmd, 1);
@@ -372,6 +446,11 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * List albums.
+	 *
+	 * @param u the u
+	 */
 	private void listAlbums(IUser u) {
 		Collection<IAlbum> albums = albumController.listAlbums(u);
 
@@ -393,6 +472,12 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Delete album.
+	 *
+	 * @param u the u
+	 * @param cmd the cmd
+	 */
 	private void deleteAlbum(IUser u, String cmd) {
 		List<String> params;
 		params = getQuotedParams(cmd, 1);
@@ -408,6 +493,12 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Creates the album.
+	 *
+	 * @param u the u
+	 * @param cmd the cmd
+	 */
 	private void createAlbum(IUser u, String cmd) {
 		List<String> params;
 		params = getQuotedParams(cmd, 1);
@@ -423,6 +514,13 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Format album.
+	 *
+	 * @param p the p
+	 * @param albums the albums
+	 * @return the string
+	 */
 	private String formatAlbum(IPhoto p, Collection<IAlbum> albums) {
 
 		StringBuffer buf = new StringBuffer();
@@ -440,6 +538,13 @@ public class CmdView {
 		return buf.toString();
 	}
 
+	/**
+	 * Parses the tag.
+	 *
+	 * @param l the l
+	 * @param tagNames the tag names
+	 * @param tagValues the tag values
+	 */
 	private void parseTag(String l, List<String> tagNames, List<String> tagValues) {
 
 		while (l.length() > 0) {
@@ -466,6 +571,13 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Parses the tag.
+	 *
+	 * @param l the l
+	 * @param tagName the tag name
+	 * @param tagValue the tag value
+	 */
 	private void parseTag(String l, StringBuffer tagName, StringBuffer tagValue) {
 
 		String sp[] = l.split(":");
@@ -487,6 +599,12 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Parses the date.
+	 *
+	 * @param string the string
+	 * @return the calendar
+	 */
 	private Calendar parseDate(String string) {
 
 		Calendar cal = null;
@@ -500,6 +618,13 @@ public class CmdView {
 		return cal;
 	}
 
+	/**
+	 * Gets the quoted params.
+	 *
+	 * @param l the l
+	 * @param numParams the num params
+	 * @return the quoted params
+	 */
 	private List<String> getQuotedParams(String l, int numParams) {
 
 		int i = 0, j = 0;
@@ -524,6 +649,12 @@ public class CmdView {
 		return strings;
 	}
 
+	/**
+	 * Login.
+	 *
+	 * @param args the args
+	 * @return the i user
+	 */
 	private IUser login(String[] args) {
 
 		IUser user;
@@ -541,6 +672,11 @@ public class CmdView {
 		return user;
 	}
 
+	/**
+	 * Delete user.
+	 *
+	 * @param args the args
+	 */
 	private void deleteUser(String[] args) {
 		if (args.length != 2) {
 			System.out.println("Error: Usage - deleteuser <user id>");
@@ -557,6 +693,11 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * Adds the user.
+	 *
+	 * @param args the args
+	 */
 	private void addUser(String[] args) {
 		if (args.length != 3) {
 			System.out.println("Error: Usage - adduser <user id> \"<user name>\" ");
@@ -575,6 +716,9 @@ public class CmdView {
 		}
 	}
 
+	/**
+	 * List users.
+	 */
 	private void listUsers() {
 		List<String> users = userController.listUsers();
 
