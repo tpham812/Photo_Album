@@ -16,7 +16,7 @@ public class CalendarUtils {
 	private static final String DATE_FMT = "MM/dd/yyyy-HH:mm:ss";
 
 	/**
-	 * To calendar.
+	 * Formats the calendar
 	 *
 	 * @param time the time
 	 * @return the calendar
@@ -48,9 +48,9 @@ public class CalendarUtils {
 	}
 	
 	/**
-	 * To fmt date.
+	 * Formats the date
 	 *
-	 * @param cal the cal
+	 * @param cal the calendar
 	 * @return the string
 	 */
 	public static String toFmtDate(Calendar cal) {

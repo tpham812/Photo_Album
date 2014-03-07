@@ -11,7 +11,7 @@ import java.util.List;
 public interface IBackend {
 
 	/**
-	 * Retrieve the user's photo file.
+	 * Retrieve the user's photo file
 	 *
 	 * @param photo the photo
 	 * @param user the user
@@ -20,15 +20,15 @@ public interface IBackend {
 	File retrievePhotoFile(IPhoto photo, IUser user);
 
 	/**
-	 * Read user.
+	 * Reads the user
 	 *
-	 * @param userId the user id
-	 * @return the i user
+	 * @param userId the users id
+	 * @return the user
 	 */
 	IUser readUser(String userId);
 
 	/**
-	 * Write user.
+	 * Writes a new user
 	 *
 	 * @param u the user
 	 * @return true, if successful
@@ -36,7 +36,7 @@ public interface IBackend {
 	boolean writeUser(IUser u);
 
 	/**
-	 * Delete user.
+	 * Deletes the user
 	 *
 	 * @param userId the user id
 	 * @return true, if successful
@@ -44,7 +44,7 @@ public interface IBackend {
 	boolean deleteUser(String userId);
 
 	/**
-	 * Gets the users corresponding to the userids.
+	 * Gets the user according to the userids.
 	 *
 	 * @param userIds the user ids
 	 * @return the user

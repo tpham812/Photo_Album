@@ -12,59 +12,59 @@ import java.util.SortedSet;
 public interface IPhoto {
 
 	/**
-	 * Gets the name.
+	 * Gets the name of the photo
 	 * 
 	 * @return the name
 	 */
 	abstract String getName();
 
 	/**
-	 * Sets the name.
+	 * Sets the name of the photo
 	 * 
-	 * @param name
-	 *            the new name
+	 * @param name name of photo
+	 *            
 	 */
 	abstract void setName(String name);
 
 	/**
-	 * Gets the caption.
+	 * Gets the caption of the photo
 	 * 
 	 * @return the caption
 	 */
 	abstract String getCaption();
 
 	/**
-	 * Sets the caption.
+	 * Sets the caption of the photo
 	 * 
-	 * @param caption
-	 *            the new caption
+	 * @param caption caption of the photo
+	 *            
 	 */
 	abstract void setCaption(String caption);
 
 	/**
-	 * Gets the date time.
+	 * Gets the time and date the photo was taken
 	 * 
-	 * @return the date time
+	 * @return the date and time
 	 */
 	abstract Calendar getDateTime();
 
 	/**
-	 * Sets the date time.
+	 * Sets the date and time the photo was taken
 	 * 
-	 * @param dateTime
-	 *            the new date time
+	 * @param dateTime the date and time
+	 *            
 	 */
 	abstract void setDateTime(Calendar dateTime);
 
 	/**
-	 * Gets the tags.
+	 * Gets the tags of the photo
 	 *
 	 * @return the tags
 	 */
 	abstract Map<String, SortedSet<String>> getTags();
 
 	/**
-	 * Sets the tags.
+	 * Sets the tags of a photo
 	 *
 	 * @param tags the tags
 	 */

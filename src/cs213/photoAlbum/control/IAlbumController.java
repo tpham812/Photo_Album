@@ -22,7 +22,7 @@ public interface IAlbumController {
 	 * List the user's albums.
 	 *
 	 * @param user the user
-	 * @return the list
+	 * @return the list of albums
 	 */
 	SortedSet<IAlbum> listAlbums(IUser user);
 
@@ -37,17 +37,17 @@ public interface IAlbumController {
 
 	
 	/**
-	 * Gets the album.
+	 * Gets the album
 	 *
 	 * @param albumName the album name
 	 * @param user the user
-	 * @return the album
+	 * @return the specified album
 	 */
 	IAlbum getAlbum(String albumName, IUser user);
 	
 	
 	/**
-	 * Deletes the user's album .
+	 * Deletes the user's album
 	 *
 	 * @param albumName the album name
 	 * @param user the user
@@ -56,16 +56,16 @@ public interface IAlbumController {
 	boolean deleteAlbum(String albumName, IUser user);
 
 	/**
-	 * List all the photos in the album.
+	 * Lists all the photos in the specified album
 	 *
 	 * @param albumName the album name
 	 * @param user the user
-	 * @return the list
+	 * @return the list of photos
 	 */
 	Collection<IPhoto> listPhotos(String albumName, IUser user);
 
 	/**
-	 * Adds the photo to the user.
+	 * Adds the photo to the specified user's album
 	 *
 	 * @param fileName the file name
 	 * @param caption the caption
@@ -76,7 +76,7 @@ public interface IAlbumController {
 	IPhoto addPhoto(String fileName, String caption, String albumName, IUser user);
 
 	/**
-	 * Move the user's photo to a different album.
+	 * Moves the user's photo to a different album
 	 *
 	 * @param fileName the file name
 	 * @param oldAlbumName the old album name
@@ -87,7 +87,7 @@ public interface IAlbumController {
 	boolean movePhoto(String fileName, String oldAlbumName, String newAlbumName, IUser user);
 
 	/**
-	 * Removes the user's photo from the album.
+	 * Removes the user's photo from the album
 	 *
 	 * @param fileName the file name
 	 * @param albumName the album name
@@ -97,7 +97,7 @@ public interface IAlbumController {
 	boolean removePhoto(String fileName, String albumName, IUser user);
 	
 	/**
-	 * Contains photo.
+	 * Determines if the specified album contains the photo
 	 *
 	 * @param fileName the file name
 	 * @param albumName the album name

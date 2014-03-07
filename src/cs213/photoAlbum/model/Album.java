@@ -23,7 +23,7 @@ public class Album implements Serializable, IAlbum {
 	public Map<String, IPhoto> photos; 
 	
 	/**
-	 * Constructor for the album object.
+	 * Constructor for the album object. Creates new HashMap for the photos
 	 *
 	 * @param name name of the album
 	 */

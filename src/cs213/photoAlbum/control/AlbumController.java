@@ -74,7 +74,14 @@ public class AlbumController implements IAlbumController {
 		return user.getAlbum(albumName).getPhotos();
 	}
 	
-
+	/**
+	 * Determines if the specified album contains the photo
+	 *
+	 * @param fileName the file name
+	 * @param albumName the album name
+	 * @param user the user
+	 * @return true, if successful
+	 */
 	public boolean containsPhoto(String fileName, String albumName, IUser user) {
 		IAlbum album = user.getAlbum(albumName);		
 		if(album == null || !album.getPhotoMap().containsKey(fileName)) {

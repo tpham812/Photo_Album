@@ -19,7 +19,7 @@ public interface IUser {
 	abstract void addAlbum(Album album);
 
 	/**
-	 * Contains album.
+	 * Determines if the user has a album with the specified albumName
 	 *
 	 * @param albumName the album name
 	 * @return true, if successful
@@ -27,7 +27,7 @@ public interface IUser {
 	abstract boolean containsAlbum(String albumName);
 
 	/**
-	 * Gets the album.
+	 * Gets the album
 	 *
 	 * @param albumName the album name
 	 * @return the album
@@ -35,7 +35,7 @@ public interface IUser {
 	abstract IAlbum getAlbum(String albumName);
 
 	/**
-	 * Adds the photo.
+	 * Adds the photo to the album
 	 *
 	 * @param photo the photo
 	 * @param album the album
@@ -43,24 +43,23 @@ public interface IUser {
 	abstract void addPhoto(Photo photo, IAlbum album);
 
 	/**
-	 * deletes album .
+	 * deletes the album
 	 *
 	 * @param albumName the album name
-	 * @return the i album
+	 * @return the IAlbum
 	 */
 	abstract IAlbum deleteAlbum(String albumName);
 
 	/**
 	 * Renames the specified album.
 	 * 
-	 * @param album
-	 *            The album title which is to be renamed
+	 * @param album The album  which is to be renamed
 	 * @return album The newly created album title
 	 */
 	abstract String rename(IAlbum album);
 
 	/**
-	 * To string.
+	 * To string method
 	 * 
 	 * @return id The users unique string ID
 	 */
@@ -69,42 +68,40 @@ public interface IUser {
 	/**
 	 * Sets the users ID.
 	 * 
-	 * @param id
-	 *            Users ID
+	 * @param id Users ID
 	 */
 	abstract void setUserID(String id);
 
 	/**
-	 * Sets the users full name.
+	 * Sets the users full name
 	 * 
-	 * @param fname
-	 *            Users full name
+	 * @param fname  Users full name
 	 */
 	abstract void setUserFullName(String fname);
 
 	/**
-	 * Returns the users id.
+	 * Gets the users id
 	 * 
 	 * @return id users id
 	 */
 	abstract String getUserID();
 
 	/**
-	 * Returns the users full name.
+	 * Gets the users full name.
 	 * 
 	 * @return fname Users full name
 	 */
 	abstract String getUserFullName();
 
 	/**
-	 * Gets the albums.
+	 * Gets the albums associated to the user
 	 *
 	 * @return the albums
 	 */
 	abstract Collection<IAlbum> getAlbums();
 
 	/**
-	 * Gets the photos.
+	 * Gets the photos
 	 * 
 	 * @return the photos
 	 */
@@ -113,8 +110,7 @@ public interface IUser {
 	/**
 	 * Sets the photos.
 	 * 
-	 * @param photos
-	 *            the photos
+	 * @param photos the map of photos
 	 */
 	abstract void setPhotos(Map<String, IPhoto> photos);
 
