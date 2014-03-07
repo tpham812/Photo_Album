@@ -49,7 +49,11 @@ public class AlbumController implements IAlbumController {
 			return false;
 		}
 
-		user.deleteAlbum(albumName);
+		IAlbum album = user.deleteAlbum(albumName);
+		for(IPhoto p : album.getPhotos()) {
+			removePhotoIfNotInAnAlbum(p.getName(), user);		
+		}
+		
 		return true;
 	}
 
@@ -130,6 +134,13 @@ public class AlbumController implements IAlbumController {
 			photos.remove(fileName);
 		}
 		
+		removePhotoIfNotInAnAlbum(fileName, user);
+
+		return true;
+	}
+
+	private void removePhotoIfNotInAnAlbum(String fileName, IUser user) {
+		
 		boolean photoExists = false;
 		for(IAlbum a: user.getAlbums()){
 			
@@ -142,8 +153,6 @@ public class AlbumController implements IAlbumController {
 		if(!photoExists) {
 			user.getPhotos().remove(fileName);
 		}
-
-		return true;
 	}
 
 	@Override
