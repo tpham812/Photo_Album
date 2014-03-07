@@ -10,8 +10,6 @@ import java.util.Map;
  * Album of a {@link User} containing multiple {@link Photo}s
  * 
  * @author brett
- * 
- *
  */
 public class Album implements Serializable, IAlbum {
 	

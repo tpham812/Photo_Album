@@ -3,10 +3,12 @@ package cs213.photoAlbum.model;
 import java.util.Collection;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface IUser.
- */
+ * Represents the IUser, containing a unique ID, their full name, and the
+ * album(s) of the user
+ * 
+ * @author brett
+ **/
 public interface IUser {
 
 	/**

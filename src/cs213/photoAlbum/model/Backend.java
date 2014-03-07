@@ -9,6 +9,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * IBackend is the interface to perform backend functions such as storage/retrieval of files and saving the user data.
+ * @author dheeptha
+ * 
+ */
 public class Backend implements IBackend {
 
 	@Override

@@ -3,7 +3,6 @@ package cs213.photoAlbum.model;
 import java.io.File;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
  * IBackend is the interface to perform backend functions such as storage/retrieval of files and saving the user data.
  * @author dheeptha
