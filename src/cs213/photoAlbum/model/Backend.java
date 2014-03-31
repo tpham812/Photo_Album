@@ -123,6 +123,7 @@ public class Backend implements IBackend {
 	}
 
 	/**
+	 *
 	 * Gets the serialized file.
 	 *
 	 * @param userId the user id
