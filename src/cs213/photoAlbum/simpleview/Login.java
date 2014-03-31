@@ -17,7 +17,7 @@ public class Login {
 	CmdView cv;
 	JFrame frame;
 	ActionListener buttonListener;
-	JPanel panel, panel2, panel3;
+	JPanel[] panel = new JPanel[3];
 	JButton button;
 	JLabel label;
 	JTextField tf;
@@ -26,12 +26,12 @@ public class Login {
 		
 		this.cv = cv;
 		frame = new JFrame("Login");
-		panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel2 = new JPanel();
-		panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
-		panel3 = new JPanel();
-		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
+		panel[0] = new JPanel();
+		panel[0].setLayout(new BoxLayout(panel[0], BoxLayout.Y_AXIS));
+		panel[1] = new JPanel();
+		panel[1].setLayout(new BoxLayout(panel[1], BoxLayout.Y_AXIS));
+		panel[2] = new JPanel();
+		panel[2].setLayout(new BoxLayout(panel[2], BoxLayout.X_AXIS));
 		button = new JButton("Login");
 		createLoginPanel();
 	}
@@ -52,18 +52,18 @@ public class Login {
 		
 		label = new JLabel("User ID:     ");
 		
-		panel2.add(Box.createRigidArea(new Dimension(0,25)));
+		panel[1].add(Box.createRigidArea(new Dimension(0,25)));
 		
-		panel3.add(label);
-		panel3.add(tf);
-		panel3.add(Box.createRigidArea((new Dimension(15,0))));
-		panel3.add(button);
+		panel[2].add(label);
+		panel[2].add(tf);
+		panel[2].add(Box.createRigidArea((new Dimension(15,0))));
+		panel[2].add(button);
 		
-		panel.add(panel2);
-		panel.add(Box.createRigidArea(new Dimension(0,25)));
-		panel.add(panel3);
+		panel[0].add(panel[1]);
+		panel[0].add(Box.createRigidArea(new Dimension(0,25)));
+		panel[0].add(panel[2]);
 		
-		frame.add(panel);
+		frame.add(panel[0]);
 		frame.setVisible(true);
 	}
 

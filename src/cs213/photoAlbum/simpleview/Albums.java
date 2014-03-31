@@ -18,8 +18,8 @@ public class Albums {
 	CmdView cv;
 	JFrame frame;
 	ActionListener buttonListener;
-	JPanel panel, panel2, panel3, panel4;
-	JButton button, button2, button3, button4, button5;
+	JPanel[] panel = new JPanel[4];
+	JButton[] button = new JButton[5];
 	JTable table;
 	JScrollPane sp; 
 	JTableHeader header;
@@ -31,19 +31,19 @@ public class Albums {
 		
 		this.cv = cv;
 		frame = new JFrame("Albums");
-		panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel2 = new JPanel();
-		panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
-		panel3 = new JPanel();
-		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
-		panel4 = new JPanel();
-		panel4.setLayout(new BoxLayout(panel4, BoxLayout.X_AXIS));
-		button = new JButton("Logout");
-		button2 = new JButton("Search");
-		button3 = new JButton("Delete");
-		button4 = new JButton("Edit");
-		button5 = new JButton("Add");
+		panel[0] = new JPanel();
+		panel[0].setLayout(new BoxLayout(panel[0], BoxLayout.Y_AXIS));
+		panel[1] = new JPanel();
+		panel[1].setLayout(new BoxLayout(panel[1], BoxLayout.X_AXIS));
+		panel[2] = new JPanel();
+		panel[2].setLayout(new BoxLayout(panel[2], BoxLayout.X_AXIS));
+		panel[3] = new JPanel();
+		panel[3].setLayout(new BoxLayout(panel[3], BoxLayout.X_AXIS));
+		button[0] = new JButton("Logout");
+		button[1] = new JButton("Search");
+		button[2] = new JButton("Delete");
+		button[3] = new JButton("Edit");
+		button[4] = new JButton("Add");
 		table = new JTable(test,columnNames);
 		header = table.getTableHeader();
 		sp = new JScrollPane(table);
@@ -60,29 +60,28 @@ public class Albums {
 		
 		table.setMaximumSize(new Dimension(450,400));
 		
+		panel[1].add(Box.createRigidArea(new Dimension(420,0)));
+		panel[1].add(button[0]);
 		
-		panel2.add(Box.createRigidArea(new Dimension(420,0)));
-		panel2.add(button);
+		panel[2].add(button[1]);
+		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
+		panel[2].add(button[2]);
+		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
+		panel[2].add(button[3]);
+		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
+		panel[2].add(button[4]);
 		
-		panel3.add(button2);
-		panel3.add(Box.createRigidArea(new Dimension(25,0)));
-		panel3.add(button3);
-		panel3.add(Box.createRigidArea(new Dimension(25,0)));
-		panel3.add(button4);
-		panel3.add(Box.createRigidArea(new Dimension(25,0)));
-		panel3.add(button5);
+		panel[3].add(Box.createRigidArea(new Dimension(21,0)));
+		panel[3].add(header);
 		
-		panel4.add(Box.createRigidArea(new Dimension(21,0)));
-		panel4.add(header);
+		panel[0].add(panel[1]);
+		panel[0].add(Box.createRigidArea(new Dimension(0,15)));
+		panel[0].add(panel[2]);
+		panel[0].add(Box.createRigidArea(new Dimension(0,20)));
+		panel[0].add(panel[3]);
+		panel[0].add(table);
 		
-		panel.add(panel2);
-		panel.add(Box.createRigidArea(new Dimension(0,15)));
-		panel.add(panel3);
-		panel.add(Box.createRigidArea(new Dimension(0,20)));
-		panel.add(panel4);
-		panel.add(table);
-		
-		frame.add(panel);
+		frame.add(panel[0]);
 		frame.setVisible(true);
 	}
 	
