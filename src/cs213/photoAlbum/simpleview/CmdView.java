@@ -44,6 +44,8 @@ public class CmdView {
 	protected Admin admin;
 	
 	protected Albums album;
+	
+	protected Search_Photos sp;
 	/**
 	 * Instantiates a new cmd view.
 	 */
@@ -54,6 +56,7 @@ public class CmdView {
 		this.login = new Login(this);
 		this.admin = new Admin (this);
 		this.album = new Albums(this);
+		this.sp = new Search_Photos(this);
 	}
 
 	/**
