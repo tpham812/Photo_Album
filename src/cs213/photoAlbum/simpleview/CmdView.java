@@ -39,6 +39,11 @@ public class CmdView {
 	/** The album controller. */
 	private IAlbumController albumController;
 
+	protected Login login;
+	
+	protected Admin admin;
+	
+	protected Albums album;
 	/**
 	 * Instantiates a new cmd view.
 	 */
@@ -46,6 +51,9 @@ public class CmdView {
 		this.userController = new UserController();
 		this.photoController = new PhotoController();
 		this.albumController = new AlbumController();
+		this.login = new Login(this);
+		this.admin = new Admin (this);
+		this.album = new Albums(this);
 	}
 
 	/**
@@ -643,7 +651,7 @@ public class CmdView {
 	private IUser login(String[] args) {
 
 		IUser user;
-
+		
 		if (args.length != 2) {
 			System.out.println("Error: Usage - login <user id>");
 		}
