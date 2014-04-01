@@ -22,8 +22,8 @@ public class Admin {
 	CmdView cv;
 	JFrame frame;
 	ActionListener buttonListener;
-	JPanel panel, panel2, panel3, panel4;
-	JButton button, button2, button3;
+	JPanel[] panel = new JPanel[4];
+	JButton[] button = new JButton[3];
 	JLabel label;
 	JTextField tf;
 	JList<User> list;
@@ -33,17 +33,17 @@ public class Admin {
 		
 		this.cv = cv;
 		frame = new JFrame("Admin");
-		panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel2 = new JPanel();
-		panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
-		panel3 = new JPanel();
-		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
-		panel4 = new JPanel();
-		panel4.setLayout(new BoxLayout(panel4, BoxLayout.X_AXIS));
-		button = new JButton("Logout");
-		button2 = new JButton("Add User");
-		button3 = new JButton("Delete");
+		panel[0] = new JPanel();
+		panel[0].setLayout(new BoxLayout(panel[0], BoxLayout.Y_AXIS));
+		panel[1] = new JPanel();
+		panel[1].setLayout(new BoxLayout(panel[1], BoxLayout.X_AXIS));
+		panel[2] = new JPanel();
+		panel[2].setLayout(new BoxLayout(panel[2], BoxLayout.X_AXIS));
+		panel[3] = new JPanel();
+		panel[3].setLayout(new BoxLayout(panel[3], BoxLayout.X_AXIS));
+		button[0] = new JButton("Logout");
+		button[1] = new JButton("Add User");
+		button[2] = new JButton("Delete");
 		list = new JList<User>();
 		sp = new JScrollPane(list);
 		label = new JLabel("User ID:   ");
@@ -60,31 +60,30 @@ public class Admin {
 		
 		tf = new JTextField();
 		tf.setEditable(true);
-		tf.setEditable(true);
 		tf.setMaximumSize(new Dimension(125,20));
 		
 		sp.setMaximumSize(new Dimension(350, 350));
 		
-		panel2.add(Box.createRigidArea(new Dimension(420,0)));
-		panel2.add(button);
+		panel[1].add(Box.createRigidArea(new Dimension(420,0)));
+		panel[1].add(button[0]);
 		
-		panel3.add(label);
-		panel3.add(tf);
-		panel3.add(Box.createRigidArea(new Dimension(10,0)));
-		panel3.add(button2);
+		panel[2].add(label);
+		panel[2].add(tf);
+		panel[2].add(Box.createRigidArea(new Dimension(10,0)));
+		panel[2].add(button[1]);
 		
-		panel4.add(Box.createRigidArea(new Dimension(17,0)));
-		panel4.add(sp);
-		panel4.add(Box.createRigidArea(new Dimension(20,0)));
-		panel4.add(button3);
+		panel[3].add(Box.createRigidArea(new Dimension(17,0)));
+		panel[3].add(sp);
+		panel[3].add(Box.createRigidArea(new Dimension(20,0)));
+		panel[3].add(button[2]);
 		
-		panel.add(panel2);
-		panel.add(Box.createRigidArea(new Dimension(0,15)));
-		panel.add(panel3);
-		panel.add(Box.createRigidArea(new Dimension(0,15)));
-		panel.add(panel4);
+		panel[0].add(panel[1]);
+		panel[0].add(Box.createRigidArea(new Dimension(0,15)));
+		panel[0].add(panel[2]);
+		panel[0].add(Box.createRigidArea(new Dimension(0,15)));
+		panel[0].add(panel[3]);
 		
-		frame.add(panel);
+		frame.add(panel[0]);
 		frame.setVisible(true);
 	}
 	
