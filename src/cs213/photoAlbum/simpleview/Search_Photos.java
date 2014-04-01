@@ -1,5 +1,6 @@
 package cs213.photoAlbum.simpleview;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -42,7 +43,7 @@ public class Search_Photos {
 		
 		for(int i = 0; i < cb.length; i++) {
 			cb[i] = new JComboBox<String>(Test);
-			cb[i].setSize(new Dimension(5, 5));
+			cb[i].setBackground(Color.white);
 		}
 	
 		panel[0] = new JPanel();
