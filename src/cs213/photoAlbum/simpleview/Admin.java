@@ -19,7 +19,7 @@ import cs213.photoAlbum.model.User;
 
 public class Admin {
 
-	CmdView cv;
+	AbstractView cv;
 	JFrame frame;
 	ActionListener buttonListener;
 	JPanel[] panel = new JPanel[4];
@@ -29,7 +29,7 @@ public class Admin {
 	JList<User> list;
 	JScrollPane sp;
 	
-	public Admin(CmdView cv) {
+	public Admin(AbstractView cv) {
 		
 		this.cv = cv;
 		frame = new JFrame("Admin");
@@ -89,9 +89,9 @@ public class Admin {
 	
 	class ButtonListener implements ActionListener {
 
-		CmdView cv;
+		AbstractView cv;
 		
-		public ButtonListener(CmdView cv) {
+		public ButtonListener(AbstractView cv) {
 			
 			this.cv = cv;
 		}

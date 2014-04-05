@@ -15,7 +15,7 @@ import javax.swing.table.JTableHeader;
 
 public class Albums {
 
-	CmdView cv;
+	AbstractView cv;
 	JFrame frame;
 	ActionListener buttonListener;
 	JPanel[] panel = new JPanel[4];
@@ -27,7 +27,7 @@ public class Albums {
 	String[][] test = {{"Test", "2", "9/12/14 - 10/12/16", "10/12/16"},
 						{"Test2", "3", "8/12/91 - 9/12/95", "9/12/95"}};
 	
-	public Albums(CmdView cv) {
+	public Albums(AbstractView cv) {
 		
 		this.cv = cv;
 		frame = new JFrame("Albums");
@@ -87,9 +87,9 @@ public class Albums {
 	
 	class ButtonListener implements ActionListener {
 
-		CmdView cv;
+		AbstractView cv;
 		
-		public ButtonListener(CmdView cv) {
+		public ButtonListener(AbstractView cv) {
 			
 			this.cv = cv;
 		}

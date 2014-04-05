@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 
 public class Search_Photos {
 
-	CmdView cv;
+	AbstractView cv;
 	ActionListener buttonListener;
 	JButton[] button = new JButton[3];
 	JFrame frame;
@@ -27,7 +27,7 @@ public class Search_Photos {
 	String[] Test = {"Test", "Test1", "Test2", "Test3"};	
 	
 	
-	public Search_Photos (CmdView cv){
+	public Search_Photos (AbstractView cv){
 		
 		this.cv = cv;
 		initializeComponents();
@@ -152,9 +152,9 @@ public class Search_Photos {
 	
 	class ButtonListener implements ActionListener {
 
-		CmdView cv;
+		AbstractView cv;
 		
-		public ButtonListener(CmdView cv) {
+		public ButtonListener(AbstractView cv) {
 			
 			this.cv = cv;
 		}
