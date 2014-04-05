@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 public class Login {
 
-	CmdView cv;
+	AbstractView cv;
 	JFrame frame;
 	ActionListener buttonListener;
 	JPanel[] panel = new JPanel[3];
@@ -22,7 +22,7 @@ public class Login {
 	JLabel label;
 	JTextField tf;
 	
-	public Login(CmdView cv) {
+	public Login(AbstractView cv) {
 		
 		this.cv = cv;
 		frame = new JFrame("Login");

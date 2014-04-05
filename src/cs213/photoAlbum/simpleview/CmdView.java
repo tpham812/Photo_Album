@@ -12,9 +12,6 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 
 import cs213.photoAlbum.control.AlbumController;
-import cs213.photoAlbum.control.IAlbumController;
-import cs213.photoAlbum.control.IPhotoController;
-import cs213.photoAlbum.control.IUserController;
 import cs213.photoAlbum.control.PhotoController;
 import cs213.photoAlbum.control.UserController;
 import cs213.photoAlbum.model.IAlbum;
@@ -26,18 +23,7 @@ import cs213.photoAlbum.util.CalendarUtils;
  * CmdView class is the text interface for managing the album.
  * @author dheeptha
  */
-public class CmdView {
-
-	/**
-	 * Controller to manage user admin. 
-	 */
-	private IUserController userController;
-
-	/** The photo controller. */
-	private IPhotoController photoController;
-
-	/** The album controller. */
-	private IAlbumController albumController;
+public class CmdView extends AbstractView {
 
 	protected Login login;
 	
@@ -50,13 +36,8 @@ public class CmdView {
 	 * Instantiates a new cmd view.
 	 */
 	public CmdView() {
-		this.userController = new UserController();
-		this.photoController = new PhotoController();
-		this.albumController = new AlbumController();
-		this.login = new Login(this);
-		this.admin = new Admin (this);
-		this.album = new Albums(this);
-		this.sp = new Search_Photos(this);
+		super();
+
 	}
 
 	/**
