@@ -15,7 +15,7 @@ import javax.swing.table.JTableHeader;
 
 public class Albums {
 
-	AbstractView cv;
+	ViewContainer viewContainer;
 	JFrame frame;
 	ActionListener buttonListener;
 	JPanel[] panel = new JPanel[4];
@@ -27,9 +27,9 @@ public class Albums {
 	String[][] test = {{"Test", "2", "9/12/14 - 10/12/16", "10/12/16"},
 						{"Test2", "3", "8/12/91 - 9/12/95", "9/12/95"}};
 	
-	public Albums(AbstractView cv) {
+	public Albums(ViewContainer cv) {
 		
-		this.cv = cv;
+		this.viewContainer = cv;
 		frame = new JFrame("Albums");
 		panel[0] = new JPanel();
 		panel[0].setLayout(new BoxLayout(panel[0], BoxLayout.Y_AXIS));
@@ -47,10 +47,9 @@ public class Albums {
 		table = new JTable(test,columnNames);
 		header = table.getTableHeader();
 		sp = new JScrollPane(table);
-		createAdminPanel();
 	}
 	
-	public void createAdminPanel() {
+	public void displayPanel() {
 		
 		frame.setSize(500, 550);
 		frame.setMaximumSize(new Dimension(500,550));
@@ -87,9 +86,9 @@ public class Albums {
 	
 	class ButtonListener implements ActionListener {
 
-		AbstractView cv;
+		ViewContainer cv;
 		
-		public ButtonListener(AbstractView cv) {
+		public ButtonListener(ViewContainer cv) {
 			
 			this.cv = cv;
 		}

@@ -1,26 +1,60 @@
 package cs213.photoAlbum.simpleview;
 
-public class GuiView extends AbstractView {
+import javax.swing.UIManager;
+
+import cs213.photoAlbum.control.IAlbumController;
+import cs213.photoAlbum.control.IPhotoController;
+import cs213.photoAlbum.control.IUserController;
+
+public class GuiView {
 	
 	protected Login login;
 	
-	protected Admin admin;
+	protected SearchPhotos sp;
+
+	/**
+	 * Controller to manage user admin. 
+	 */
+	protected IUserController userController;
+
+	/** The photo controller. */
+	protected IPhotoController photoController;
+
+	/** The album controller. */
+	protected IAlbumController albumController;
 	
-	protected Albums album;
-	
-	protected Search_Photos sp;
+	private ViewContainer viewContainer;
 	
 	public GuiView() {
 		super();
-		this.login = new Login(this);
-		this.admin = new Admin (this);
-		this.album = new Albums(this);
-		this.sp = new Search_Photos(this);
+		viewContainer = new ViewContainer();
+		this.login = new Login(viewContainer);
+		this.sp = new SearchPhotos(viewContainer);
+		
+	}
+
+	protected void showGUI() {
+		login.displayPanel();
 		
 	}
 	
 	public static void main(String[] args) {
-		GuiView guiView = new GuiView();
+		final GuiView guiView = new GuiView();
+		
+		/* Use an appropriate Look and Feel */
+		try {
+
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				guiView.showGUI();
+			}
+		});
 	}
 
 }
