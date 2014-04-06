@@ -12,9 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import cs213.photoAlbum.model.IUser;
+
 public class Login {
 
-	AbstractView cv;
+	ViewContainer viewContainer;
 	JFrame frame;
 	ActionListener buttonListener;
 	JPanel[] panel = new JPanel[3];
@@ -22,9 +24,13 @@ public class Login {
 	JLabel label;
 	JTextField tf;
 	
-	public Login(AbstractView cv) {
+	protected Admin admin;
+	
+	protected Albums album;
+	
+	public Login(ViewContainer cv) {
 		
-		this.cv = cv;
+		this.viewContainer = cv;
 		frame = new JFrame("Login");
 		panel[0] = new JPanel();
 		panel[0].setLayout(new BoxLayout(panel[0], BoxLayout.Y_AXIS));
@@ -33,12 +39,15 @@ public class Login {
 		panel[2] = new JPanel();
 		panel[2].setLayout(new BoxLayout(panel[2], BoxLayout.X_AXIS));
 		button = new JButton("Login");
-		createLoginPanel();
+		button.addActionListener(new ButtonListener(this));
+		
+
+		this.admin = new Admin (viewContainer);
+		this.album = new Albums(viewContainer);
 	}
-	
-	public void createLoginPanel() {
 		
-		
+	public void displayPanel() {	
+
 		frame.setSize(500, 150);
 		frame.setMaximumSize(new Dimension(500,200));
 		frame.setResizable(false);
@@ -71,11 +80,33 @@ public class Login {
 		
 		Login login;
 		
-		public ButtonListener(Login login) {
+		public ButtonListener(Login l) {
 			
-			this.login = login;
+			this.login = l;
 		}
+		
 		public void actionPerformed(ActionEvent e) {
+			
+			
+			System.out.println(e);
+			
+			String userId = login.tf.getText();
+			
+			if(!userId.isEmpty()) {
+				IUser u = login.viewContainer.login(login.tf.getText());
+				
+				if(u != null) {
+					
+					login.frame.dispose();
+					
+					if(u.getUserID().equals("admin")) {
+						admin.displayPanel();						
+					} else {
+						album.displayPanel();
+					}
+					
+				}
+			}
 		}
 	}
 }

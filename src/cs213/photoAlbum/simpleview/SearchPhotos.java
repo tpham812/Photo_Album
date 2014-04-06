@@ -15,9 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class Search_Photos {
+public class SearchPhotos {
 
-	AbstractView cv;
+	ViewContainer viewContainer;
 	ActionListener buttonListener;
 	JButton[] button = new JButton[3];
 	JFrame frame;
@@ -27,11 +27,11 @@ public class Search_Photos {
 	String[] Test = {"Test", "Test1", "Test2", "Test3"};	
 	
 	
-	public Search_Photos (AbstractView cv){
+	public SearchPhotos (ViewContainer cv){
 		
-		this.cv = cv;
+		this.viewContainer = cv;
 		initializeComponents();
-		createPanel();
+		
 	}
 	public void initializeComponents() {
 		
@@ -68,7 +68,7 @@ public class Search_Photos {
 		
 	}
 	
-	public void createPanel() {
+	public void displayPanel() {
 		
 		frame.setSize(600, 320);
 		frame.setMaximumSize(new Dimension(600,320));
@@ -152,9 +152,9 @@ public class Search_Photos {
 	
 	class ButtonListener implements ActionListener {
 
-		AbstractView cv;
+		ViewContainer cv;
 		
-		public ButtonListener(AbstractView cv) {
+		public ButtonListener(ViewContainer cv) {
 			
 			this.cv = cv;
 		}

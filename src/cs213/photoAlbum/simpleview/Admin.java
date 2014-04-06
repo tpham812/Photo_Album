@@ -19,7 +19,7 @@ import cs213.photoAlbum.model.User;
 
 public class Admin {
 
-	AbstractView cv;
+	ViewContainer viewContainer;
 	JFrame frame;
 	ActionListener buttonListener;
 	JPanel[] panel = new JPanel[4];
@@ -29,9 +29,9 @@ public class Admin {
 	JList<User> list;
 	JScrollPane sp;
 	
-	public Admin(AbstractView cv) {
+	public Admin(ViewContainer cv) {
 		
-		this.cv = cv;
+		this.viewContainer = cv;
 		frame = new JFrame("Admin");
 		panel[0] = new JPanel();
 		panel[0].setLayout(new BoxLayout(panel[0], BoxLayout.Y_AXIS));
@@ -47,10 +47,9 @@ public class Admin {
 		list = new JList<User>();
 		sp = new JScrollPane(list);
 		label = new JLabel("User ID:   ");
-		createAdminPanel();
 	}
 	
-	public void createAdminPanel() {
+	public void displayPanel() {
 		
 		frame.setSize(500, 500);
 		frame.setMaximumSize(new Dimension(500,500));
@@ -89,9 +88,9 @@ public class Admin {
 	
 	class ButtonListener implements ActionListener {
 
-		AbstractView cv;
+		ViewContainer cv;
 		
-		public ButtonListener(AbstractView cv) {
+		public ButtonListener(ViewContainer cv) {
 			
 			this.cv = cv;
 		}
