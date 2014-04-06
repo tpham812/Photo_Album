@@ -3,6 +3,8 @@ package cs213.photoAlbum.simpleview;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Collection;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -12,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
+
+import cs213.photoAlbum.model.IAlbum;
+import cs213.photoAlbum.util.CalendarUtils;
 
 public class Albums {
 
@@ -23,9 +28,8 @@ public class Albums {
 	JTable table;
 	JScrollPane sp; 
 	JTableHeader header;
-	String[] columnNames = {"Album", "Number of Photos", "Date Range", "Oldest Date"};
-	String[][] test = {{"Test", "2", "9/12/14 - 10/12/16", "10/12/16"},
-						{"Test2", "3", "8/12/91 - 9/12/95", "9/12/95"}};
+	String[] columnNames = {"Album", "# Photos", "Date Range", "Oldest Date"};
+	String[][] test;
 	
 	public Albums(ViewContainer cv) {
 		
@@ -44,12 +48,47 @@ public class Albums {
 		button[2] = new JButton("Delete");
 		button[3] = new JButton("Edit");
 		button[4] = new JButton("Add");
-		table = new JTable(test,columnNames);
-		header = table.getTableHeader();
-		sp = new JScrollPane(table);
+		
 	}
 	
 	public void displayPanel() {
+		
+		Collection<IAlbum> albums = viewContainer.listAlbums();
+		
+		if (albums.isEmpty()) {
+			test = new String[][]{};
+		} else {
+			
+			test = new String[albums.size()][4];
+			int i = 0;
+			for (IAlbum a : albums) {
+				Calendar max = a.maxPhotoDate();
+				Calendar min = a.minPhotoDate();
+
+				//"Album", "Number of Photos", "Date Range", "Oldest Date"
+				test[i][0] = a.getAlbumName(); 
+				test[i][1] = Integer.toString(a.getPhotos().size());
+										
+				if (max == null) {
+					test[i][2] = "";
+					test[i][3] = "";
+				} else {
+					test[i][2] = CalendarUtils.toFmtDate(min) + " - " + CalendarUtils.toFmtDate(max);
+					
+					test[i][3] = CalendarUtils.toFmtDate(min);
+				}
+				
+				i++;
+			}
+		}
+
+		
+		table = new JTable(test,columnNames);
+		
+		
+		header = table.getTableHeader();
+		sp = new JScrollPane(table);
+
 		
 		frame.setSize(500, 550);
 		frame.setMaximumSize(new Dimension(500,550));
@@ -63,9 +102,9 @@ public class Albums {
 		panel[1].add(button[0]);
 		
 		panel[2].add(button[1]);
-		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
+		panel[2].add(Box.createRigidArea(new Dimension(10,0)));
 		panel[2].add(button[2]);
-		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
+		panel[2].add(Box.createRigidArea(new Dimension(10,0)));
 		panel[2].add(button[3]);
 		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
 		panel[2].add(button[4]);
@@ -78,9 +117,11 @@ public class Albums {
 		panel[0].add(panel[2]);
 		panel[0].add(Box.createRigidArea(new Dimension(0,20)));
 		panel[0].add(panel[3]);
+		
 		panel[0].add(table);
 		
 		frame.add(panel[0]);
+
 		frame.setVisible(true);
 	}
 	
