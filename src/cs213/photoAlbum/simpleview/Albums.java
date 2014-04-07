@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -15,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
+import cs213.photoAlbum.model.Album;
 import cs213.photoAlbum.model.IAlbum;
 import cs213.photoAlbum.util.CalendarUtils;
 
@@ -24,12 +26,14 @@ public class Albums {
 	JFrame frame;
 	ActionListener buttonListener;
 	JPanel[] panel = new JPanel[4];
-	JButton[] button = new JButton[5];
+	JButton[] button = new JButton[6];
 	JTable table;
 	JScrollPane sp; 
 	JTableHeader header;
 	String[] columnNames = {"Album", "# Photos", "Date Range", "Oldest Date"};
 	String[][] test;
+	
+	Collection<IAlbum> albums;
 	
 	public Albums(ViewContainer cv) {
 		
@@ -48,12 +52,46 @@ public class Albums {
 		button[2] = new JButton("Delete");
 		button[3] = new JButton("Edit");
 		button[4] = new JButton("Add");
+		button[5] = new JButton("View");
+		
+		button[5].addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				
+				frame.dispose();
+				
+				int[] selection = table.getSelectedRows();
+				int row;
+				
+				if(selection.length > 0) {				
+					row = table.convertRowIndexToModel(selection[0]);
+					IAlbum album = null;
+					
+					System.out.println("Row # " + row);
+					
+					Iterator<IAlbum> itr = albums.iterator();
+					for(int j=0;j<=row && itr.hasNext();j++) {						
+						album = itr.next();
+					}
+					
+					try {
+						PhotoView photoView = new PhotoView(album);
+						photoView.setVisible(true);
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+			}
+		});
 		
 	}
 	
 	public void displayPanel() {
 		
-		Collection<IAlbum> albums = viewContainer.listAlbums();
+		albums = viewContainer.listAlbums();
 		
 		if (albums.isEmpty()) {
 			test = new String[][]{};
@@ -97,6 +135,7 @@ public class Albums {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		table.setMaximumSize(new Dimension(450,400));
+		table.setRowSelectionAllowed(true);
 		
 		panel[1].add(Box.createRigidArea(new Dimension(420,0)));
 		panel[1].add(button[0]);
@@ -108,6 +147,9 @@ public class Albums {
 		panel[2].add(button[3]);
 		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
 		panel[2].add(button[4]);
+		
+		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
+		panel[2].add(button[5]);
 		
 		panel[3].add(Box.createRigidArea(new Dimension(21,0)));
 		panel[3].add(header);
