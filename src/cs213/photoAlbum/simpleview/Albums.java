@@ -121,7 +121,11 @@ public class Albums {
 		}
 
 		
-		table = new JTable(test,columnNames);
+		table = new JTable(test,columnNames) {
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				return false;
+				}
+		};
 		
 		
 		header = table.getTableHeader();
@@ -141,9 +145,9 @@ public class Albums {
 		panel[1].add(button[0]);
 		
 		panel[2].add(button[1]);
-		panel[2].add(Box.createRigidArea(new Dimension(10,0)));
+		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
 		panel[2].add(button[2]);
-		panel[2].add(Box.createRigidArea(new Dimension(10,0)));
+		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
 		panel[2].add(button[3]);
 		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
 		panel[2].add(button[4]);
