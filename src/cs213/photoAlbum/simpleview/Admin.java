@@ -3,10 +3,12 @@ package cs213.photoAlbum.simpleview;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.ListModel;
 
 import cs213.photoAlbum.model.User;
 
@@ -26,8 +29,9 @@ public class Admin {
 	JButton[] button = new JButton[3];
 	JLabel label;
 	JTextField tf;
-	JList<User> list;
+	JList<String> list;
 	JScrollPane sp;
+	String[] users;
 	
 	public Admin(ViewContainer cv) {
 		
@@ -44,7 +48,10 @@ public class Admin {
 		button[0] = new JButton("Logout");
 		button[1] = new JButton("Add User");
 		button[2] = new JButton("Delete");
-		list = new JList<User>();
+		List<String> listUsers = cv.listUser();
+		users = new String[listUsers.size()];
+		listUsers.toArray(users);
+		list = new JList<String>(users);
 		sp = new JScrollPane(list);
 		label = new JLabel("User ID:   ");
 	}

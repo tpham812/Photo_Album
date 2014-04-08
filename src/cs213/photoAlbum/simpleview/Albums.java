@@ -82,13 +82,13 @@ public class Albums {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					
 				}
 			}
 		});
 		
 	}
 	
+	@SuppressWarnings("serial")
 	public void displayPanel() {
 		
 		albums = viewContainer.listAlbums();
@@ -120,13 +120,11 @@ public class Albums {
 			}
 		}
 
-		
 		table = new JTable(test,columnNames) {
 			public boolean isCellEditable(int rowIndex, int colIndex) {
 				return false;
 				}
-		};
-		
+		};		
 		
 		header = table.getTableHeader();
 		sp = new JScrollPane(table);
@@ -163,11 +161,9 @@ public class Albums {
 		panel[0].add(panel[2]);
 		panel[0].add(Box.createRigidArea(new Dimension(0,20)));
 		panel[0].add(panel[3]);
-		
 		panel[0].add(table);
 		
 		frame.add(panel[0]);
-
 		frame.setVisible(true);
 	}
 	
