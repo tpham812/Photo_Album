@@ -2,6 +2,7 @@ package cs213.photoAlbum.simpleview;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 
 import cs213.photoAlbum.control.AlbumController;
 import cs213.photoAlbum.control.IAlbumController;
@@ -47,6 +48,11 @@ public class ViewContainer {
 
 	public IUser getUser() {
 		return user;
+	}
+	
+	public List<String> listUser() {
+		
+		return userController.listUsers();
 	}
 
 	public Collection<IAlbum> listAlbums() {

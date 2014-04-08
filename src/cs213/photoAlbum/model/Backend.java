@@ -50,8 +50,8 @@ public class Backend implements IBackend {
 		User user = null;
 
 		try {
-			File f = getSerializedFile(userId);			
-			if(!f.exists()) {
+			File f = getSerializedFile(userId);	
+			if(f.exists() && !f.getCanonicalPath().endsWith(f.getName()) || !f.exists()) {
 				return null;
 			}
 			
