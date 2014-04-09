@@ -55,6 +55,16 @@ public class ViewContainer {
 		return userController.listUsers();
 	}
 
+	public boolean addUser(String userId, String userName) {
+		
+		return userController.addUser(userId, userName);
+	}
+	
+	public boolean deleteUser(String userId) {
+		
+		return userController.deleteUser(userId);
+	}
+	
 	public Collection<IAlbum> listAlbums() {
 		Collection<IAlbum> albums = albumController.listAlbums(user);
 

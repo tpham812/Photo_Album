@@ -10,6 +10,9 @@ public class GuiView {
 	
 	protected Login login;
 	
+	protected Admin admin;
+	
+	protected Albums albums;
 	protected SearchPhotos sp;
 
 	/**
@@ -23,18 +26,20 @@ public class GuiView {
 	/** The album controller. */
 	protected IAlbumController albumController;
 	
-	private ViewContainer viewContainer;
+	protected ViewContainer viewContainer;
 	
 	public GuiView() {
 		super();
 		viewContainer = new ViewContainer();
-		this.login = new Login(viewContainer);
+		this.login = new Login(this);
+		this.admin = new Admin(this);
+		this.albums = new Albums(this);
 		this.sp = new SearchPhotos(viewContainer);
 		
 	}
 
 	protected void showGUI() {
-		login.displayPanel();
+		login.show();
 		
 	}
 	

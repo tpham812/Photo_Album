@@ -19,7 +19,7 @@ import cs213.photoAlbum.model.IUser;
 
 public class Login {
 
-	ViewContainer viewContainer;
+	GuiView guiView;
 	JFrame frame, frame2;
 	ActionListener buttonListener;
 	JPanel[] panel = new JPanel[4];
@@ -27,13 +27,10 @@ public class Login {
 	JLabel label, errorLabel;
 	JTextField tf;
 	
-	protected Admin admin;
 	
-	protected Albums album;
-	
-	public Login(ViewContainer cv) {
+	public Login(GuiView gv) {
 		
-		this.viewContainer = cv;
+		guiView = gv;
 		frame = new JFrame("Login");
 		panel[0] = new JPanel();
 		panel[0].setLayout(new BoxLayout(panel[0], BoxLayout.Y_AXIS));
@@ -43,10 +40,8 @@ public class Login {
 		panel[2].setLayout(new BoxLayout(panel[2], BoxLayout.X_AXIS));
 		button = new JButton("Login");
 		button.addActionListener(new ButtonListener(this));
+		displayPanel();
 		createErrorPanel();
-		
-		this.admin = new Admin (viewContainer);
-		this.album = new Albums(viewContainer);
 	}
 		
 	public void createErrorPanel() {
@@ -97,9 +92,13 @@ public class Login {
 		panel[0].add(panel[2]);
 		
 		frame.add(panel[0]);
-		frame.setVisible(true);
+		frame.setVisible(false);
 	}
 
+	public void show() {
+		
+		frame.setVisible(true);
+	}
 	class ButtonListener implements ActionListener {
 		
 		Login login;
@@ -115,13 +114,17 @@ public class Login {
 			if(e.getSource() == login.button) {
 				String userId = login.tf.getText().trim();
 				if(!userId.isEmpty()) {
-					IUser u = login.viewContainer.login(userId);
+					IUser u = login.guiView.viewContainer.login(userId);
 					if(u != null) {
-						login.frame.dispose();
+						login.frame.setVisible(false);
 						if(u.getUserID().equals("admin")) {
-							admin.displayPanel();						
+							login.tf.setText(null);
+							login.guiView.admin.show();	
+							
 						} else {
-							album.displayPanel();
+							login.tf.setText(null);
+							//login.guiView.albums.displayPanel();
+						
 						}	
 					}
 					else {
