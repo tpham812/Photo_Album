@@ -22,7 +22,7 @@ import cs213.photoAlbum.util.CalendarUtils;
 
 public class Albums {
 
-	ViewContainer viewContainer;
+	GuiView guiView;
 	JFrame frame;
 	ActionListener buttonListener;
 	JPanel[] panel = new JPanel[4];
@@ -35,9 +35,9 @@ public class Albums {
 	
 	Collection<IAlbum> albums;
 	
-	public Albums(ViewContainer cv) {
+	public Albums(GuiView gv) {
 		
-		this.viewContainer = cv;
+		guiView = gv;
 		frame = new JFrame("Albums");
 		panel[0] = new JPanel();
 		panel[0].setLayout(new BoxLayout(panel[0], BoxLayout.Y_AXIS));
@@ -91,7 +91,7 @@ public class Albums {
 	@SuppressWarnings("serial")
 	public void displayPanel() {
 		
-		albums = viewContainer.listAlbums();
+		albums = guiView.viewContainer.listAlbums();
 		
 		if (albums.isEmpty()) {
 			test = new String[][]{};
