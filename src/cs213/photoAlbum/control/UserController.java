@@ -39,6 +39,11 @@ public class UserController implements IUserController {
 		u = new User(userId, userName);		
 		return backend.writeUser(u);		
 	}
+	
+	public boolean writeUser(IUser u){
+		return backend.writeUser(u);		
+	}
+	
 
 	@Override
 	public boolean deleteUser(String userId) {
