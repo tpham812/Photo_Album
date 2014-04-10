@@ -99,6 +99,7 @@ public class Login {
 		
 		frame.setVisible(true);
 	}
+	
 	class ButtonListener implements ActionListener {
 		
 		Login login;
@@ -123,7 +124,8 @@ public class Login {
 							
 						} else {
 							login.tf.setText(null);
-							//login.guiView.albums.displayPanel();
+							login.guiView.viewContainer.setUser(u);
+							login.guiView.albums.show();
 						
 						}	
 					}
@@ -149,47 +151,22 @@ public class Login {
 			login = l;
 		}
 		
-		public void windowActivated(WindowEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void windowClosed(WindowEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
 		@SuppressWarnings("deprecation")
-		@Override
 		public void windowClosing(WindowEvent arg0) {
 			
 			login.frame.enable();
 		}
 
-		@Override
-		public void windowDeactivated(WindowEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void windowActivated(WindowEvent arg0) {}
 
-		@Override
-		public void windowDeiconified(WindowEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void windowIconified(WindowEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void windowOpened(WindowEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void windowClosed(WindowEvent arg0) {}
 		
+		public void windowDeactivated(WindowEvent arg0) {}
+
+		public void windowDeiconified(WindowEvent arg0) {}
+
+		public void windowIconified(WindowEvent arg0) {}
+
+		public void windowOpened(WindowEvent arg0) {}
 	}
 }

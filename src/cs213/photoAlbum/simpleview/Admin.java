@@ -92,7 +92,7 @@ public class Admin {
 		frame2.setLocationRelativeTo(null);
 		frame2.setResizable(false);
 		frame2.setVisible(false);
-		frame2.addWindowListener(new panelListener(this));
+		frame2.addWindowListener(new PanelListener(this));
 	}
 	
 	public void displayPanel() {
@@ -209,11 +209,11 @@ public class Admin {
 		}
 	}
 	
-	class panelListener implements WindowListener {
+	class PanelListener implements WindowListener {
 
 		Admin admin;
 		
-		public panelListener(Admin ad) {
+		public PanelListener(Admin ad) {
 			
 			admin = ad;
 		}
