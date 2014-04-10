@@ -73,9 +73,24 @@ public class ViewContainer {
 		
 		return albumController.getAlbum(albumName, user);
 	}
+	
+	public boolean isAlbumExist(String albumName) {
+		
+		return user.containsAlbum(albumName);
+	}
+	
+	public void editAlbum(String newAlbumName, String oldAlbumName) {
+		
+		albumController.editAlbum(newAlbumName, oldAlbumName, user);
+	}
 	public void logout() {
 		
 		userController.logout(user);
+	}
+	
+	public boolean deleteAlbum(String albumName) {
+		
+		return albumController.deleteAlbum(albumName, user);
 	}
 	public Collection<IAlbum> listAlbums() {
 		Collection<IAlbum> albums = albumController.listAlbums(user);

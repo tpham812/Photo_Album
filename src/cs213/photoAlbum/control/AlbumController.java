@@ -51,7 +51,11 @@ public class AlbumController implements IAlbumController {
 		return true;
 	}
 
-
+	@Override
+	public void editAlbum(String newAlbumName, String oldAlbumName, IUser user) {
+		
+		user.editAlbum(newAlbumName, oldAlbumName);
+	}
 	@Override
 	public boolean deleteAlbum(String albumName, IUser user) {
 

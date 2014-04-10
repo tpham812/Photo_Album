@@ -26,6 +26,16 @@ public interface IAlbumController {
 	 */
 	SortedSet<IAlbum> listAlbums(IUser user);
 
+	
+	/**
+	 * Edits the name of an album
+	 *  
+	 * @param newAlbumName the new album name
+	 * @param oldAlbumName the old album name
+	 * @param user the current user
+	 */
+	public void editAlbum(String newAlbumName, String oldAlbumName, IUser user);
+	
 	/**
 	 * Creates an album for the user.
 	 *

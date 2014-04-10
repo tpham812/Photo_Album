@@ -46,6 +46,14 @@ public class User implements Serializable, IUser {
 	}
 
 	@Override
+	public void editAlbum(String newAlbumName, String oldAlbumName) {
+		
+		IAlbum al = albumList.get(oldAlbumName);
+		al.setAlbumName(newAlbumName);
+		albumList.remove(oldAlbumName);
+		albumList.put(newAlbumName, al);
+	}
+	@Override
 	public void addAlbum(Album album) {		
 		
 		albumList.put(album.getAlbumName(), album);				
