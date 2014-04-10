@@ -57,7 +57,7 @@ public class PhotoView extends JFrame {
 	private JTable tagTable;
 
 	private JList<String> albumsList;
-	
+
 	private GuiView guiView;
 
 	public PhotoView(IAlbum album, GuiView guiView) throws Exception {
@@ -69,7 +69,8 @@ public class PhotoView extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("");
-		setSize(600, 500);
+		setMinimumSize(new Dimension(700, 700));
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLocationRelativeTo(null);
 
 		photoLabel.setVerticalTextPosition(JLabel.TOP);
@@ -86,6 +87,8 @@ public class PhotoView extends JFrame {
 		iconsPane.setPreferredSize(new Dimension(200, 150));
 		add(iconsPane, BorderLayout.NORTH);
 
+		DisplayPhotoAction photo1Action = null;
+
 		for (IPhoto photo : album.getPhotos()) {
 
 			ImageIcon fullIcon = getIcon(photo.getName(), photo.getCaption());
@@ -97,6 +100,10 @@ public class PhotoView extends JFrame {
 
 				DisplayPhotoAction thumbAction = new DisplayPhotoAction(fullIcon, tIcon, photo, this);
 
+				if (photo1Action == null) {
+					photo1Action = thumbAction;
+				}
+
 				JButton thumbButton = new JButton(thumbAction);
 				thumbButton.setText(photo.getCaption());
 				thumbButton.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -104,6 +111,10 @@ public class PhotoView extends JFrame {
 
 				iconsBar.add(thumbButton, iconsBar.getComponentCount() - 1);
 			}
+		}
+
+		if (photo1Action != null) {
+			photo1Action.showPhoto();
 		}
 
 	}
@@ -140,6 +151,10 @@ public class PhotoView extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 
+			showPhoto();
+		}
+
+		public void showPhoto() {
 			photoLabel.setIcon(fullIcon);
 			photoLabel.setText(photo.getCaption());
 			photoView.photo = this.photo;
@@ -224,6 +239,7 @@ public class PhotoView extends JFrame {
 			tagTable = new JTable(data, columnNames);
 			tagTable.setPreferredScrollableViewportSize(new Dimension(200, 100));
 			tagTable.setFillsViewportHeight(true);
+			tagTable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 
 			JScrollPane scrollPane = new JScrollPane(tagTable);
 
@@ -232,7 +248,7 @@ public class PhotoView extends JFrame {
 			c.gridx = 0;
 			c.gridy = 1;
 			c.ipadx = 200;
-			c.ipady = 200;
+			c.ipady = 100;
 			editPanel.add(scrollPane, c);
 
 			ep2 = new JPanel(new GridBagLayout());
@@ -325,13 +341,7 @@ public class PhotoView extends JFrame {
 			ep2.add(button, c);
 
 			button = new JButton("Reload");
-			button.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-
-				}
-			});
+			button.addActionListener(this);
 			c = new GridBagConstraints();
 			c.insets = new Insets(0, 10, 0, 10);
 			c.gridx = 2;
@@ -382,6 +392,8 @@ public class PhotoView extends JFrame {
 			editPanel.add(ep2, c);
 
 			editPanel.setVisible(true);
+			validate();
+			repaint();
 		}
 
 	}
