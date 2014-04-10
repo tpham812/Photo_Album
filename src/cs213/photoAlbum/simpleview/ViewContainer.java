@@ -65,6 +65,19 @@ public class ViewContainer {
 		return userController.deleteUser(userId);
 	}
 	
+	public boolean createAlbum(String albumName) {
+		
+		return albumController.createAlbum(albumName, user);
+	}
+	
+	public IAlbum getAlbum(String albumName) {
+		
+		return albumController.getAlbum(albumName, user);
+	}
+	public void logout() {
+		
+		userController.logout(user);
+	}
 	public Collection<IAlbum> listAlbums() {
 		Collection<IAlbum> albums = albumController.listAlbums(user);
 
