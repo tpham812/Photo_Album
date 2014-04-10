@@ -329,7 +329,7 @@ public class Albums {
 				}
 				else {
 					album.frame[0].setVisible(false);
-					album.guiView.sp.show();
+					album.guiView.sp.show((String)album.table.getValueAt(album.table.getSelectedRow(), 0));
 				}
 			}
 			else if(e.getSource() == album.button[2]) {
@@ -432,11 +432,9 @@ public class Albums {
 		@SuppressWarnings("deprecation")
 		public void windowClosing(WindowEvent arg0) {
 			
-			if(arg0.getSource() == album.frame) {
+			if(arg0.getSource() == album.frame[0]) {
 				album.guiView.viewContainer.logout();
-				album.frame[0].setVisible(false);
-				album.frame[1].setVisible(false);
-				album.guiView.login.show();
+				System.exit(0);
 			}
 			else if(!album.frame[1].isVisible() && !album.frame[2].isVisible()) {
 				album.frame[0].enable();
