@@ -43,6 +43,7 @@ public class Admin {
 		
 		guiView = gv;
 		frame = new JFrame("Admin");
+		frame.addWindowListener(new PanelListener(this));
 		buttonListener = new ButtonListener(this);
 		panel[0] = new JPanel();
 		panel[0].setLayout(new BoxLayout(panel[0], BoxLayout.Y_AXIS));
@@ -67,6 +68,8 @@ public class Admin {
 		listUsers.toArray(users);
 		modelAction.newList(userModel, users);
 		list = new JList(userModel);
+		if(!userModel.isEmpty())
+			list.setSelectedIndex(0);
 		sp = new JScrollPane(list);
 		label[0] = new JLabel("User ID:   ");
 		label[1] = new JLabel("Full Name:   ");
@@ -101,7 +104,6 @@ public class Admin {
 		frame.setMaximumSize(new Dimension(500,515));
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		tf[0].setEditable(true);
 		tf[0].setMaximumSize(new Dimension(125,20));
@@ -186,6 +188,7 @@ public class Admin {
 						admin.users = new String[users.size()];
 						users.toArray(admin.users);
 						admin.modelAction.newList(admin.userModel, admin.users);
+						admin.list.setSelectedIndex(0);
 						admin.tf[0].setText(null);
 						admin.tf[1].setText(null);
 					}
@@ -200,6 +203,8 @@ public class Admin {
 				admin.users = new String[users.size()];
 				users.toArray(admin.users);
 				admin.modelAction.newList(admin.userModel, admin.users);
+				if(!admin.userModel.isEmpty())
+					admin.list.setSelectedIndex(0);
 				
 			}
 			else if(e.getSource() == admin.closeButton) {
@@ -221,7 +226,14 @@ public class Admin {
 		@SuppressWarnings("deprecation")
 		public void windowClosing(WindowEvent arg0) {
 			
-			admin.frame.enable();
+			if(arg0.getSource() == admin.frame) {
+				admin.tf[0].setText(null);
+				admin.tf[1].setText(null);
+				admin.frame.setVisible(false);
+				admin.guiView.login.show();
+			}
+			else 
+				admin.frame.enable();
 		}
 		
 		public void windowActivated(WindowEvent arg0) {}

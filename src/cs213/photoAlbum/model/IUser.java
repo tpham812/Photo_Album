@@ -10,6 +10,15 @@ import java.util.Map;
  * @author brett
  */
 public interface IUser {
+	
+	/**
+	 * Change the name of the album	
+	 * 
+	 * @param newAlbumName new album name
+	 * @param oldAlbumName old album name
+	 */
+	
+	public void editAlbum(String newAlbumName, String oldAlbumName);
 
 	/**
 	 * Adds new album to the list of albums.

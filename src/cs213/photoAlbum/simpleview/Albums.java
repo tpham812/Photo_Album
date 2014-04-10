@@ -22,8 +22,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import cs213.photoAlbum.model.IAlbum;
-import cs213.photoAlbum.simpleview.Login.ButtonListener;
-import cs213.photoAlbum.simpleview.Login.panelListener;
 import cs213.photoAlbum.util.CalendarUtils;
 
 public class Albums {
@@ -34,7 +32,7 @@ public class Albums {
 	ActionListener buttonListener;
 	JPanel[] panel = new JPanel[11];
 	JTextField[] tf = new JTextField[2];
-	JButton[] button = new JButton[9];
+	JButton[] button = new JButton[11];
 	JButton closeButton;
 	JLabel[] label = new JLabel[3];
 	JLabel errorLabel;
@@ -66,6 +64,7 @@ public class Albums {
 		button[0].addActionListener(buttonListener);
 		button[1] = new JButton("Search");
 		button[2] = new JButton("Delete");
+		button[2].addActionListener(buttonListener);
 		button[3] = new JButton("Edit");
 		button[3].addActionListener(buttonListener);
 		button[4] = new JButton("Add");
@@ -77,6 +76,10 @@ public class Albums {
 		button[7].addActionListener(buttonListener);
 		button[8] = new JButton("Logout");
 		button[8].addActionListener(buttonListener);
+		button[9] = new JButton("Save");
+		button[9].addActionListener(buttonListener);
+		button[10] = new JButton("Cancel");
+		button[10].addActionListener(buttonListener);
 		button[5].addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent event) {
@@ -197,9 +200,9 @@ public class Albums {
 		panel[8].add(label[1]);
 		panel[8].add(tf[1]);
 		
-		panel[9].add(button[6]);
+		panel[9].add(button[9]);
 		panel[9].add(Box.createRigidArea(new Dimension(10,0)));
-		panel[9].add(button[7]);
+		panel[9].add(button[10]);
 		
 		panel[7].add(Box.createRigidArea(new Dimension(0,35)));
 		panel[7].add(panel[8]);
@@ -259,7 +262,7 @@ public class Albums {
 		frame.setVisible(false);
 	}
 	
-	public void setUserAlbum() {
+	public void displayUserAlbum() {
 		
 		albums = guiView.viewContainer.listAlbums();
 		
@@ -291,11 +294,14 @@ public class Albums {
 		}
 		tableModel = new DefaultTableModel(test, columnNames);
 		table.setModel(tableModel);
+		if(!albums.isEmpty()) {
+			table.setRowSelectionInterval(0, 0);
+		}
 	}
 	
 	public void show() {
 		
-		setUserAlbum();
+		displayUserAlbum();
 		frame.setVisible(true);
 	}
 	
@@ -318,81 +324,79 @@ public class Albums {
 				album.guiView.login.show();
 				album.frame3.setVisible(false);
 			}
-			
+			else if(e.getSource() == album.button[2]) {
+				album.guiView.viewContainer.deleteAlbum((String)table.getValueAt(table.getSelectedRow(), 0));
+				displayUserAlbum();
+			}
 			else if(e.getSource() == album.button[4]) {
 				album.frame.disable();
 				album.frame2.setVisible(true);
 			}
 
-			else if(e.getSource() == button[7]) {
-				if(album.frame2.isVisible()) {
+			else if(e.getSource() == album.button[7]) {
 					album.frame.enable();
 					album.frame2.setVisible(false);
-				}
-				else {
-					
-					IAlbum al = album.guiView.viewContainer.getAlbum((String)table.getValueAt(table.getSelectedRow(), 0));
-					album.tf[1].setText(al.getAlbumName());
+			}
+			else if(e.getSource() == album.button[10]) {
 					album.frame.enable();
 					album.frame3.setVisible(false);
-				}
 			}
 			else if(e.getSource() == album.button[3]) {
+				album.tf[1].setText((String)album.table.getValueAt(album.table.getSelectedRow(), 0));
 				album.frame.disable();
 				album.frame3.setVisible(true);
 			}
-			else if(e.getSource() == button[6]) {
-				if(album.frame2.isVisible()) {
-					String albumName = album.tf[0].getText();
-					if(!albumName.equals("")) {
-						boolean isExist = album.guiView.viewContainer.createAlbum(albumName);
-						if(isExist) {
-							album.setUserAlbum();
-							album.tf[0].setText(null);
-							album.frame.enable();
-							album.frame2.setVisible(false);
-						}
-						else {
-							album.errorLabel.setText("Album already exists");
-							album.frame2.disable();
-							album.frame4.setSize(200, 150);
-							album.frame4.setVisible(true);
-						}
+			else if(e.getSource() == album.button[6]) {
+				
+				String albumName = album.tf[0].getText();
+				if(!albumName.equals("")) {
+					boolean isExist = album.guiView.viewContainer.createAlbum(albumName);
+					if(isExist) {
+						album.displayUserAlbum();
+						album.tf[0].setText(null);
+						album.frame.enable();
+						album.frame2.setVisible(false);
 					}
 					else {
-						
-						album.errorLabel.setText("Must enter in an Album Name before creation");
+						album.errorLabel.setText("Album already exists");
 						album.frame2.disable();
-						album.frame4.setSize(300, 150);
+						album.frame4.setSize(200, 150);
 						album.frame4.setVisible(true);
 					}
 				}
 				else {
-					String albumName = album.tf[1].getText();
-					if(!albumName.equals("")) {
-						IAlbum al = album.guiView.viewContainer.getAlbum((String)table.getValueAt(table.getSelectedRow(), 0));
-						IAlbum al2 = album.guiView.viewContainer.getAlbum(albumName);
-						if(al2 == null) {
-							al.setAlbumName(albumName);
-							setUserAlbum();
-							album.tf[1].setText(null);
-							album.frame.enable();
-							album.frame3.setVisible(false);
-						}
-						else {
-							album.errorLabel.setText("Album name already exists");
-							album.frame3.disable();
-							album.frame4.setSize(210, 150);
-							album.frame4.setVisible(true);
-						}
+						
+					album.errorLabel.setText("Must enter in an Album Name before creation");
+					album.frame2.disable();
+					album.frame4.setSize(300, 150);
+					album.frame4.setVisible(true);
+				}
+			}
+			else if(e.getSource() == album.button[9]) {
+				String albumName = album.tf[1].getText();
+				if(!albumName.equals("")) {
+					boolean isExist = album.guiView.viewContainer.isAlbumExist(albumName);
+					if(!isExist) {
+						album.guiView.viewContainer.editAlbum(albumName, (String)album.table.getValueAt(album.table.getSelectedRow(), 0));
+						displayUserAlbum();
+						album.tf[1].setText(null);
+						album.frame.enable();
+						album.frame3.setVisible(false);
 					}
 					else {
-						album.errorLabel.setText("Must enter in an album name before saving");
+						album.errorLabel.setText("Album name already exists");
 						album.frame3.disable();
-						album.frame4.setSize(300, 150);
+						album.frame4.setSize(210, 150);
 						album.frame4.setVisible(true);
 					}
 				}
+				else {
+					album.errorLabel.setText("Must enter in an album name before saving");
+					album.frame3.disable();
+					album.frame4.setSize(300, 150);
+					album.frame4.setVisible(true);
+				}
+				
 			}
 			else if(e.getSource() == album.closeButton) {
 				
@@ -430,9 +434,9 @@ public class Albums {
 				album.tf[0].setText(null);
 				album.frame2.enable();
 			}
-		//	else if(!album.frame3.isEnabled() && !album.frame.isEnabled()) {
-		//		album.frame3.enable();
-		//	}
+		else if(!album.frame3.isEnabled() && !album.frame.isEnabled()) {
+			album.frame3.enable();
+		}
 			else {
 				album.frame.enable();
 			}

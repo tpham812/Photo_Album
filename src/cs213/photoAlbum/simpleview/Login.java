@@ -74,7 +74,7 @@ public class Login {
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		tf = new JTextField("testuser");
+		tf = new JTextField();
 		tf.setEditable(true);
 		tf.setMaximumSize(new Dimension(125,20));
 		
