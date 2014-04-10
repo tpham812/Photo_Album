@@ -51,5 +51,7 @@ public interface IUserController {
 	 * @param u the IUser object
 	 */
 	void logout(IUser u);
+	
+	boolean writeUser(IUser u);
 
 }
