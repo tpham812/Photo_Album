@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 
 public class SearchPhotos {
 
-	ViewContainer viewContainer;
+	GuiView guiView;
 	ActionListener buttonListener;
 	JButton[] button = new JButton[3];
 	JFrame frame;
@@ -26,15 +26,10 @@ public class SearchPhotos {
 	JComboBox<String>[] cb = new JComboBox[8];
 	String[] Test = {"Test", "Test1", "Test2", "Test3"};	
 	
-	
-	public SearchPhotos (ViewContainer cv){
+	public SearchPhotos (GuiView gv){
 		
-		this.viewContainer = cv;
-		initializeComponents();
-		
-	}
-	public void initializeComponents() {
-		
+		guiView = gv;
+
 		frame = new JFrame("Search Photos");
 		
 		button[0] = new JButton("Search");
@@ -42,7 +37,7 @@ public class SearchPhotos {
 		button[2] = new JButton("Back");
 		
 		for(int i = 0; i < cb.length; i++) {
-			cb[i] = new JComboBox<String>(Test);
+			cb[i] = new JComboBox<String>();
 			cb[i].setBackground(Color.white);
 		}
 	
@@ -66,9 +61,10 @@ public class SearchPhotos {
 		label[9] = new JLabel("Day");
 		label[10] = new JLabel("Year");
 		
+		createSearchPhotoPanel();
 	}
 	
-	public void displayPanel() {
+	public void createSearchPhotoPanel() {
 		
 		frame.setSize(600, 320);
 		frame.setMaximumSize(new Dimension(600,320));
@@ -147,9 +143,17 @@ public class SearchPhotos {
 		panel[0].add(Box.createRigidArea(new Dimension(0, 15)));
 		
 		frame.add(panel[0]);
-		frame.setVisible(true);	
+		frame.setVisible(false);	
 	}
 	
+	public void setDates_Tags() {
+		
+	}
+	public void show() {
+		
+		
+		frame.setVisible(true);
+	}
 	class ButtonListener implements ActionListener {
 
 		ViewContainer cv;

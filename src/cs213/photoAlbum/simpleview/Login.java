@@ -40,33 +40,11 @@ public class Login {
 		panel[2].setLayout(new BoxLayout(panel[2], BoxLayout.X_AXIS));
 		button = new JButton("Login");
 		button.addActionListener(new ButtonListener(this));
-		displayPanel();
+		createLoginPanel();
 		createErrorPanel();
 	}
 		
-	public void createErrorPanel() {
-		
-		frame2 = new JFrame("Error");
-		panel[3] = new JPanel();
-		panel[3].setLayout(new BoxLayout(panel[3], BoxLayout.Y_AXIS));
-		closeButton = new JButton("Close");
-		closeButton.addActionListener(new ButtonListener(this));
-		errorLabel = new JLabel("User does not exist");
-		errorLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		closeButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
-		panel[3].add(Box.createRigidArea(new Dimension (0, 30)));
-		panel[3].add(errorLabel);
-		panel[3].add(Box.createRigidArea(new Dimension(0, 35)));
-		panel[3].add(closeButton);
-		frame2.add(panel[3]);
-		frame2.setSize(new Dimension(200,150));
-		frame2.setLocationRelativeTo(null);
-		frame2.setResizable(false);
-		frame2.setVisible(false);
-		frame2.addWindowListener(new panelListener(this));
-	}
-	
-	public void displayPanel() {	
+	public void createLoginPanel() {	
 
 		frame.setSize(500, 150);
 		frame.setMaximumSize(new Dimension(500,200));
@@ -93,7 +71,29 @@ public class Login {
 		frame.add(panel[0]);
 		frame.setVisible(false);
 	}
-
+	
+	public void createErrorPanel() {
+		
+		frame2 = new JFrame("Error");
+		panel[3] = new JPanel();
+		panel[3].setLayout(new BoxLayout(panel[3], BoxLayout.Y_AXIS));
+		closeButton = new JButton("Close");
+		closeButton.addActionListener(new ButtonListener(this));
+		errorLabel = new JLabel("User does not exist");
+		errorLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		closeButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+		panel[3].add(Box.createRigidArea(new Dimension (0, 30)));
+		panel[3].add(errorLabel);
+		panel[3].add(Box.createRigidArea(new Dimension(0, 35)));
+		panel[3].add(closeButton);
+		frame2.add(panel[3]);
+		frame2.setSize(new Dimension(200,150));
+		frame2.setLocationRelativeTo(null);
+		frame2.setResizable(false);
+		frame2.setVisible(false);
+		frame2.addWindowListener(new panelListener(this));
+	}
+	
 	public void show() {
 		
 		frame.setVisible(true);

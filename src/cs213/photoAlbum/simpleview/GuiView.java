@@ -13,6 +13,7 @@ public class GuiView {
 	protected Admin admin;
 	
 	protected Albums albums;
+	
 	protected SearchPhotos sp;
 
 	/**
@@ -34,7 +35,7 @@ public class GuiView {
 		this.login = new Login(this);
 		this.admin = new Admin(this);
 		this.albums = new Albums(this);
-		this.sp = new SearchPhotos(viewContainer);
+		this.sp = new SearchPhotos(this);
 		
 	}
 
