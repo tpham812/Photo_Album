@@ -57,6 +57,8 @@ public class PhotoView extends JFrame {
 	private JTable tagTable;
 
 	private JList<String> albumsList;
+	
+	private JTextField captionField;
 
 	private GuiView guiView;
 
@@ -202,7 +204,8 @@ public class PhotoView extends JFrame {
 			c.gridy = 2;
 			c.ipadx = 100;
 
-			ep2.add(new JLabel(photo.getCaption()), c);
+			captionField = new JTextField(photo.getCaption());
+			ep2.add(captionField, c);
 
 			c = new GridBagConstraints();
 			c.insets = new Insets(5, 0, 5, 0);
@@ -300,6 +303,10 @@ public class PhotoView extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
+					
+					if(!captionField.getText().isEmpty()) {
+						photo.setCaption(captionField.getText());
+					}
 
 					photo.getTags().clear();
 
