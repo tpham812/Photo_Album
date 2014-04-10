@@ -34,7 +34,6 @@ public class Admin {
 	JTextField[] tf = new JTextField[2];
 	JList<DefaultListModel<String>> list;
 	JScrollPane sp;
-	String[] users;
 	DefaultListModel<String> userModel = new DefaultListModel<String>();
 	DefaultListModelAction modelAction = new DefaultListModelAction();
 	
@@ -64,7 +63,7 @@ public class Admin {
 		tf[0] = new JTextField();
 		tf[1] = new JTextField();
 		List<String> listUsers = guiView.viewContainer.listUser();
-		users = new String[listUsers.size()];
+		String[] users = new String[listUsers.size()];
 		listUsers.toArray(users);
 		modelAction.newList(userModel, users);
 		list = new JList(userModel);
@@ -73,32 +72,11 @@ public class Admin {
 		sp = new JScrollPane(list);
 		label[0] = new JLabel("User ID:   ");
 		label[1] = new JLabel("Full Name:   ");
-		displayPanel();
+		createAdminPanel();
 		createUserExistErrorPanel();
 	}
 	
-	public void createUserExistErrorPanel() {
-		
-		frame2 = new JFrame("Error");
-		panel[5] = new JPanel();
-		panel[5].setLayout(new BoxLayout(panel[5], BoxLayout.Y_AXIS));
-		closeButton = new JButton("Close");
-		closeButton.addActionListener(new ButtonListener(this));
-		errorLabel = new JLabel();
-		errorLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		closeButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
-		panel[5].add(Box.createRigidArea(new Dimension (0, 30)));
-		panel[5].add(errorLabel);
-		panel[5].add(Box.createRigidArea(new Dimension(0, 35)));
-		panel[5].add(closeButton);
-		frame2.add(panel[5]);
-		frame2.setLocationRelativeTo(null);
-		frame2.setResizable(false);
-		frame2.setVisible(false);
-		frame2.addWindowListener(new PanelListener(this));
-	}
-	
-	public void displayPanel() {
+	public void createAdminPanel() {
 		
 		frame.setSize(500, 515);
 		frame.setMaximumSize(new Dimension(500,515));
@@ -139,6 +117,27 @@ public class Admin {
 		
 		frame.add(panel[0]);
 		frame.setVisible(false);
+	}
+	
+	public void createUserExistErrorPanel() {
+		
+		frame2 = new JFrame("Error");
+		panel[5] = new JPanel();
+		panel[5].setLayout(new BoxLayout(panel[5], BoxLayout.Y_AXIS));
+		closeButton = new JButton("Close");
+		closeButton.addActionListener(new ButtonListener(this));
+		errorLabel = new JLabel();
+		errorLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		closeButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+		panel[5].add(Box.createRigidArea(new Dimension (0, 30)));
+		panel[5].add(errorLabel);
+		panel[5].add(Box.createRigidArea(new Dimension(0, 35)));
+		panel[5].add(closeButton);
+		frame2.add(panel[5]);
+		frame2.setLocationRelativeTo(null);
+		frame2.setResizable(false);
+		frame2.setVisible(false);
+		frame2.addWindowListener(new PanelListener(this));
 	}
 	
 	public void show() {
@@ -185,9 +184,9 @@ public class Admin {
 					}
 					else {
 						List<String> users = admin.guiView.viewContainer.listUser();
-						admin.users = new String[users.size()];
-						users.toArray(admin.users);
-						admin.modelAction.newList(admin.userModel, admin.users);
+						String[] tempUser = new String[users.size()];
+						users.toArray(tempUser);
+						admin.modelAction.newList(admin.userModel, tempUser);
 						admin.list.setSelectedIndex(0);
 						admin.tf[0].setText(null);
 						admin.tf[1].setText(null);
@@ -200,9 +199,9 @@ public class Admin {
 				String user = admin.userModel.get(index);
 				admin.guiView.viewContainer.deleteUser(user);
 				List<String> users = admin.guiView.viewContainer.listUser();
-				admin.users = new String[users.size()];
-				users.toArray(admin.users);
-				admin.modelAction.newList(admin.userModel, admin.users);
+				String[] tempUser = new String[users.size()];
+				users.toArray(tempUser);
+				admin.modelAction.newList(admin.userModel, tempUser);
 				if(!admin.userModel.isEmpty())
 					admin.list.setSelectedIndex(0);
 				
