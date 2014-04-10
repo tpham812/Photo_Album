@@ -98,7 +98,7 @@ public class Albums {
 					}
 					
 					try {
-						PhotoView photoView = new PhotoView(album);
+						PhotoView photoView = new PhotoView(album, guiView);
 						photoView.setVisible(true);
 
 					} catch (Exception e) {

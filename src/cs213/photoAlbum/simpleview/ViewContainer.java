@@ -54,7 +54,6 @@ public class ViewContainer {
 		
 		return userController.listUsers();
 	}
-
 	public boolean addUser(String userId, String userName) {
 		
 		return userController.addUser(userId, userName);
@@ -82,6 +81,10 @@ public class ViewContainer {
 		Collection<IAlbum> albums = albumController.listAlbums(user);
 
 		return albums;
+	}
+	
+	public boolean saveUser(){
+		return userController.writeUser(user);
 	}
 
 }
