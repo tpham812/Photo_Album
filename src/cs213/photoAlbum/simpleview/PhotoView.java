@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -59,7 +60,7 @@ public class PhotoView extends JFrame {
 
 	private GuiView guiView;
 
-	public PhotoView(IAlbum album, GuiView guiView) throws Exception {
+	public PhotoView(IAlbum album, GuiView guiView) {
 
 		this.guiView = guiView;
 		this.viewContainer = guiView.viewContainer;
@@ -118,9 +119,15 @@ public class PhotoView extends JFrame {
 
 	}
 
-	protected ImageIcon getIcon(String path, String description) throws Exception {
+	protected ImageIcon getIcon(String path, String description)  {
 
-		return new ImageIcon((new File(path)).toURI().toURL(), description);
+		try {
+			return new ImageIcon((new File(path)).toURI().toURL(), description);
+		} catch (MalformedURLException e) {
+
+		}
+		
+		return null;
 	}
 
 	private Image makeThumbnail(Image srcImg, int w, int h) {
@@ -381,6 +388,9 @@ public class PhotoView extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 
+					photoView.dispose();
+
+					AddPhoto addPhoto = new AddPhoto(album, guiView);
 				}
 			});
 			c = new GridBagConstraints();
