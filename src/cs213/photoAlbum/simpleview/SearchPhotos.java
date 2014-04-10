@@ -189,7 +189,22 @@ public class SearchPhotos {
 		}
 		public void actionPerformed(ActionEvent e) {
 			
+			if(e.getSource() == sp.button[0]) {
+				
+			}
 			
+			else {
+				sp.tf.setText(null);
+				resetComboBox();
+				sp.frame.setVisible(false);
+				sp.guiView.albums.show();
+			}
+		}
+		
+		public void resetComboBox() {
+			for(int i = 0; i < sp.cb.length; i++) {
+				cb[i].setSelectedIndex(0);
+			}
 		}
 	}
 }
