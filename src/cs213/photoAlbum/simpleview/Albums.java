@@ -90,9 +90,7 @@ public class Albums {
 				if(selection.length > 0) {				
 					row = table.convertRowIndexToModel(selection[0]);
 					IAlbum album = null;
-					
-					System.out.println("Row # " + row);
-					
+										
 					Iterator<IAlbum> itr = albums.iterator();
 					for(int j=0;j<=row && itr.hasNext();j++) {						
 						album = itr.next();
