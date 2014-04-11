@@ -335,6 +335,8 @@ public class Albums {
 			}
 			else if(e.getSource() == album.button[2]) {
 				album.guiView.viewContainer.deleteAlbum((String)table.getValueAt(table.getSelectedRow(), 0));
+				album.guiView.viewContainer.saveUser();
+
 				displayUserAlbum();
 			}
 			else if(e.getSource() == album.button[3]) {
@@ -351,6 +353,7 @@ public class Albums {
 				if(!albumName.equals("")) {
 					boolean isExist = album.guiView.viewContainer.createAlbum(albumName);
 					if(isExist) {
+						album.guiView.viewContainer.saveUser();
 						album.displayUserAlbum();
 						album.tf[0].setText(null);
 						album.frame[0].enable();
@@ -381,6 +384,7 @@ public class Albums {
 					boolean isExist = album.guiView.viewContainer.isAlbumExist(albumName);
 					if(!isExist) {
 						album.guiView.viewContainer.editAlbum(albumName, (String)album.table.getValueAt(album.table.getSelectedRow(), 0));
+						album.guiView.viewContainer.saveUser();
 						displayUserAlbum();
 						album.tf[1].setText(null);
 						album.frame[0].enable();
