@@ -58,5 +58,13 @@ public class CalendarUtils {
 		SimpleDateFormat formatter = new SimpleDateFormat(DATE_FMT);
 		return formatter.format(cal.getTime());
 	}
-
+	
+	@SuppressWarnings("deprecation")
+	public static Calendar calendarWithoutTime(Calendar calendar) {
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date(calendar.getTime().getYear(), calendar.getTime().getMonth(), calendar.getTime().getDate()));
+		cal.set(Calendar.MILLISECOND, 0);
+		return cal;
+	}
 }

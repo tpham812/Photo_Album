@@ -11,7 +11,7 @@ import cs213.photoAlbum.model.Backend;
 import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
-
+import cs213.photoAlbum.util.CalendarUtils;
 /**
  * Controller interface for {@link Photo} management, such as adding/deleting tags, get photos by date range/tag.
  * @author dheeptha
@@ -87,10 +87,11 @@ public class PhotoController implements IPhotoController {
 
 	@Override
 	public SortedSet<IPhoto> getPhotosByDate(Calendar start, Calendar end, IUser user) {
-
+		
+		
+		
 		SortedSet<IPhoto> result = new TreeSet<IPhoto>(new PhotoComparator());
 		for (IPhoto p : user.getPhotos().values()) {
-
 			if (p.getDateTime().equals(start) || p.getDateTime().equals(end)
 					|| (p.getDateTime().after(start) && p.getDateTime().before(end))) {
 

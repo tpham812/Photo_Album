@@ -20,4 +20,22 @@ public class DefaultComboBoxModelAction {
 			model.addElement(Integer.toString(i));
 		}
 	}
+	
+	public void setHourComboBox(DefaultComboBoxModel<String> model) {
+		
+		model.addElement("");
+		for(int i = 1; i <= 24; i++) {
+			model.addElement(Integer.toString(i));
+		}
+	}
+	
+	public void setMinute_SecondsComboBox(DefaultComboBoxModel<String> model, DefaultComboBoxModel<String> model2) {
+		
+		model.addElement("");
+		model2.addElement("");
+		for(int i = 0; i < 60; i++) {
+			model.addElement(Integer.toString(i));
+			model2.addElement(Integer.toString(i));
+		}
+	}
 }

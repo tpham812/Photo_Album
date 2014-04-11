@@ -49,12 +49,12 @@ public class SearchPhotos {
 	JTable table;
 	JScrollPane sp;
 	JPanel[] panel = new JPanel[9];
-	JLabel[] label = new JLabel[11];
-	JComboBox<String>[] cb = new JComboBox[6];
+	JLabel[] label = new JLabel[17];
+	JComboBox<String>[] cb = new JComboBox[12];
 	String[] columnNames = {"Tag Type", "Tag Value"};
 	int[] month = {1,2,3,4,5,6,7,8,9,10,11,12};
 	int[] day = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
-	DefaultComboBoxModel<String> monthModel, dayModel, yearModel, monthModel2, dayModel2, yearModel2;
+	DefaultComboBoxModel<String> monthModel, dayModel, yearModel, monthModel2, dayModel2, yearModel2, hour, hour2, minute, minute2, second, second2;
 	DefaultComboBoxModelAction modelAction = new DefaultComboBoxModelAction();
 	
 	/**
@@ -85,6 +85,12 @@ public class SearchPhotos {
 		monthModel2 = new DefaultComboBoxModel<String>();
 		dayModel2 = new DefaultComboBoxModel<String>();
 		yearModel2 = new DefaultComboBoxModel<String>();
+		hour = new DefaultComboBoxModel<String>();
+		minute = new DefaultComboBoxModel<String>();
+		second= new DefaultComboBoxModel<String>();
+		hour2 = new DefaultComboBoxModel<String>();
+		minute2 = new DefaultComboBoxModel<String>();
+		second2 = new DefaultComboBoxModel<String>();
 		
 		for(int i = 0; i < cb.length; i++) {
 			cb[i] = new JComboBox<String>();
@@ -110,6 +116,12 @@ public class SearchPhotos {
 		label[8] = new JLabel("Month");
 		label[9] = new JLabel("Day");
 		label[10] = new JLabel("Year");
+		label[11] = new JLabel("Hour");
+		label[12] = new JLabel("Minute");
+		label[13] = new JLabel("Second");
+		label[14] = new JLabel("Hour");
+		label[15] = new JLabel("Minute");
+		label[16] = new JLabel("Second");
 		createSearchPhotoPanel();
 		createErrorPanel();
 	}
@@ -123,6 +135,10 @@ public class SearchPhotos {
 		modelAction.newComboBox(monthModel2, month);
 		modelAction.newComboBox(dayModel, day);
 		modelAction.newComboBox(dayModel2, day);
+		modelAction.setHourComboBox(hour);
+		modelAction.setHourComboBox(hour2);
+		modelAction.setMinute_SecondsComboBox(minute, second);
+		modelAction.setMinute_SecondsComboBox(minute2, second2);
 		
 		cb[0].setModel(monthModel);
 		cb[0].setSelectedIndex(0);
@@ -132,20 +148,41 @@ public class SearchPhotos {
 		cb[3].setSelectedIndex(0);
 		cb[4].setModel(dayModel2);
 		cb[4].setSelectedIndex(0);
+		cb[6].setModel(hour);
+		cb[6].setSelectedIndex(0);
+		cb[7].setModel(minute);
+		cb[7].setSelectedIndex(0);
+		cb[8].setModel(second);
+		cb[8].setSelectedIndex(0);
+		cb[9].setModel(hour2);
+		cb[9].setSelectedIndex(0);
+		cb[10].setModel(minute2);
+		cb[10].setSelectedIndex(0);
+		cb[11].setModel(second2);
+		cb[11].setSelectedIndex(0);
 		
-		frame[0].setSize(600, 500);
+		
+		
+		
+		frame[0].setSize(1200, 500);
 		frame[0].setResizable(false);
 		frame[0].setLocationRelativeTo(null);
 		
 		label[3].setFont(new Font(null, Font.BOLD, 16));
 		panel[1].add(label[3]);
-		panel[1].setMaximumSize(new Dimension(500,40));
+		panel[1].setMaximumSize(new Dimension(1100,40));
 		
 		panel[2].add(cb[0]);
 		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
 		panel[2].add(cb[1]);
 		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
 		panel[2].add(cb[2]);
+		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
+		panel[2].add(cb[6]);
+		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
+		panel[2].add(cb[7]);
+		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
+		panel[2].add(cb[8]);
 		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
 		panel[2].add(label[7]);
 		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
@@ -155,35 +192,54 @@ public class SearchPhotos {
 		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
 		panel[2].add(cb[5]);
 		panel[2].add(Box.createRigidArea(new Dimension(8, 0)));
-		panel[2].setMaximumSize(new Dimension(500,25));
+		panel[2].add(cb[9]);
+		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
+		panel[2].add(cb[10]);
+		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
+		panel[2].add(cb[11]);
+		panel[2].add(Box.createRigidArea(new Dimension(10, 0)));
+		panel[2].setMaximumSize(new Dimension(1100,25));
 		
 		panel[3].add(Box.createRigidArea(new Dimension(10, 0)));
 		panel[3].add(label[0]);
-		panel[3].add(Box.createRigidArea(new Dimension(52, 0)));
+		panel[3].add(Box.createRigidArea(new Dimension(62, 0)));
 		panel[3].add(label[1]);
-		panel[3].add(Box.createRigidArea(new Dimension(55, 0)));
+		panel[3].add(Box.createRigidArea(new Dimension(69, 0)));
 		panel[3].add(label[2]);
-		panel[3].add(Box.createRigidArea(new Dimension(72, 0)));
+		panel[3].add(Box.createRigidArea(new Dimension(69, 0)));
+		panel[3].add(label[11]);
+		panel[3].add(Box.createRigidArea(new Dimension(57, 0)));
+		panel[3].add(label[12]);
+		panel[3].add(Box.createRigidArea(new Dimension(45, 0)));
+		panel[3].add(label[13]);
+		panel[3].add(Box.createRigidArea(new Dimension(65, 0)));
 		panel[3].add(label[8]);
-		panel[3].add(Box.createRigidArea(new Dimension(52, 0)));
+		panel[3].add(Box.createRigidArea(new Dimension(62, 0)));
 		panel[3].add(label[9]);
-		panel[3].add(Box.createRigidArea(new Dimension(56, 0)));
+		panel[3].add(Box.createRigidArea(new Dimension(68, 0)));
 		panel[3].add(label[10]);
-		panel[3].setMaximumSize(new Dimension(500,40));
+		panel[3].add(Box.createRigidArea(new Dimension(67, 0)));
+		panel[3].add(label[14]);
+		panel[3].add(Box.createRigidArea(new Dimension(56, 0)));
+		panel[3].add(label[15]);
+		panel[3].add(Box.createRigidArea(new Dimension(47, 0)));
+		panel[3].add(label[16]);
+		panel[3].add(Box.createRigidArea(new Dimension(52, 0)));
+		panel[3].setMaximumSize(new Dimension(1100,40));
 		
 		label[4].setFont(new Font(null, Font.BOLD, 16));
 		panel[4].add(label[4]);
-		panel[4].setMaximumSize(new Dimension(500,40));
+		panel[4].setMaximumSize(new Dimension(1100,40));
 		
 		panel[5].add(sp);
-		panel[5].setMaximumSize(new Dimension(500,200));
+		panel[5].setMaximumSize(new Dimension(1100,200));
 		
 		panel[6].add(Box.createRigidArea(new Dimension(225,0)));
 		panel[6].add(button[0]);
-		panel[6].setMaximumSize(new Dimension(500,40));
+		panel[6].setMaximumSize(new Dimension(550,40));
 		
 		panel[7].add(button[1]);
-		panel[7].setMaximumSize(new Dimension(500,40));
+		panel[7].setMaximumSize(new Dimension(1100,40));
 		
 		panel[0].add(Box.createRigidArea(new Dimension(0,20)));
 		panel[0].add(panel[1]);
@@ -280,7 +336,8 @@ public class SearchPhotos {
 					List<String> tagNames = new ArrayList<String>();
 					SortedSet<IPhoto> tagSet;
 					SortedSet<IPhoto> dateSet;
-					if(sp.cb[0].getSelectedIndex() == 0 && sp.cb[1].getSelectedIndex() == 0 && sp.cb[2].getSelectedIndex() == 0 && sp.cb[3].getSelectedIndex() == 0 && sp.cb[4].getSelectedIndex() == 0 && sp.cb[5].getSelectedIndex() == 0) {
+					if(sp.cb[0].getSelectedIndex() == 0 && sp.cb[1].getSelectedIndex() == 0 && sp.cb[2].getSelectedIndex() == 0 && sp.cb[3].getSelectedIndex() == 0 && sp.cb[4].getSelectedIndex() == 0 && sp.cb[5].getSelectedIndex() == 0
+						&& sp.cb[6].getSelectedIndex() == 0 && sp.cb[7].getSelectedIndex() == 0 && sp.cb[8].getSelectedIndex() == 0 && sp.cb[9].getSelectedIndex() == 0 && sp.cb[10].getSelectedIndex() == 0 && sp.cb[11].getSelectedIndex() == 0) {
 						startDate = null;
 						endDate = null;
 						boolean check = getTags(tagValues, tagNames);
@@ -300,21 +357,37 @@ public class SearchPhotos {
 								sp.frame[1].setVisible(true);
 							}
 							else {
-								guiView.viewContainer.setPhotos(tagSet);
-								resetComboBox();
-								sp.frame[0].setVisible(false);
-								PhotoView photoView = new PhotoView(guiView);
-								photoView.setVisible(true);
+								if(tagSet.isEmpty()) {
+									sp.errorLabel.setText("No matching photos found");
+									sp.frame[0].disable();
+									sp.frame[1].setSize(250, 150);
+									sp.frame[1].setVisible(true);
+								}
+								else {
+									guiView.viewContainer.setPhotos(tagSet);
+									resetComboBox();
+									sp.frame[0].setVisible(false);
+									PhotoView photoView = new PhotoView(guiView);
+									photoView.setVisible(true); 
+								}
 							}
 						}
 					}
-					else if(sp.cb[0].getSelectedIndex() != 0 && sp.cb[1].getSelectedIndex() != 0 && sp.cb[2].getSelectedIndex() != 0 && sp.cb[3].getSelectedIndex() != 0 && sp.cb[4].getSelectedIndex() != 0 && sp.cb[5].getSelectedIndex() != 0) {
+					else if(sp.cb[0].getSelectedIndex() != 0 && sp.cb[1].getSelectedIndex() != 0 && sp.cb[2].getSelectedIndex() != 0 && sp.cb[3].getSelectedIndex() != 0 && sp.cb[4].getSelectedIndex() != 0 && sp.cb[5].getSelectedIndex() != 0
+							&& sp.cb[6].getSelectedIndex() != 0 && sp.cb[7].getSelectedIndex() != 0 && sp.cb[8].getSelectedIndex() != 0 && sp.cb[9].getSelectedIndex() != 0 && sp.cb[10].getSelectedIndex() != 0 && sp.cb[11].getSelectedIndex() != 0) {
 						startDate = new Date(Integer.parseInt((String)cb[2].getSelectedItem())-1900, Integer.parseInt((String)cb[0].getSelectedItem()) - 1, Integer.parseInt((String)cb[1].getSelectedItem()));
 						endDate = new Date(Integer.parseInt((String)cb[5].getSelectedItem())-1900, Integer.parseInt((String)cb[3].getSelectedItem()) - 1, Integer.parseInt((String)cb[4].getSelectedItem()));
+						startDate.setHours(Integer.parseInt((String)sp.cb[6].getSelectedItem()) - 1); 
+						startDate.setMinutes(Integer.parseInt((String)sp.cb[7].getSelectedItem())); 
+						startDate.setSeconds(Integer.parseInt((String)sp.cb[8].getSelectedItem())); 
+						endDate.setHours(Integer.parseInt((String)sp.cb[9].getSelectedItem()) - 1); 
+						endDate.setMinutes(Integer.parseInt((String)sp.cb[10].getSelectedItem())); 
+						endDate.setSeconds(Integer.parseInt((String)sp.cb[11].getSelectedItem())); 
+						
 						if(startDate.compareTo(endDate) > 0 ) {
-							sp.errorLabel.setText("Starting date must be before end date");
+							sp.errorLabel.setText("Starting date must be before or equal end date");
 							sp.frame[0].disable();
-							sp.frame[1].setSize(260, 150);
+							sp.frame[1].setSize(270, 150);
 							sp.frame[1].setVisible(true);
 						}
 						else {
@@ -333,19 +406,35 @@ public class SearchPhotos {
 								tagSet = sp.guiView.viewContainer.getPhotosByTag(tagNames, tagValues);
 								dateSet = sp.guiView.viewContainer.getPhotosByDate(start, end);
 								if(tagValues.isEmpty()) {
-									sp.guiView.viewContainer.setPhotos(dateSet);
-									resetComboBox();
-									sp.frame[0].setVisible(false);
-									PhotoView photoView = new PhotoView(guiView);
-									photoView.setVisible(true);
+									if(dateSet.isEmpty()) {
+										sp.errorLabel.setText("No matching photos found");
+										sp.frame[0].disable();
+										sp.frame[1].setSize(250, 150);
+										sp.frame[1].setVisible(true);
+									}
+									else {
+										sp.guiView.viewContainer.setPhotos(dateSet);
+										resetComboBox();
+										sp.frame[0].setVisible(false);
+										PhotoView photoView = new PhotoView(guiView);
+										photoView.setVisible(true);
+									}
 								}
 								else {
 									tagSet.retainAll(dateSet); 
-									guiView.viewContainer.setPhotos(tagSet);
-									resetComboBox();
-									sp.frame[0].setVisible(false);
-									PhotoView photoView = new PhotoView(guiView);
-									photoView.setVisible(true);
+									if(tagSet.isEmpty()) {
+										sp.errorLabel.setText("No matching photos found");
+										sp.frame[0].disable();
+										sp.frame[1].setSize(250, 150);
+										sp.frame[1].setVisible(true);
+									}
+									else {
+										guiView.viewContainer.setPhotos(tagSet);
+										resetComboBox();
+										sp.frame[0].setVisible(false);
+										PhotoView photoView = new PhotoView(guiView);
+										photoView.setVisible(true);
+									}
 								}
 							}
 						}
