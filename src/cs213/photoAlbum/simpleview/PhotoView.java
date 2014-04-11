@@ -85,10 +85,11 @@ public class PhotoView extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("");
-		setMinimumSize(new Dimension(700, 700));
+		setMinimumSize(new Dimension(1200, 700));
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLocationRelativeTo(null);
 
+		
 		photoLabel.setVerticalTextPosition(JLabel.TOP);
 		photoLabel.setHorizontalTextPosition(JLabel.CENTER);
 		photoLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -250,6 +251,7 @@ public class PhotoView extends JFrame {
 				thumbButton.setVerticalTextPosition(SwingConstants.BOTTOM);
 				thumbButton.setHorizontalTextPosition(SwingConstants.CENTER);
 
+				thumbAction.setIconButton(thumbButton);
 				iconsBar.add(thumbButton, iconsBar.getComponentCount());
 
 				displayActions.add(thumbAction);
@@ -279,7 +281,10 @@ public class PhotoView extends JFrame {
 			iconsBar.add(navButton, iconsBar.getComponentCount());
 		}
 
+	
 	}
+	
+	
 
 	protected ImageIcon getIcon(String path, String description) {
 
@@ -309,6 +314,12 @@ public class PhotoView extends JFrame {
 		private PhotoView photoView;
 		private IPhoto photo;
 		private int photoIndex;
+		private JButton iconButton;
+		
+		
+		public void setIconButton(JButton iconButton) {
+			this.iconButton = iconButton;
+		}
 
 		public DisplayPhotoAction(Icon fullIcon, Icon thumb, IPhoto photo,
 				int photoIndex, PhotoView photoView) {
@@ -478,6 +489,8 @@ public class PhotoView extends JFrame {
 
 					if (!captionField.getText().isEmpty()) {
 						photo.setCaption(captionField.getText());
+						iconButton.setText(captionField.getText());
+						
 						// update icons here
 					} else {
 						errorLabel.setText("Invalid Caption");
