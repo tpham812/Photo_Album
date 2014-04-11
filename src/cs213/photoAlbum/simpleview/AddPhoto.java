@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import cs213.photoAlbum.model.IAlbum;
+import cs213.photoAlbum.model.IPhoto;
 
 public class AddPhoto extends JFrame {
 
@@ -134,22 +135,23 @@ public class AddPhoto extends JFrame {
 		editPanel.add(scrollPane, c);
 
 		JButton button;
-		button = new JButton("Save");
-		button.addActionListener(new AddAction(this));
-		c = new GridBagConstraints();
-		c.insets = new Insets(0, 10, 0, 10);
-		c.gridx = 0;
-		c.gridy = 3;
-		editPanel.add(button, c);
-
 		button = new JButton("Back");
 		button.addActionListener(new BackAction(this));
 
 		c = new GridBagConstraints();
 		c.insets = new Insets(0, 10, 0, 10);
+		c.gridx = 0;
+		c.gridy = 3;
+		editPanel.add(button, c);
+		
+		button = new JButton("Save");
+		button.addActionListener(new AddAction(this));
+		c = new GridBagConstraints();
+		c.insets = new Insets(0, 10, 0, 10);
 		c.gridx = 1;
 		c.gridy = 3;
 		editPanel.add(button, c);
+
 
 		editPanel.setVisible(true);
 
@@ -182,7 +184,8 @@ public class AddPhoto extends JFrame {
 					viewContainer.saveUser();
 
 					addPhoto.dispose();
-					new PhotoView(album, guiView).setVisible(true);;					
+					viewContainer.setAlbum(viewContainer.getAlbum());
+					new PhotoView(guiView).setVisible(true);
 				}
 			}
 		}
@@ -200,7 +203,7 @@ public class AddPhoto extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 
 			addPhoto.dispose();
-			new PhotoView(album, guiView);
+			new PhotoView(guiView).setVisible(true);
 		}
 	}
 

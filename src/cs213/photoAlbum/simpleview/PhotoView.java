@@ -1,6 +1,7 @@
 package cs213.photoAlbum.simpleview;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
@@ -20,6 +21,7 @@ import java.util.SortedSet;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -44,27 +46,30 @@ public class PhotoView extends JFrame {
 
 	private JScrollPane iconsPane;
 
-	private IAlbum album;
-
 	private JLabel photoLabel = new JLabel();
 
 	private JPanel editPanel;
 
 	private IPhoto photo;
 
+	private int photoIndex;
+
 	private JTable tagTable;
 
 	private JList<String> albumsList;
-	
+
 	private JTextField captionField;
 
 	private GuiView guiView;
 
-	public PhotoView(IAlbum album, GuiView guiView) {
+	private List<DisplayPhotoAction> displayActions;
 
-		this.guiView = guiView;
-		this.viewContainer = guiView.viewContainer;
-		this.album = album;
+	public int displayPhotoIndex;
+
+	public PhotoView(GuiView gv) {
+
+		this.guiView = gv;
+		this.viewContainer = gv.viewContainer;
 		this.editPanel = new JPanel(new GridBagLayout());
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,9 +92,60 @@ public class PhotoView extends JFrame {
 		iconsPane.setPreferredSize(new Dimension(200, 150));
 		add(iconsPane, BorderLayout.NORTH);
 
-		DisplayPhotoAction photo1Action = null;
+		JButton button = new JButton(" Back to Albums ");
+		button.setBorder(BorderFactory.createLineBorder(Color.black));
+		button.addActionListener(new ActionListener() {
 
-		for (IPhoto photo : album.getPhotos()) {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				dispose();
+				guiView.viewContainer.setAlbum(null);
+				guiView.albums.show();
+			}
+		});
+		iconsBar.add(button, 0);
+		iconsBar.add(Box.createHorizontalStrut(10));
+
+		button = new JButton(" Add photo ");
+		button.setBorder(BorderFactory.createLineBorder(Color.black));
+		button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				dispose();
+
+				AddPhoto addPhoto = new AddPhoto(viewContainer.getAlbum(), guiView);
+			}
+		});
+		iconsBar.add(button, iconsBar.getComponentCount());
+		iconsBar.add(Box.createHorizontalStrut(10));
+
+
+		if (!viewContainer.getPhotos().isEmpty()) {
+
+			JButton navButton = new JButton(" <<< Prev photo ");
+			navButton.setBorder(BorderFactory.createLineBorder(Color.black));
+			navButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+
+					if (displayPhotoIndex > 0) {
+						displayActions.get(--displayPhotoIndex).showPhoto();
+					}
+				}
+			});
+			iconsBar.add(navButton, iconsBar.getComponentCount());
+			iconsBar.add(Box.createHorizontalStrut(10));
+
+		}
+
+		DisplayPhotoAction photo1Action = null;
+		displayActions = new ArrayList<PhotoView.DisplayPhotoAction>();
+		int i = 0;
+		for (IPhoto photo : viewContainer.getPhotos()) {
 
 			ImageIcon fullIcon = getIcon(photo.getName(), photo.getCaption());
 
@@ -98,7 +154,7 @@ public class PhotoView extends JFrame {
 				ImageIcon tIcon = new ImageIcon(makeThumbnail(fullIcon.getImage(), 100, 100));
 				tIcon.setDescription(photo.getCaption());
 
-				DisplayPhotoAction thumbAction = new DisplayPhotoAction(fullIcon, tIcon, photo, this);
+				DisplayPhotoAction thumbAction = new DisplayPhotoAction(fullIcon, tIcon, photo, i++, this);
 
 				if (photo1Action == null) {
 					photo1Action = thumbAction;
@@ -109,24 +165,45 @@ public class PhotoView extends JFrame {
 				thumbButton.setVerticalTextPosition(SwingConstants.BOTTOM);
 				thumbButton.setHorizontalTextPosition(SwingConstants.CENTER);
 
-				iconsBar.add(thumbButton, iconsBar.getComponentCount() - 1);
+				iconsBar.add(thumbButton, iconsBar.getComponentCount());
+
+				displayActions.add(thumbAction);
 			}
 		}
 
-		if (photo1Action != null) {
-			photo1Action.showPhoto();
+		if (!viewContainer.getPhotos().isEmpty()) {
+			displayActions.get(0).showPhoto();
+
+			iconsBar.add(Box.createHorizontalStrut(10));
+
+			JButton navButton = new JButton(" Next photo >>> ");
+			navButton.setBorder(BorderFactory.createLineBorder(Color.black));
+			navButton.setBorderPainted(true);
+			navButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+
+					if (displayPhotoIndex < displayActions.size() - 1) {
+						displayActions.get(++displayPhotoIndex).showPhoto();
+					}
+
+				}
+			});
+
+			iconsBar.add(navButton, iconsBar.getComponentCount());
 		}
 
 	}
 
-	protected ImageIcon getIcon(String path, String description)  {
+	protected ImageIcon getIcon(String path, String description) {
 
 		try {
 			return new ImageIcon((new File(path)).toURI().toURL(), description);
 		} catch (MalformedURLException e) {
 
 		}
-		
+
 		return null;
 	}
 
@@ -145,14 +222,15 @@ public class PhotoView extends JFrame {
 		private Icon fullIcon;
 		private PhotoView photoView;
 		private IPhoto photo;
+		private int photoIndex;
 
-		public DisplayPhotoAction(Icon fullIcon, Icon thumb, IPhoto photo, PhotoView photoView) {
+		public DisplayPhotoAction(Icon fullIcon, Icon thumb, IPhoto photo, int photoIndex, PhotoView photoView) {
 			this.fullIcon = fullIcon;
 			putValue(LARGE_ICON_KEY, thumb);
 			putValue(SHORT_DESCRIPTION, photo.getCaption());
 			this.photoView = photoView;
 			this.photo = photo;
-			// this.photo = photo;
+			this.photoIndex = photoIndex;
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -164,6 +242,7 @@ public class PhotoView extends JFrame {
 			photoLabel.setIcon(fullIcon);
 			photoLabel.setText(photo.getCaption());
 			photoView.photo = this.photo;
+			photoView.displayPhotoIndex = this.photoIndex;
 			setTitle(photo.getCaption());
 
 			editPanel.removeAll();
@@ -307,8 +386,8 @@ public class PhotoView extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					
-					if(!captionField.getText().isEmpty()) {
+
+					if (!captionField.getText().isEmpty()) {
 						photo.setCaption(captionField.getText());
 					}
 
@@ -390,7 +469,7 @@ public class PhotoView extends JFrame {
 
 					photoView.dispose();
 
-					AddPhoto addPhoto = new AddPhoto(album, guiView);
+					AddPhoto addPhoto = new AddPhoto(viewContainer.getAlbum(), guiView);
 				}
 			});
 			c = new GridBagConstraints();
