@@ -125,8 +125,8 @@ public class ViewContainer {
 		return photos;
 	}
 
-	public void setPhotos(List<IPhoto> photos) {
-		this.photos = photos;
+	public void setPhotos(Collection<IPhoto> photos) {
+		this.photos = new ArrayList<IPhoto>(photos);
 	}
 
 	public void setUser(IUser user) {

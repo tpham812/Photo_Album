@@ -38,30 +38,53 @@ public class AddPhoto extends JFrame {
 
 	private JLabel fileLabel;
 
-	public AddPhoto(IAlbum album, GuiView guiView) {
+	public AddPhoto(IAlbum album, GuiView gv) {
 
-		this.guiView = guiView;
-		this.viewContainer = guiView.viewContainer;
+		this.guiView = gv;
+		this.viewContainer = gv.viewContainer;
 		this.album = album;
 		this.editPanel = new JPanel(new GridBagLayout());
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("");
-		setMinimumSize(new Dimension(700, 700));
+		setMinimumSize(new Dimension(600, 400));
 		setLocationRelativeTo(null);
 
 		GridBagConstraints c;
 
+		int j = 0;
+		
+		JButton button;
+
+		button = new JButton(" Logout ");
+		button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				guiView.viewContainer.logout();
+				dispose();
+				guiView.login.show();
+			}
+		});
+
+		c = new GridBagConstraints();
+		c.insets = new Insets(0, 10, 0, 10);
+		c.gridx = 3;
+		c.gridy = j++;
+		editPanel.add(button, c);
+		
+		
 		c = new GridBagConstraints();
 		c.insets = new Insets(5, 0, 5, 0);
 		c.gridx = 0;
-		c.gridy = 0;
+		c.gridy = j;
 		editPanel.add(new JLabel("Pathname: "), c);
 
 		c = new GridBagConstraints();
 		c.insets = new Insets(5, 0, 5, 5);
 		c.gridx = 1;
-		c.gridy = 0;
+		c.gridy = j;
 
 		fileLabel = new JLabel();
 
@@ -89,19 +112,19 @@ public class AddPhoto extends JFrame {
 		c = new GridBagConstraints();
 		c.insets = new Insets(5, 0, 5, 0);
 		c.gridx = 2;
-		c.gridy = 0;
+		c.gridy = j++;
 		editPanel.add(openButton, c);
 
 		c = new GridBagConstraints();
 		c.insets = new Insets(5, 0, 5, 0);
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = j;
 		editPanel.add(new JLabel("Caption:  "), c);
 
 		c = new GridBagConstraints();
 		c.insets = new Insets(5, 0, 5, 0);
 		c.gridx = 1;
-		c.gridy = 1;
+		c.gridy = j++;
 		c.ipadx = 100;
 
 		captionField = new JTextField();
@@ -110,7 +133,7 @@ public class AddPhoto extends JFrame {
 		c = new GridBagConstraints();
 		c.insets = new Insets(5, 0, 5, 0);
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = j;
 		JLabel jLabel = new JLabel("Albums : ");
 		editPanel.add(jLabel, c);
 
@@ -129,19 +152,18 @@ public class AddPhoto extends JFrame {
 		c = new GridBagConstraints();
 		c.insets = new Insets(5, 0, 5, 0);
 		c.gridx = 1;
-		c.gridy = 2;
+		c.gridy = j++;
 		c.ipadx = 100;
 		c.ipady = 100;
 		editPanel.add(scrollPane, c);
 
-		JButton button;
-		button = new JButton("Back");
+		button = new JButton("Cancel");
 		button.addActionListener(new BackAction(this));
 
 		c = new GridBagConstraints();
 		c.insets = new Insets(0, 10, 0, 10);
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = j;
 		editPanel.add(button, c);
 		
 		button = new JButton("Save");
@@ -149,7 +171,7 @@ public class AddPhoto extends JFrame {
 		c = new GridBagConstraints();
 		c.insets = new Insets(0, 10, 0, 10);
 		c.gridx = 1;
-		c.gridy = 3;
+		c.gridy = j;
 		editPanel.add(button, c);
 
 
