@@ -4,18 +4,20 @@ import javax.swing.DefaultComboBoxModel;
 
 public class DefaultComboBoxModelAction {
 
-	public void newComboBox(DefaultComboBoxModel<Integer> model, int[] date) {
+	public void newComboBox(DefaultComboBoxModel<String> model, int[] date) {
 		
-		model.removeAllElements();
+		model.addElement("");
 		for(int i = 0; i < date.length; i++) {
-			model.addElement(date[i]);
+			model.addElement(Integer.toString(date[i]));
 		}
 	}
 	
-	public void setYearComboBox(DefaultComboBoxModel<Integer> model, int max, int min) {
+	public void setYearComboBox(DefaultComboBoxModel<String> model, int max, int min) {
 		
+		model.removeAllElements();
+		model.addElement("");
 		for(int i = min; i  <= max; i++) {
-			model.addElement(i);
+			model.addElement(Integer.toString(i));
 		}
 	}
 }
