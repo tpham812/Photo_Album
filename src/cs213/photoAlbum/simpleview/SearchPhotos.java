@@ -292,6 +292,7 @@ public class SearchPhotos {
 							sp.frame[1].setVisible(true);
 						}
 						else {
+							clearTagPanel();
 							tagSet = sp.guiView.viewContainer.getPhotosByTag(tagNames, tagValues);
 							if(tagValues.isEmpty()) {
 								sp.errorLabel.setText("No tags or dates were given for search");
@@ -317,6 +318,7 @@ public class SearchPhotos {
 							start.setTime(startDate);
 							end.setTime(endDate);
 							boolean check = getTags(tagValues, tagNames);
+							
 							if(!check) {
 								sp.errorLabel.setText("Must enter in both Tag Type and Tag Value");
 								sp.frame[0].disable();
@@ -324,6 +326,7 @@ public class SearchPhotos {
 								sp.frame[1].setVisible(true);
 							}
 							else {
+								clearTagPanel();
 								tagSet = sp.guiView.viewContainer.getPhotosByTag(tagNames, tagValues);
 								dateSet = sp.guiView.viewContainer.getPhotosByDate(start, end);
 								if(tagValues.isEmpty()) {
@@ -368,30 +371,44 @@ public class SearchPhotos {
 			
 			String tagV = "";
 			String tagN = "";
-			Object obj1, obj2;
-			
+			Object obj1 = null, obj2 = null;
+			boolean check = true;
 			for(int i = 0; i < sp.table.getRowCount(); i++) {
-					if((obj1 = sp.table.getValueAt(i, 0)) == null && (obj2 = sp.table.getValueAt(i, 1)) == null) {
+				
+					obj1 = sp.table.getValueAt(i, 0);
+					obj2 = sp.table.getValueAt(i, 1);
+					
+					if(obj1 == null && obj2  == null) {
 						continue;
+					}
+					else if(obj1 == null && obj2 != null ||  obj2 == null && obj1 != null) {
+						sp.table.setValueAt(null, i, 0);
+						sp.table.setValueAt(null, i, 1);
+						check = false;
 					}
 					else if(!(tagN =  sp.table.getValueAt(i, 0).toString()).trim().equals("") && !(tagV = sp.table.getValueAt(i, 1).toString()).trim().equals("")) {
 						tagValues.add(tagV);
 						tagNames.add(tagN);
 					}
 					else if(tagN.equals("") && tagV.equals("")) {
+						sp.table.setValueAt(null, i, 0);
+						sp.table.setValueAt(null, i, 1);
 						continue;
 					}
-					else 
-						return false;
+					else {
+						sp.table.setValueAt(null, i, 0);
+						sp.table.setValueAt(null, i, 1);
+						check = false;
+					}
 			}
-			return true;
+			return check;
 		}
 		
 		public void clearTagPanel() {
 			
 			for(int i = 0; i < sp.table.getRowCount(); i++) {
-				sp.tableModel.setValueAt(null, i, 0);
-				sp.tableModel.setValueAt(null, i, 1);
+				sp.table.setValueAt(null, i, 0);
+				sp.table.setValueAt(null, i, 1);
 			}
 		}
 	}
