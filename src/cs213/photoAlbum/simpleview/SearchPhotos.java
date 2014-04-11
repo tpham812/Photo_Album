@@ -50,7 +50,7 @@ public class SearchPhotos {
 	JScrollPane sp;
 	JPanel[] panel = new JPanel[9];
 	JLabel[] label = new JLabel[11];
-	JComboBox<String>[] cb = new JComboBox[8];
+	JComboBox<String>[] cb = new JComboBox[6];
 	String[] columnNames = {"Tag Type", "Tag Value"};
 	int[] month = {1,2,3,4,5,6,7,8,9,10,11,12};
 	int[] day = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
@@ -258,7 +258,6 @@ public class SearchPhotos {
 		
 		setYearComboBox(albumName);
 		frame[0].setVisible(true);
-		
 	}
 	
 	class ButtonListener implements ActionListener {
@@ -302,9 +301,10 @@ public class SearchPhotos {
 							}
 							else {
 								guiView.viewContainer.setPhotos(tagSet);
+								resetComboBox();
+								sp.frame[0].setVisible(false);
 								PhotoView photoView = new PhotoView(guiView);
 								photoView.setVisible(true);
-								// here is where you search only by tags
 							}
 						}
 					}
@@ -334,16 +334,18 @@ public class SearchPhotos {
 								dateSet = sp.guiView.viewContainer.getPhotosByDate(start, end);
 								if(tagValues.isEmpty()) {
 									sp.guiView.viewContainer.setPhotos(dateSet);
+									resetComboBox();
+									sp.frame[0].setVisible(false);
 									PhotoView photoView = new PhotoView(guiView);
 									photoView.setVisible(true);
-									//here is where you search by dates only 
 								}
 								else {
-									tagSet.retainAll(dateSet); // intersect the tagSet and dateSet
+									tagSet.retainAll(dateSet); 
 									guiView.viewContainer.setPhotos(tagSet);
+									resetComboBox();
+									sp.frame[0].setVisible(false);
 									PhotoView photoView = new PhotoView(guiView);
 									photoView.setVisible(true);
-									//here is where you search by both tags and date
 								}
 							}
 						}
@@ -411,7 +413,12 @@ public class SearchPhotos {
 			}
 			return check;
 		}
-		
+		public void resetComboBox() {
+			
+			for(int i = 0; i < sp.cb.length; i++) {
+				cb[i].setSelectedIndex(0);
+			}
+		}
 		public void clearTagPanel() {
 			
 			for(int i = 0; i < sp.table.getRowCount(); i++) {
