@@ -377,10 +377,10 @@ public class SearchPhotos {
 							&& sp.cb[6].getSelectedIndex() != 0 && sp.cb[7].getSelectedIndex() != 0 && sp.cb[8].getSelectedIndex() != 0 && sp.cb[9].getSelectedIndex() != 0 && sp.cb[10].getSelectedIndex() != 0 && sp.cb[11].getSelectedIndex() != 0) {
 						startDate = new Date(Integer.parseInt((String)cb[2].getSelectedItem())-1900, Integer.parseInt((String)cb[0].getSelectedItem()) - 1, Integer.parseInt((String)cb[1].getSelectedItem()));
 						endDate = new Date(Integer.parseInt((String)cb[5].getSelectedItem())-1900, Integer.parseInt((String)cb[3].getSelectedItem()) - 1, Integer.parseInt((String)cb[4].getSelectedItem()));
-						startDate.setHours(Integer.parseInt((String)sp.cb[6].getSelectedItem()) - 1); 
+						startDate.setHours(Integer.parseInt((String)sp.cb[6].getSelectedItem())); 
 						startDate.setMinutes(Integer.parseInt((String)sp.cb[7].getSelectedItem())); 
 						startDate.setSeconds(Integer.parseInt((String)sp.cb[8].getSelectedItem())); 
-						endDate.setHours(Integer.parseInt((String)sp.cb[9].getSelectedItem()) - 1); 
+						endDate.setHours(Integer.parseInt((String)sp.cb[9].getSelectedItem())); 
 						endDate.setMinutes(Integer.parseInt((String)sp.cb[10].getSelectedItem())); 
 						endDate.setSeconds(Integer.parseInt((String)sp.cb[11].getSelectedItem())); 
 						
