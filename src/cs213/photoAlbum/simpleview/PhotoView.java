@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -82,6 +83,7 @@ public class PhotoView extends JFrame {
 		photoLabel.setHorizontalTextPosition(JLabel.CENTER);
 		photoLabel.setHorizontalAlignment(JLabel.CENTER);
 		photoLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
 		add(photoLabel, BorderLayout.CENTER);
 
 		add(editPanel, BorderLayout.EAST);
@@ -92,8 +94,24 @@ public class PhotoView extends JFrame {
 		iconsPane.setPreferredSize(new Dimension(200, 150));
 		add(iconsPane, BorderLayout.NORTH);
 
-		JButton button = new JButton(" Back to Albums ");
-		button.setBorder(BorderFactory.createLineBorder(Color.black));
+		JPanel panel = new JPanel(new GridLayout(3,1));
+		panel.setMaximumSize(new Dimension(100,100));
+		//panel.setSize(100, 100);
+		
+		JButton button = null;
+				
+		button = new JButton(" Logout ");
+		button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+			}
+		});		
+		button.setMinimumSize(new Dimension(10, 100));
+		panel.add(button,0);
+				
+		button = new JButton(" < Albums ");
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -104,11 +122,10 @@ public class PhotoView extends JFrame {
 				guiView.albums.show();
 			}
 		});
-		iconsBar.add(button, 0);
-		iconsBar.add(Box.createHorizontalStrut(10));
-
+		button.setMinimumSize(new Dimension(10, 100));
+		panel.add(button,1);
+		
 		button = new JButton(" Add photo ");
-		button.setBorder(BorderFactory.createLineBorder(Color.black));
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -119,9 +136,12 @@ public class PhotoView extends JFrame {
 				AddPhoto addPhoto = new AddPhoto(viewContainer.getAlbum(), guiView);
 			}
 		});
-		iconsBar.add(button, iconsBar.getComponentCount());
-		iconsBar.add(Box.createHorizontalStrut(10));
+		button.setMinimumSize(new Dimension(10, 100));
+		panel.add(button,1);
+		
+		iconsBar.add(panel,0);
 
+		iconsBar.add(Box.createHorizontalStrut(10));
 
 		if (!viewContainer.getPhotos().isEmpty()) {
 
@@ -442,46 +462,6 @@ public class PhotoView extends JFrame {
 			c.insets = new Insets(0, 10, 0, 10);
 			c.gridx = 0;
 			c.gridy = 3;
-			editPanel.add(ep2, c);
-
-			ep2 = new JPanel(new GridBagLayout());
-			button = new JButton("Back to Albums");
-			button.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-
-					photoView.dispose();
-					guiView.albums.show();
-				}
-			});
-			c = new GridBagConstraints();
-			c.insets = new Insets(0, 10, 0, 10);
-			c.gridx = 0;
-			c.gridy = 0;
-			ep2.add(button, c);
-
-			button = new JButton("Add new photo");
-			button.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-
-					photoView.dispose();
-
-					AddPhoto addPhoto = new AddPhoto(viewContainer.getAlbum(), guiView);
-				}
-			});
-			c = new GridBagConstraints();
-			c.insets = new Insets(0, 10, 0, 10);
-			c.gridx = 1;
-			c.gridy = 0;
-			ep2.add(button, c);
-
-			c = new GridBagConstraints();
-			c.insets = new Insets(0, 10, 0, 10);
-			c.gridx = 0;
-			c.gridy = 4;
 			editPanel.add(ep2, c);
 
 			editPanel.setVisible(true);
