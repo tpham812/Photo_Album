@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Calendar;
 
 import javax.swing.Box;
@@ -15,7 +17,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import cs213.photoAlbum.model.IAlbum;
 import cs213.photoAlbum.util.DefaultComboBoxModelAction;
@@ -24,36 +29,59 @@ import cs213.photoAlbum.util.DefaultComboBoxModelAction;
 public class SearchPhotos {
 	
 	
+	DefaultTableModel tableModel;
 	GuiView guiView;
 	ActionListener buttonListener;
 	JButton[] button = new JButton[3];
 	JFrame frame;
-	JTextField tf;
+	JTable table;
+	JScrollPane sp;
 	JPanel[] panel = new JPanel[8];
 	JLabel[] label = new JLabel[11];
-	JComboBox<Integer>[] cb = new JComboBox[8];
+	JComboBox<String>[] cb = new JComboBox[8];
+	String[] columnNames = {"Tag Type", "Tag Value"};
 	int[] month = {1,2,3,4,5,6,7,8,9,10,11,12};
 	int[] day = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
-	DefaultComboBoxModel<Integer> monthModel, dayModel, yearModel;
+	DefaultComboBoxModel<String> monthModel, dayModel, yearModel;
 	DefaultComboBoxModelAction modelAction = new DefaultComboBoxModelAction();
 	
 	public SearchPhotos (GuiView gv){
 		
 		guiView = gv;
-		tf = new JTextField();
-		tf.setSize(500, 100);
-		tf.setMaximumSize(new Dimension(500,100));
 		frame = new JFrame("Search Photos");
+		buttonListener = new ButtonListener(this);
+		tableModel = new DefaultTableModel(columnNames, 20);
+		table = new JTable(tableModel) {
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				if(rowIndex == 0) {
+					return true;
+				}
+				else if(colIndex == 0) {
+					if(getValueAt(rowIndex - 1, colIndex) != null && getValueAt(rowIndex - 1, colIndex + 1) != null) 
+						return true;
+				}
+				else if(colIndex == 1) {
+					if(getValueAt(rowIndex - 1, colIndex) != null && getValueAt(rowIndex - 1, colIndex - 1) != null) 
+						return true;
+				}
+				return false;
+
+			}
+			
+		};
+		sp = new JScrollPane(table);
+		sp.setSize(500, 250);
 		
 		button[0] = new JButton("Search");
 		button[1] = new JButton("Back");
+		button[1].addActionListener(buttonListener);
 		
-		monthModel = new DefaultComboBoxModel<Integer>();
-		dayModel = new DefaultComboBoxModel<Integer>();
-		yearModel = new DefaultComboBoxModel<Integer>();
+		monthModel = new DefaultComboBoxModel<String>();
+		dayModel = new DefaultComboBoxModel<String>();
+		yearModel = new DefaultComboBoxModel<String>();
 		
 		for(int i = 0; i < cb.length; i++) {
-			cb[i] = new JComboBox<Integer>();
+			cb[i] = new JComboBox<String>();
 			cb[i].setBackground(Color.white);
 		}
 			
@@ -89,8 +117,8 @@ public class SearchPhotos {
 		cb[3].setModel(monthModel);
 		cb[4].setModel(dayModel);
 		
-		frame.setSize(600, 320);
-		frame.setMaximumSize(new Dimension(600,320));
+		frame.setSize(600, 500);
+		//frame.setMaximumSize(new Dimension(600,450));
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -133,8 +161,8 @@ public class SearchPhotos {
 		panel[4].add(label[4]);
 		panel[4].setMaximumSize(new Dimension(500,40));
 		
-		panel[5].add(tf);
-		panel[5].setMaximumSize(new Dimension(500,100));
+		panel[5].add(sp);
+		panel[5].setMaximumSize(new Dimension(500,200));
 		
 		panel[6].add(Box.createRigidArea(new Dimension(225,0)));
 		panel[6].add(button[0]);
@@ -145,10 +173,13 @@ public class SearchPhotos {
 		
 		panel[0].add(Box.createRigidArea(new Dimension(0,20)));
 		panel[0].add(panel[1]);
+		panel[0].add(Box.createRigidArea(new Dimension(0,5)));
 		panel[0].add(panel[2]);
+		panel[0].add(Box.createRigidArea(new Dimension(0,5)));
 		panel[0].add(panel[3]);
-		panel[0].add(Box.createRigidArea(new Dimension(0,10)));
+		panel[0].add(Box.createRigidArea(new Dimension(0,20)));
 		panel[0].add(panel[4]);
+		panel[0].add(Box.createRigidArea(new Dimension(0,5)));
 		panel[0].add(panel[5]);
 		panel[0].add(Box.createRigidArea(new Dimension(0, 15)));
 		panel[0].add(panel[6]);
@@ -159,6 +190,10 @@ public class SearchPhotos {
 		frame.setVisible(false);	
 	}
 	
+	public void createErroPanel() {
+		
+		
+	}
 	public void setYearComboBox(String albumName) {
 		
 		IAlbum al = guiView.viewContainer.getAlbum(albumName);
@@ -194,16 +229,19 @@ public class SearchPhotos {
 			}
 			
 			else {
-				sp.tf.setText(null);
-				resetComboBox();
-				sp.frame.setVisible(false);
-				sp.guiView.albums.show();
+				if(!sp.table.isEditing()) {
+					clearTagPanel();
+					sp.frame.setVisible(false);
+					sp.guiView.albums.show();
+				}
 			}
+		
 		}
 		
-		public void resetComboBox() {
-			for(int i = 0; i < sp.cb.length; i++) {
-				cb[i].setSelectedIndex(0);
+		public void clearTagPanel() {
+			for(int i = 0; i < sp.table.getRowCount(); i++) {
+				sp.tableModel.setValueAt(null, i, 0);
+				sp.tableModel.setValueAt(null, i, 1);
 			}
 		}
 	}
