@@ -122,7 +122,7 @@ public class SearchPhotos {
 		modelAction.newComboBox(monthModel, month);
 		modelAction.newComboBox(monthModel2, month);
 		modelAction.newComboBox(dayModel, day);
-		modelAction.newComboBox(dayModel2, month);
+		modelAction.newComboBox(dayModel2, day);
 		
 		cb[0].setModel(monthModel);
 		cb[0].setSelectedIndex(0);
@@ -301,6 +301,9 @@ public class SearchPhotos {
 								sp.frame[1].setVisible(true);
 							}
 							else {
+								guiView.viewContainer.setPhotos(tagSet);
+								PhotoView photoView = new PhotoView(guiView);
+								photoView.setVisible(true);
 								// here is where you search only by tags
 							}
 						}
@@ -330,11 +333,16 @@ public class SearchPhotos {
 								tagSet = sp.guiView.viewContainer.getPhotosByTag(tagNames, tagValues);
 								dateSet = sp.guiView.viewContainer.getPhotosByDate(start, end);
 								if(tagValues.isEmpty()) {
-								
+									sp.guiView.viewContainer.setPhotos(dateSet);
+									PhotoView photoView = new PhotoView(guiView);
+									photoView.setVisible(true);
 									//here is where you search by dates only 
 								}
 								else {
 									tagSet.retainAll(dateSet); // intersect the tagSet and dateSet
+									guiView.viewContainer.setPhotos(tagSet);
+									PhotoView photoView = new PhotoView(guiView);
+									photoView.setVisible(true);
 									//here is where you search by both tags and date
 								}
 							}

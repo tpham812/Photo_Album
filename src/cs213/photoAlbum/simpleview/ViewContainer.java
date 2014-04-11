@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import java.util.SortedSet;
 
 import cs213.photoAlbum.control.AlbumController;
 import cs213.photoAlbum.control.IAlbumController;
@@ -129,6 +130,15 @@ public class ViewContainer {
 		this.photos = new ArrayList<IPhoto>(photos);
 	}
 
+	public SortedSet<IPhoto> getPhotosByDate(Calendar start, Calendar end) {
+		
+		return  photoController.getPhotosByDate(start, end, user);
+	}
+	
+	public SortedSet<IPhoto> getPhotosByTag(List<String> tagNames, List<String> tagValues) {
+		
+		return photoController.getPhotosByTag(tagNames, tagValues, user);
+	}
 	public void setUser(IUser user) {
 		this.user = user;
 	}
