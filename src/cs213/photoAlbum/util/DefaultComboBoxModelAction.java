@@ -24,7 +24,7 @@ public class DefaultComboBoxModelAction {
 	public void setHourComboBox(DefaultComboBoxModel<String> model) {
 		
 		model.addElement("");
-		for(int i = 1; i <= 24; i++) {
+		for(int i = 0; i < 24; i++) {
 			model.addElement(Integer.toString(i));
 		}
 	}

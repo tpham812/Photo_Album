@@ -212,7 +212,7 @@ public class SearchPhotos {
 		panel[3].add(label[12]);
 		panel[3].add(Box.createRigidArea(new Dimension(45, 0)));
 		panel[3].add(label[13]);
-		panel[3].add(Box.createRigidArea(new Dimension(65, 0)));
+		panel[3].add(Box.createRigidArea(new Dimension(68, 0)));
 		panel[3].add(label[8]);
 		panel[3].add(Box.createRigidArea(new Dimension(62, 0)));
 		panel[3].add(label[9]);
@@ -222,7 +222,7 @@ public class SearchPhotos {
 		panel[3].add(label[14]);
 		panel[3].add(Box.createRigidArea(new Dimension(56, 0)));
 		panel[3].add(label[15]);
-		panel[3].add(Box.createRigidArea(new Dimension(47, 0)));
+		panel[3].add(Box.createRigidArea(new Dimension(43, 0)));
 		panel[3].add(label[16]);
 		panel[3].add(Box.createRigidArea(new Dimension(52, 0)));
 		panel[3].setMaximumSize(new Dimension(1100,40));
