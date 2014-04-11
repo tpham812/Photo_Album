@@ -24,6 +24,11 @@ import javax.swing.table.JTableHeader;
 import cs213.photoAlbum.model.IAlbum;
 import cs213.photoAlbum.util.CalendarUtils;
 
+/**
+ * Creates the GUI for displaying albums
+ * 
+ * @author Truong Pham
+ */
 public class Albums {
 
 	GuiView guiView;
@@ -44,6 +49,11 @@ public class Albums {
 	DefaultTableModel tableModel = null;
 	Collection<IAlbum> albums;
 	
+	/**
+	 * Constructor that initializes GUI components
+	 * 
+	 * @param gv GuiView object
+	 */
 	public Albums(GuiView gv) {
 		
 		guiView = gv;
@@ -97,7 +107,7 @@ public class Albums {
 					}
 					
 					try {
-						//guiView.viewContainer.setAlbum(album);
+						guiView.viewContainer.setAlbum(album);
 						//Use the below for search results
 						//guiView.viewContainer.setPhotos(album.getPhotos());
 						
@@ -116,6 +126,9 @@ public class Albums {
 		createErrorPanel();
 	}
 	
+	/**
+	 * Creates the album panel
+	 */
 	@SuppressWarnings("serial")
 	public void createAlbumPanel() {
 
@@ -164,6 +177,9 @@ public class Albums {
 		frame[0].setVisible(false);
 	}
 
+	/**
+	 * Creates the add album panel
+	 */
 	public void createAddAlbumPanel() {
 		
 		frame[1] = new JFrame("Add Album");
@@ -203,6 +219,9 @@ public class Albums {
 		frame[1].setVisible(false);
 	}
 	
+	/**
+	 * Creates the edit panel
+	 */
 	public void createEditAlbumPanel() {
 		
 		frame[2] = new JFrame("Edit Album");
@@ -242,6 +261,9 @@ public class Albums {
 		frame[2].setVisible(false);
 	}
 	
+	/**
+	 * Create error panel for error handling
+	 */
 	public void createErrorPanel() {
 		
 		frame[3] = new JFrame("Error");
@@ -263,6 +285,9 @@ public class Albums {
 		frame[3].setVisible(false);
 	}
 	
+	/**
+	 * Display the albums current user has
+	 */
 	public void displayUserAlbum() {
 		
 		albums = guiView.viewContainer.listAlbums();
@@ -297,6 +322,9 @@ public class Albums {
 		}
 	}
 	
+	/**
+	 * Shows the album panel with the albums the user has
+	 */
 	public void show() {
 		
 		displayUserAlbum();

@@ -17,6 +17,11 @@ import javax.swing.JTextField;
 
 import cs213.photoAlbum.model.IUser;
 
+/**
+ * Creates the GUI for login 
+ * 
+ * @author Truong Pham
+ */
 public class Login {
 
 	GuiView guiView;
@@ -28,6 +33,11 @@ public class Login {
 	JTextField tf;
 	
 	
+	/**
+	 * Constructor that initializes GUI components
+	 * 
+	 * @param gv GuiView object
+	 */
 	public Login(GuiView gv) {
 		
 		guiView = gv;
@@ -44,6 +54,9 @@ public class Login {
 		createErrorPanel();
 	}
 		
+	/**
+	 * Create the login panel
+	 */
 	public void createLoginPanel() {	
 
 		frame.setSize(500, 150);
@@ -72,6 +85,9 @@ public class Login {
 		frame.setVisible(false);
 	}
 	
+	/**
+	 * Creates the error panel for error handling
+	 */
 	public void createErrorPanel() {
 		
 		frame2 = new JFrame("Error");
@@ -94,6 +110,9 @@ public class Login {
 		frame2.addWindowListener(new panelListener(this));
 	}
 	
+	/**
+	 * Shows the login panel
+	 */
 	public void show() {
 		
 		frame.setVisible(true);
