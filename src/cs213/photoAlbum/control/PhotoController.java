@@ -71,7 +71,6 @@ public class PhotoController implements IPhotoController {
 
 		Map<String, SortedSet<String>> tagMap = photo.getTags();
 		Set<String> tags = tagMap.get(tagType);
-
 		if (tags == null) {
 			return false;
 		}
@@ -90,7 +89,6 @@ public class PhotoController implements IPhotoController {
 	public SortedSet<IPhoto> getPhotosByDate(Calendar start, Calendar end, IUser user) {
 
 		SortedSet<IPhoto> result = new TreeSet<IPhoto>(new PhotoComparator());
-
 		for (IPhoto p : user.getPhotos().values()) {
 
 			if (p.getDateTime().equals(start) || p.getDateTime().equals(end)
