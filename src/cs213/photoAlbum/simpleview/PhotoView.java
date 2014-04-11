@@ -66,6 +66,8 @@ public class PhotoView extends JFrame {
 	private List<DisplayPhotoAction> displayActions;
 
 	public int displayPhotoIndex;
+	
+	private JTextField makeAlbumField;
 
 	public PhotoView(GuiView gv) {
 
@@ -94,23 +96,26 @@ public class PhotoView extends JFrame {
 		iconsPane.setPreferredSize(new Dimension(200, 150));
 		add(iconsPane, BorderLayout.NORTH);
 
-		JPanel panel = new JPanel(new GridLayout(3,1));
-		panel.setMaximumSize(new Dimension(100,100));
-		//panel.setSize(100, 100);
-		
+		JPanel panel = new JPanel(new GridLayout(3, 1));
+		panel.setMaximumSize(new Dimension(100, 100));
+		// panel.setSize(100, 100);
+
 		JButton button = null;
-				
+
 		button = new JButton(" Logout ");
 		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
+				guiView.viewContainer.logout();
+				dispose();
+				guiView.login.show();
 			}
-		});		
+		});
 		button.setMinimumSize(new Dimension(10, 100));
-		panel.add(button,0);
-				
+		panel.add(button, 0);
+
 		button = new JButton(" < Albums ");
 		button.addActionListener(new ActionListener() {
 
@@ -123,23 +128,71 @@ public class PhotoView extends JFrame {
 			}
 		});
 		button.setMinimumSize(new Dimension(10, 100));
-		panel.add(button,1);
-		
-		button = new JButton(" Add photo ");
-		button.addActionListener(new ActionListener() {
+		panel.add(button, 1);
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		if (viewContainer.getAlbum() != null) {
 
-				dispose();
+			button = new JButton(" Add photo ");
+			button.addActionListener(new ActionListener() {
 
-				AddPhoto addPhoto = new AddPhoto(viewContainer.getAlbum(), guiView);
-			}
-		});
-		button.setMinimumSize(new Dimension(10, 100));
-		panel.add(button,1);
-		
-		iconsBar.add(panel,0);
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+
+					dispose();
+
+					AddPhoto addPhoto = new AddPhoto(viewContainer.getAlbum(), guiView);
+				}
+			});
+			button.setMinimumSize(new Dimension(10, 100));
+			panel.add(button, 2);
+
+			iconsBar.add(panel, 0);
+		} else {
+			
+			iconsBar.add(panel, 0);
+
+			
+			panel = new JPanel(new GridLayout(3, 1));
+			panel.setMaximumSize(new Dimension(120, 100));
+			
+			makeAlbumField = new JTextField();
+			makeAlbumField.setMaximumSize(new Dimension(10, 10));
+			panel.add(makeAlbumField, 0);
+			
+
+			button = new JButton("Make Album");
+			button.setMaximumSize(new Dimension(10, 100));
+
+			button.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					String txt = makeAlbumField.getText();
+					if(txt != null && !txt.isEmpty()) {
+						
+						if(viewContainer.createAlbum(txt)) {						
+							for(IPhoto p : viewContainer.getPhotos()) {
+								viewContainer.albumController.addPhoto(p.getName(), p.getCaption(), txt, viewContainer.getUser());
+							}
+							viewContainer.saveUser();
+							
+							dispose();
+							guiView.viewContainer.setAlbum(viewContainer.getAlbum(txt));
+							new PhotoView(guiView).setVisible(true);
+						}						
+					}
+
+				}
+			});
+			button.setMinimumSize(new Dimension(10, 100));
+			
+			panel.add(button, 1);
+			
+			panel.add(new JLabel(), 2);
+
+			iconsBar.add(panel, 1);
+
+		}
 
 		iconsBar.add(Box.createHorizontalStrut(10));
 
@@ -440,8 +493,14 @@ public class PhotoView extends JFrame {
 							viewContainer.albumController.removePhoto(photo.getName(), aName, viewContainer.getUser());
 						}
 					}
-
+					
 					viewContainer.saveUser();
+					
+					if(viewContainer.getAlbum() != null && !viewContainer.albumController.containsPhoto(photo.getName(), viewContainer.getAlbum().getAlbumName() , viewContainer.getUser())){
+						dispose();
+						viewContainer.setAlbum(viewContainer.getAlbum());
+						new PhotoView(guiView).setVisible(true);
+					}
 				}
 			});
 			c = new GridBagConstraints();
