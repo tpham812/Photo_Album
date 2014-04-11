@@ -97,7 +97,7 @@ public class Albums {
 					}
 					
 					try {
-						guiView.viewContainer.setAlbum(album);
+						//guiView.viewContainer.setAlbum(album);
 						//Use the below for search results
 						//guiView.viewContainer.setPhotos(album.getPhotos());
 						

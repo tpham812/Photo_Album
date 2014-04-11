@@ -51,7 +51,6 @@ public class SearchPhotos {
 	int[] day = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
 	DefaultComboBoxModel<String> monthModel, dayModel, yearModel, monthModel2, dayModel2, yearModel2;
 	DefaultComboBoxModelAction modelAction = new DefaultComboBoxModelAction();
-	String[][] setTable = new String[20][2];
 	
 	public SearchPhotos (GuiView gv){
 		
@@ -60,7 +59,6 @@ public class SearchPhotos {
 		panelListener = new PanelListener(this);		
 		frame[0] = new JFrame("Search Photos");
 		frame[0].addWindowListener(panelListener);
-		initializeObjectArray();
 		tableModel = new DefaultTableModel(columnNames,20);
 		table = new JTable(tableModel);
 		sp = new JScrollPane(table);
@@ -231,15 +229,6 @@ public class SearchPhotos {
 		cb[5].setSelectedIndex(0);
 	}
 	
-	public void initializeObjectArray() {
-		
-		for(int i = 0; i < 20; i++) {
-			for(int j = 0; j < 2; j++) {
-				setTable[i][j] = " ";
-			}
-		}
-	}
-	
 	public void show(String albumName) {
 		
 		setYearComboBox(albumName);
@@ -255,6 +244,7 @@ public class SearchPhotos {
 			
 			this.sp = sp;
 		}
+		
 		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
 			
@@ -292,28 +282,33 @@ public class SearchPhotos {
 					else if(sp.cb[0].getSelectedIndex() != 0 && sp.cb[1].getSelectedIndex() != 0 && sp.cb[2].getSelectedIndex() != 0 && sp.cb[3].getSelectedIndex() != 0 && sp.cb[4].getSelectedIndex() != 0 && sp.cb[5].getSelectedIndex() != 0) {
 						startDate = new Date(Integer.parseInt((String)cb[2].getSelectedItem())-1900, Integer.parseInt((String)cb[0].getSelectedItem()) - 1, Integer.parseInt((String)cb[1].getSelectedItem()));
 						endDate = new Date(Integer.parseInt((String)cb[5].getSelectedItem())-1900, Integer.parseInt((String)cb[3].getSelectedItem()) - 1, Integer.parseInt((String)cb[4].getSelectedItem()));
-						start.setTime(startDate);
-						end.setTime(endDate);
-						boolean check = getTags(tagValues, tagNames);
-						if(!check) {
-							sp.errorLabel.setText("Must enter in both Tag Type and Tag Value");
+						if(startDate.compareTo(endDate) > 0 ) {
+							sp.errorLabel.setText("Starting date must be before end date");
 							sp.frame[0].disable();
 							sp.frame[1].setSize(260, 150);
 							sp.frame[1].setVisible(true);
 						}
 						else {
-							tagSet = sp.guiView.viewContainer.getPhotosByTag(tagNames, tagValues);
-							dateSet = sp.guiView.viewContainer.getPhotosByDate(start, end);
-						
-							
-							if(tagValues.isEmpty()) {
-								
-								//here is where you search by dates only 
+							start.setTime(startDate);
+							end.setTime(endDate);
+							boolean check = getTags(tagValues, tagNames);
+							if(!check) {
+								sp.errorLabel.setText("Must enter in both Tag Type and Tag Value");
+								sp.frame[0].disable();
+								sp.frame[1].setSize(260, 150);
+								sp.frame[1].setVisible(true);
 							}
-							
 							else {
-								tagSet.retainAll(dateSet); // intersect the tagSet and dateSet
-								//here is where you search by both tags and date
+								tagSet = sp.guiView.viewContainer.getPhotosByTag(tagNames, tagValues);
+								dateSet = sp.guiView.viewContainer.getPhotosByDate(start, end);
+								if(tagValues.isEmpty()) {
+								
+									//here is where you search by dates only 
+								}
+								else {
+									tagSet.retainAll(dateSet); // intersect the tagSet and dateSet
+									//here is where you search by both tags and date
+								}
 							}
 						}
 					}
@@ -343,6 +338,7 @@ public class SearchPhotos {
 				sp.frame[1].setVisible(false);
 			}
 		}
+		
 		public boolean getTags(List<String> tagValues, List<String> tagNames) {
 			
 			String tagV = "";
@@ -357,7 +353,6 @@ public class SearchPhotos {
 						tagValues.add(tagV);
 						tagNames.add(tagN);
 					}
-				//}
 					else if(tagN.equals("") && tagV.equals("")) {
 						continue;
 					}
@@ -366,6 +361,7 @@ public class SearchPhotos {
 			}
 			return true;
 		}
+		
 		public void clearTagPanel() {
 			
 			for(int i = 0; i < sp.table.getRowCount(); i++) {
