@@ -293,9 +293,13 @@ public class SearchPhotos {
 						else {
 							tagSet = sp.guiView.viewContainer.getPhotosByTag(tagNames, tagValues);
 							dateSet = sp.guiView.viewContainer.getPhotosByDate(start, end);
+							tagSet.retainAll(dateSet); // intersected it
+							
 							if(tagValues.isEmpty()) {
+								
 								//here is where you search by dates only 
 							}
+							
 							else {
 								//here is where you search by both tags and date
 							}
@@ -317,7 +321,6 @@ public class SearchPhotos {
 				}
 			}
 			else if(e.getSource() == sp.closeButton) {
-				System.out.println("Test");
 				sp.frame[0].enable();
 				sp.frame[1].setVisible(false);
 			}
