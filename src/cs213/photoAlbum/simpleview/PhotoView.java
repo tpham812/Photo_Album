@@ -23,6 +23,7 @@ import java.util.SortedSet;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -39,11 +40,14 @@ import javax.swing.SwingConstants;
 
 import cs213.photoAlbum.model.IAlbum;
 import cs213.photoAlbum.model.IPhoto;
+import cs213.photoAlbum.simpleview.SearchPhotos.PanelListener;
 import cs213.photoAlbum.util.CalendarUtils;
 
 public class PhotoView extends JFrame {
 
 	ViewContainer viewContainer;
+
+	private JLabel errorLabel;
 
 	private JScrollPane iconsPane;
 
@@ -66,8 +70,12 @@ public class PhotoView extends JFrame {
 	private List<DisplayPhotoAction> displayActions;
 
 	public int displayPhotoIndex;
-	
+
 	private JTextField makeAlbumField;
+
+	private JFrame errorFrame;
+
+	private PanelListener panelListener;
 
 	public PhotoView(GuiView gv) {
 
@@ -140,7 +148,8 @@ public class PhotoView extends JFrame {
 
 					dispose();
 
-					AddPhoto addPhoto = new AddPhoto(viewContainer.getAlbum(), guiView);
+					AddPhoto addPhoto = new AddPhoto(viewContainer.getAlbum(),
+							guiView);
 				}
 			});
 			button.setMinimumSize(new Dimension(10, 100));
@@ -148,17 +157,15 @@ public class PhotoView extends JFrame {
 
 			iconsBar.add(panel, 0);
 		} else {
-			
+
 			iconsBar.add(panel, 0);
 
-			
 			panel = new JPanel(new GridLayout(3, 1));
 			panel.setMaximumSize(new Dimension(120, 100));
-			
+
 			makeAlbumField = new JTextField();
 			makeAlbumField.setMaximumSize(new Dimension(10, 10));
 			panel.add(makeAlbumField, 0);
-			
 
 			button = new JButton("Make Album");
 			button.setMaximumSize(new Dimension(10, 100));
@@ -168,26 +175,29 @@ public class PhotoView extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					String txt = makeAlbumField.getText();
-					if(txt != null && !txt.isEmpty()) {
-						
-						if(viewContainer.createAlbum(txt)) {						
-							for(IPhoto p : viewContainer.getPhotos()) {
-								viewContainer.albumController.addPhoto(p.getName(), p.getCaption(), txt, viewContainer.getUser());
+					if (txt != null && !txt.isEmpty()) {
+
+						if (viewContainer.createAlbum(txt)) {
+							for (IPhoto p : viewContainer.getPhotos()) {
+								viewContainer.albumController.addPhoto(
+										p.getName(), p.getCaption(), txt,
+										viewContainer.getUser());
 							}
 							viewContainer.saveUser();
-							
+
 							dispose();
-							guiView.viewContainer.setAlbum(viewContainer.getAlbum(txt));
+							guiView.viewContainer.setAlbum(viewContainer
+									.getAlbum(txt));
 							new PhotoView(guiView).setVisible(true);
-						}						
+						}
 					}
 
 				}
 			});
 			button.setMinimumSize(new Dimension(10, 100));
-			
+
 			panel.add(button, 1);
-			
+
 			panel.add(new JLabel(), 2);
 
 			iconsBar.add(panel, 1);
@@ -224,10 +234,12 @@ public class PhotoView extends JFrame {
 
 			if (fullIcon != null) {
 
-				ImageIcon tIcon = new ImageIcon(makeThumbnail(fullIcon.getImage(), 100, 100));
+				ImageIcon tIcon = new ImageIcon(makeThumbnail(
+						fullIcon.getImage(), 100, 100));
 				tIcon.setDescription(photo.getCaption());
 
-				DisplayPhotoAction thumbAction = new DisplayPhotoAction(fullIcon, tIcon, photo, i++, this);
+				DisplayPhotoAction thumbAction = new DisplayPhotoAction(
+						fullIcon, tIcon, photo, i++, this);
 
 				if (photo1Action == null) {
 					photo1Action = thumbAction;
@@ -281,7 +293,8 @@ public class PhotoView extends JFrame {
 	}
 
 	private Image makeThumbnail(Image srcImg, int w, int h) {
-		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		BufferedImage resizedImg = new BufferedImage(w, h,
+				BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2 = resizedImg.createGraphics();
 		g2.drawImage(srcImg, 0, 0, w, h, null);
 		g2.dispose();
@@ -297,7 +310,8 @@ public class PhotoView extends JFrame {
 		private IPhoto photo;
 		private int photoIndex;
 
-		public DisplayPhotoAction(Icon fullIcon, Icon thumb, IPhoto photo, int photoIndex, PhotoView photoView) {
+		public DisplayPhotoAction(Icon fullIcon, Icon thumb, IPhoto photo,
+				int photoIndex, PhotoView photoView) {
 			this.fullIcon = fullIcon;
 			putValue(LARGE_ICON_KEY, thumb);
 			putValue(SHORT_DESCRIPTION, photo.getCaption());
@@ -319,6 +333,7 @@ public class PhotoView extends JFrame {
 			setTitle(photo.getCaption());
 
 			editPanel.removeAll();
+			createErrorPanel();
 
 			GridBagConstraints c;
 
@@ -373,7 +388,8 @@ public class PhotoView extends JFrame {
 			Object[][] data = new Object[20][2];
 
 			int i = 0;
-			for (Entry<String, SortedSet<String>> e1 : photo.getTags().entrySet()) {
+			for (Entry<String, SortedSet<String>> e1 : photo.getTags()
+					.entrySet()) {
 
 				for (String e2 : e1.getValue()) {
 					data[i][0] = e1.getKey();
@@ -462,6 +478,11 @@ public class PhotoView extends JFrame {
 
 					if (!captionField.getText().isEmpty()) {
 						photo.setCaption(captionField.getText());
+						// update icons here
+					} else {
+						errorLabel.setText("Invalid Caption");
+						errorFrame.setSize(260, 150);
+						errorFrame.setVisible(true);
 					}
 
 					photo.getTags().clear();
@@ -473,16 +494,32 @@ public class PhotoView extends JFrame {
 						String key = tagTable.getValueAt(i, 0).toString();
 						String val = tagTable.getValueAt(i, 1).toString();
 
-						if (key != null && val != null && key.length() > 0 && val.length() > 0) {
-							viewContainer.photoController.addTag(photo.getName(), key, val, viewContainer.getUser());
+						if (key != null && val != null && key.length() > 0
+								&& val.length() > 0) {
+							boolean b = viewContainer.photoController.addTag(
+									photo.getName(), key, val,
+									viewContainer.getUser());
+							if (!b) {
+								errorLabel.setText("Invalid Tag");
+								errorFrame.setSize(260, 150);
+								errorFrame.setVisible(true);
+								tagTable.setValueAt(null, i, 0);
+								tagTable.setValueAt(null, i, 1);
+							}
+						} else if((key !=null && key.length()>0)||(val!=null&&val.length()>0)){
+							errorLabel.setText("Must Enter In Both Tag Type and Tag Value");
+							errorFrame.setSize(260, 150);
+							errorFrame.setVisible(true);
+							tagTable.setValueAt(null, i, 0);
+							tagTable.setValueAt(null, i, 1);
 						}
 					}
 
 					List<String> sels = albumsList.getSelectedValuesList();
 
 					for (String s : sels) {
-						viewContainer.albumController.addPhoto(photo.getName(), photo.getCaption(), s,
-								viewContainer.getUser());
+						viewContainer.albumController.addPhoto(photo.getName(),
+								photo.getCaption(), s, viewContainer.getUser());
 					}
 
 					ListModel<String> model = albumsList.getModel();
@@ -490,13 +527,19 @@ public class PhotoView extends JFrame {
 					for (int i = 0; i < model.getSize(); i++) {
 						String aName = model.getElementAt(i);
 						if (!sels.contains(aName)) {
-							viewContainer.albumController.removePhoto(photo.getName(), aName, viewContainer.getUser());
+							viewContainer.albumController.removePhoto(
+									photo.getName(), aName,
+									viewContainer.getUser());
 						}
 					}
-					
+
 					viewContainer.saveUser();
-					
-					if(viewContainer.getAlbum() != null && !viewContainer.albumController.containsPhoto(photo.getName(), viewContainer.getAlbum().getAlbumName() , viewContainer.getUser())){
+
+					if (viewContainer.getAlbum() != null
+							&& !viewContainer.albumController.containsPhoto(
+									photo.getName(), viewContainer.getAlbum()
+											.getAlbumName(), viewContainer
+											.getUser())) {
 						dispose();
 						viewContainer.setAlbum(viewContainer.getAlbum());
 						new PhotoView(guiView).setVisible(true);
@@ -536,5 +579,23 @@ public class PhotoView extends JFrame {
 		for (Integer e : list)
 			ret[i++] = e.intValue();
 		return ret;
+	}
+
+	public void createErrorPanel() {
+
+		errorFrame = new JFrame("Error");
+		errorFrame.addWindowListener(panelListener);
+		errorFrame.setAlwaysOnTop(true);
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		errorLabel = new JLabel();
+		errorLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		panel.add(Box.createRigidArea(new Dimension(0, 30)));
+		panel.add(errorLabel);
+		panel.add(Box.createRigidArea(new Dimension(0, 35)));
+		errorFrame.add(panel);
+		errorFrame.setLocationRelativeTo(null);
+		errorFrame.setResizable(false);
+		errorFrame.setVisible(false);
 	}
 }
