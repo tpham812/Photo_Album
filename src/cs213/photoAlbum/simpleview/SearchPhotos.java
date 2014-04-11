@@ -30,6 +30,11 @@ import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.util.DefaultComboBoxModelAction;
 
 
+/**
+ * Creates the GUI for searching photos
+ * 
+ * @author Truong Pham
+ */
 public class SearchPhotos {
 	
 	
@@ -52,6 +57,11 @@ public class SearchPhotos {
 	DefaultComboBoxModel<String> monthModel, dayModel, yearModel, monthModel2, dayModel2, yearModel2;
 	DefaultComboBoxModelAction modelAction = new DefaultComboBoxModelAction();
 	
+	/**
+	 * Cosntructor to initialize GUI components
+	 * 
+	 * @param gv GuiView object
+	 */
 	public SearchPhotos (GuiView gv){
 		
 		guiView = gv;
@@ -104,6 +114,9 @@ public class SearchPhotos {
 		createErrorPanel();
 	}
 	
+	/**
+	 * Creates the search photo panel
+	 */
 	public void createSearchPhotoPanel() {
 		
 		modelAction.newComboBox(monthModel, month);
@@ -212,6 +225,12 @@ public class SearchPhotos {
 		frame[1].setVisible(false);
 	}
 	
+	/**
+	 * Gets the start date and end date in the given album and store all the dates
+	 * starting from start date up to end date into the year combo boxes
+	 * 
+	 * @param albumName album name
+	 */
 	public void setYearComboBox(String albumName) {
 		
 		IAlbum al = guiView.viewContainer.getAlbum(albumName);
@@ -229,6 +248,12 @@ public class SearchPhotos {
 		cb[5].setSelectedIndex(0);
 	}
 	
+	/**
+	 * Shows the search photo panel while updating the start date
+	 * and end date for given album
+	 * 
+	 * @param albumName album name
+	 */
 	public void show(String albumName) {
 		
 		setYearComboBox(albumName);

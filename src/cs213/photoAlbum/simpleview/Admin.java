@@ -21,6 +21,11 @@ import javax.swing.JScrollPane;
 import cs213.photoAlbum.util.DefaultListModelAction;
 
 
+/**
+ * Creates the GUI for Admin
+ * 
+ * @author Truong Pham
+ */
 public class Admin {
 
 	GuiView guiView;
@@ -38,6 +43,11 @@ public class Admin {
 	DefaultListModelAction modelAction = new DefaultListModelAction();
 	
 	
+	/**
+	 * Constructor that initializes GUI components
+	 *  
+	 * @param gv guiView object
+	 */
 	public Admin(GuiView gv) {
 		
 		guiView = gv;
@@ -75,6 +85,9 @@ public class Admin {
 		createUserExistErrorPanel();
 	}
 	
+	/**
+	 * Creates the admin panel
+	 */
 	public void createAdminPanel() {
 		
 		frame.setSize(500, 515);
@@ -119,6 +132,9 @@ public class Admin {
 		frame.setVisible(false);
 	}
 	
+	/**
+	 * Creates the error panel for error handling
+	 */
 	public void createUserExistErrorPanel() {
 		
 		frame2 = new JFrame("Error");
@@ -140,6 +156,9 @@ public class Admin {
 		frame2.addWindowListener(new PanelListener(this));
 	}
 	
+	/**
+	 * Shows the admin panel
+	 */
 	public void show() {
 		
 		frame.setVisible(true);
@@ -153,6 +172,7 @@ public class Admin {
 			
 			admin = ad;
 		}
+		
 		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
 			
