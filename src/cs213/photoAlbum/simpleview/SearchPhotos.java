@@ -51,6 +51,7 @@ public class SearchPhotos {
 	int[] day = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
 	DefaultComboBoxModel<String> monthModel, dayModel, yearModel, monthModel2, dayModel2, yearModel2;
 	DefaultComboBoxModelAction modelAction = new DefaultComboBoxModelAction();
+	String[][] setTable = new String[20][2];
 	
 	public SearchPhotos (GuiView gv){
 		
@@ -59,7 +60,8 @@ public class SearchPhotos {
 		panelListener = new PanelListener(this);		
 		frame[0] = new JFrame("Search Photos");
 		frame[0].addWindowListener(panelListener);
-		tableModel = new DefaultTableModel(columnNames, 20);
+		initializeObjectArray();
+		tableModel = new DefaultTableModel(columnNames,20);
 		table = new JTable(tableModel);
 		sp = new JScrollPane(table);
 		sp.setSize(500, 250);
@@ -229,6 +231,15 @@ public class SearchPhotos {
 		cb[5].setSelectedIndex(0);
 	}
 	
+	public void initializeObjectArray() {
+		
+		for(int i = 0; i < 20; i++) {
+			for(int j = 0; j < 2; j++) {
+				setTable[i][j] = " ";
+			}
+		}
+	}
+	
 	public void show(String albumName) {
 		
 		setYearComboBox(albumName);
@@ -293,7 +304,7 @@ public class SearchPhotos {
 						else {
 							tagSet = sp.guiView.viewContainer.getPhotosByTag(tagNames, tagValues);
 							dateSet = sp.guiView.viewContainer.getPhotosByDate(start, end);
-							tagSet.retainAll(dateSet); // intersected it
+						
 							
 							if(tagValues.isEmpty()) {
 								
@@ -301,6 +312,7 @@ public class SearchPhotos {
 							}
 							
 							else {
+								tagSet.retainAll(dateSet); // intersect the tagSet and dateSet
 								//here is where you search by both tags and date
 							}
 						}
@@ -311,6 +323,12 @@ public class SearchPhotos {
 						sp.frame[1].setSize(295, 150);
 						sp.frame[1].setVisible(true);
 					}
+				}
+				else {
+					sp.errorLabel.setText("You must finish inputting in table before searching");
+					sp.frame[0].disable();
+					sp.frame[1].setSize(310, 150);
+					sp.frame[1].setVisible(true);
 				}
 			}
 			else if(e.getSource() == sp.button[1]) {
@@ -327,19 +345,24 @@ public class SearchPhotos {
 		}
 		public boolean getTags(List<String> tagValues, List<String> tagNames) {
 			
-			String tagV;
-			String tagN;
+			String tagV = "";
+			String tagN = "";
 			Object obj1, obj2;
 			
 			for(int i = 0; i < sp.table.getRowCount(); i++) {
-				if((obj1 = sp.table.getValueAt(i, 0)) != null && (obj2 = sp.table.getValueAt(i, 1)) != null) {
-					if(!(tagN =  obj1.toString()).trim().equals("") && !(tagV = obj2.toString()).trim().equals("")) {
+					if((obj1 = sp.table.getValueAt(i, 0)) == null && (obj2 = sp.table.getValueAt(i, 1)) == null) {
+						continue;
+					}
+					else if(!(tagN =  sp.table.getValueAt(i, 0).toString()).trim().equals("") && !(tagV = sp.table.getValueAt(i, 1).toString()).trim().equals("")) {
 						tagValues.add(tagV);
 						tagNames.add(tagN);
 					}
-				}
-				else 
-					return false;
+				//}
+					else if(tagN.equals("") && tagV.equals("")) {
+						continue;
+					}
+					else 
+						return false;
 			}
 			return true;
 		}
