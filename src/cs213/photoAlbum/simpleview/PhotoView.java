@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -310,18 +311,19 @@ public class PhotoView extends JFrame {
 
 		private static final long serialVersionUID = 1L;
 
-		private Icon fullIcon;
+		private ImageIcon fullIcon;
 		private PhotoView photoView;
 		private IPhoto photo;
 		private int photoIndex;
 		private JButton iconButton;
+		private Dimension imgDim;
 		
 		
 		public void setIconButton(JButton iconButton) {
 			this.iconButton = iconButton;
 		}
 
-		public DisplayPhotoAction(Icon fullIcon, Icon thumb, IPhoto photo,
+		public DisplayPhotoAction(ImageIcon fullIcon, Icon thumb, IPhoto photo,
 				int photoIndex, PhotoView photoView) {
 			this.fullIcon = fullIcon;
 			putValue(LARGE_ICON_KEY, thumb);
@@ -329,6 +331,8 @@ public class PhotoView extends JFrame {
 			this.photoView = photoView;
 			this.photo = photo;
 			this.photoIndex = photoIndex;
+			
+			imgDim = new Dimension(fullIcon.getImage().getWidth(null), fullIcon.getImage().getHeight(null));
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -337,7 +341,25 @@ public class PhotoView extends JFrame {
 		}
 
 		public void showPhoto() {
-			photoLabel.setIcon(fullIcon);
+			
+			Dimension dim = photoLabel.getBounds().getSize();
+			
+			if(dim.getWidth() == 0 || dim.getHeight() == 0 ){
+				Toolkit toolkit = Toolkit.getDefaultToolkit();
+			    dim = toolkit.getScreenSize();
+			}
+			
+			dim = getPhotoDim(dim);			
+			
+			if(imgDim.getHeight() < dim.getHeight() && imgDim.getWidth() < dim.getWidth()){
+
+				photoLabel.setIcon(fullIcon);
+			
+			} else {
+				
+				photoLabel.setIcon(new ImageIcon(makeThumbnail(fullIcon.getImage(), (int)dim.getWidth(),(int)dim.getHeight())));
+			}
+			
 			photoLabel.setText(photo.getCaption());
 			photoView.photo = this.photo;
 			photoView.displayPhotoIndex = this.photoIndex;
@@ -610,5 +632,14 @@ public class PhotoView extends JFrame {
 		errorFrame.setLocationRelativeTo(null);
 		errorFrame.setResizable(false);
 		errorFrame.setVisible(false);
+	}
+	
+	public Dimension getPhotoDim(Dimension d){
+		
+	    Dimension newDim = new Dimension((int)(d.getWidth() * 0.66), (int)(d.getHeight() * 0.75));
+		System.out.println("label height = " + newDim.getHeight());
+		System.out.println("label weight = " + newDim.getWidth());
+
+	    return newDim;	    
 	}
 }
