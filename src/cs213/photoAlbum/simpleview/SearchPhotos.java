@@ -71,6 +71,8 @@ public class SearchPhotos {
 		frame[0].addWindowListener(panelListener);
 		tableModel = new DefaultTableModel(columnNames,20);
 		table = new JTable(tableModel);
+		table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+
 		sp = new JScrollPane(table);
 		sp.setSize(500, 250);
 		
