@@ -354,7 +354,7 @@ public class PhotoView extends JFrame {
 			if(imgDim.getHeight() < dim.getHeight() && imgDim.getWidth() < dim.getWidth()){
 
 				photoLabel.setIcon(fullIcon);
-			
+
 			} else {
 				
 				photoLabel.setIcon(new ImageIcon(makeThumbnail(fullIcon.getImage(), (int)dim.getWidth(),(int)dim.getHeight())));
@@ -636,10 +636,7 @@ public class PhotoView extends JFrame {
 	
 	public Dimension getPhotoDim(Dimension d){
 		
-	    Dimension newDim = new Dimension((int)(d.getWidth() * 0.66), (int)(d.getHeight() * 0.75));
-		System.out.println("label height = " + newDim.getHeight());
-		System.out.println("label weight = " + newDim.getWidth());
-
+	    Dimension newDim = new Dimension((int)(d.getWidth() * 0.75), (int)(d.getHeight() * 0.8));
 	    return newDim;	    
 	}
 }
