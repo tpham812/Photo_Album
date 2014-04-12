@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * IBackend is the interface to perform backend functions such as storage/retrieval of files and saving the user data.
  * @author dheeptha
@@ -16,13 +17,16 @@ import java.util.List;
  */
 public class Backend implements IBackend {
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#retrievePhotoFile(cs213.photoAlbum.model.IPhoto, cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public File retrievePhotoFile(IPhoto photo, IUser user) {
 		return getFile(photo.getName());
 	}
 	
 	/**
-	 * Determines if the file exists
+	 * Determines if the file exists.
 	 *
 	 * @param name the name
 	 * @return true, if successful
@@ -32,16 +36,19 @@ public class Backend implements IBackend {
 	}
 	
 	/**
-	 * Creates the file associated with the file name
-	 * 
+	 * Creates the file associated with the file name.
+	 *
 	 * @param name name of the file
-	 * @return new file 
+	 * @return new file
 	 */
 	
 	public File getFile(String name){
 		return new File(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#readUser(java.lang.String)
+	 */
 	@Override
 	public User readUser(String userId) {
 
@@ -68,7 +75,7 @@ public class Backend implements IBackend {
 	}
 	
 	/**
-	 * Lists the users
+	 * Lists the users.
 	 *
 	 * @return the list of all current users
 	 */
@@ -89,7 +96,7 @@ public class Backend implements IBackend {
 	}
 
 	/**
-	 * Gets the data directory
+	 * Gets the data directory.
 	 *
 	 * @return the data directory
 	 */
@@ -102,6 +109,9 @@ public class Backend implements IBackend {
 		return f;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#writeUser(cs213.photoAlbum.model.IUser)
+	 */
 	@Override
 	public boolean  writeUser(IUser u) {
 
@@ -140,12 +150,18 @@ public class Backend implements IBackend {
 		return new File("data/" + userId + ".ser");
 	}
 	
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#deleteUser(java.lang.String)
+	 */
 	@Override
 	public boolean deleteUser(String userId) {
 
 		return getSerializedFile(userId).delete();
 	}
 
+	/* (non-Javadoc)
+	 * @see cs213.photoAlbum.model.IBackend#getUser(java.util.List)
+	 */
 	@Override
 	public List<User> getUser(List<String> userIds) {
 
@@ -157,7 +173,7 @@ public class Backend implements IBackend {
 	}
 
 	/**
-	 * Closes the programs inputstream
+	 * Closes the programs inputstream.
 	 *
 	 * @param in the in
 	 * @param userId the user id
@@ -175,7 +191,7 @@ public class Backend implements IBackend {
 
 
 	/**
-	 * Closes the programs output stream
+	 * Closes the programs output stream.
 	 *
 	 * @param out the output stream
 	 * @param userId the user id

@@ -17,25 +17,39 @@ import javax.swing.JTextField;
 
 import cs213.photoAlbum.model.IUser;
 
+
 /**
- * Creates the GUI for login 
- * 
+ * Creates the GUI for login .
+ *
  * @author Truong Pham
  */
 public class Login {
 
+	/** The gui view. */
 	GuiView guiView;
+	
+	/** The frame2. */
 	JFrame frame, frame2;
+	
+	/** The button listener. */
 	ActionListener buttonListener;
+	
+	/** The panel. */
 	JPanel[] panel = new JPanel[4];
+	
+	/** The close button. */
 	JButton button, closeButton;
+	
+	/** The error label. */
 	JLabel label, errorLabel;
+	
+	/** The tf. */
 	JTextField tf;
 	
 	
 	/**
-	 * Constructor that initializes GUI components
-	 * 
+	 * Constructor that initializes GUI components.
+	 *
 	 * @param gv GuiView object
 	 */
 	public Login(GuiView gv) {
@@ -55,7 +69,7 @@ public class Login {
 	}
 		
 	/**
-	 * Create the login panel
+	 * Create the login panel.
 	 */
 	public void createLoginPanel() {	
 
@@ -86,7 +100,7 @@ public class Login {
 	}
 	
 	/**
-	 * Creates the error panel for error handling
+	 * Creates the error panel for error handling.
 	 */
 	public void createErrorPanel() {
 		
@@ -111,22 +125,42 @@ public class Login {
 	}
 	
 	/**
-	 * Shows the login panel
+	 * Shows the login panel.
 	 */
 	public void show() {
 		
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * The listener interface for receiving button events.
+	 * The class that is interested in processing a button
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addButtonListener<code> method. When
+	 * the button event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see ButtonEvent
+	 */
 	class ButtonListener implements ActionListener {
 		
+		/** The login. */
 		Login login;
 		
+		/**
+		 * Instantiates a new button listener.
+		 *
+		 * @param l the l
+		 */
 		public ButtonListener(Login l) {
 			
 			this.login = l;
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
 			
@@ -160,31 +194,70 @@ public class Login {
 			}
 		}
 	}
+	
+	/**
+	 * The listener interface for receiving panel events.
+	 * The class that is interested in processing a panel
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addpanelListener<code> method. When
+	 * the panel event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see panelEvent
+	 */
 	class panelListener implements WindowListener {
 
+		/** The login. */
 		Login login;
 		
+		/**
+		 * Instantiates a new panel listener.
+		 *
+		 * @param l the l
+		 */
 		public panelListener(Login l) {
 			
 			login = l;
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowClosing(java.awt.event.WindowEvent)
+		 */
 		@SuppressWarnings("deprecation")
 		public void windowClosing(WindowEvent arg0) {
 			
 			login.frame.enable();
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowActivated(java.awt.event.WindowEvent)
+		 */
 		public void windowActivated(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowClosed(java.awt.event.WindowEvent)
+		 */
 		public void windowClosed(WindowEvent arg0) {}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowDeactivated(java.awt.event.WindowEvent)
+		 */
 		public void windowDeactivated(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowDeiconified(java.awt.event.WindowEvent)
+		 */
 		public void windowDeiconified(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowIconified(java.awt.event.WindowEvent)
+		 */
 		public void windowIconified(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowOpened(java.awt.event.WindowEvent)
+		 */
 		public void windowOpened(WindowEvent arg0) {}
 	}
 }

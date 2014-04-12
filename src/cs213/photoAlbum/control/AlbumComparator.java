@@ -4,11 +4,16 @@ import java.util.Comparator;
 
 import cs213.photoAlbum.model.IAlbum;
 
+
 /**
- * AlbumComparator to sort by album name
+ * AlbumComparator to sort by album name.
+ * @author dheeptha
  */
 public class AlbumComparator implements Comparator<IAlbum> {
 
+	/* (non-Javadoc)
+	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	 */
 	@Override
 	/**
 	 * Compares two albums and returns an integer value

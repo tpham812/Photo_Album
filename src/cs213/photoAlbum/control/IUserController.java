@@ -6,6 +6,7 @@ import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.User;
 
 
+
 /**
  * Controller interface for {@link User} functions such as login, logout, add/delete/list users.
  *
@@ -14,7 +15,7 @@ import cs213.photoAlbum.model.User;
 public interface IUserController {
 
 	/**
-	 * Provides a list of all current users
+	 * Provides a list of all current users.
 	 *
 	 * @return the list
 	 */
@@ -38,7 +39,7 @@ public interface IUserController {
 	boolean deleteUser(String userId);
 
 	/**
-	 * Logs in the user
+	 * Logs in the user.
 	 *
 	 * @param userId the user id
 	 * @return the user
@@ -46,12 +47,18 @@ public interface IUserController {
 	IUser login(String userId);
 
 	/**
-	 * Logs out the users
+	 * Logs out the users.
 	 *
 	 * @param u the IUser object
 	 */
 	void logout(IUser u);
 	
+	/**
+	 * Write user.
+	 *
+	 * @param u the u
+	 * @return true, if successful
+	 */
 	boolean writeUser(IUser u);
 
 }

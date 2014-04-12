@@ -9,6 +9,7 @@ import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.model.Photo;
 
 
+
 /**
  * Controller interface for {@link Photo} management, such as adding/deleting tags, get photos by date range/tag.
  * @author dheeptha
@@ -17,7 +18,7 @@ import cs213.photoAlbum.model.Photo;
 public interface IPhotoController {
 
 	/**
-	 * Adds a tag to the user's photo
+	 * Adds a tag to the user's photo.
 	 *
 	 * @param fileName the file name
 	 * @param tagType the tag type
@@ -28,7 +29,7 @@ public interface IPhotoController {
 	boolean addTag(String fileName, String tagType, String tagValue, IUser user);
 
 	/**
-	 * Delete a tag associated with the user's photo
+	 * Delete a tag associated with the user's photo.
 	 *
 	 * @param fileName the file name
 	 * @param tagType the tag type
@@ -39,7 +40,7 @@ public interface IPhotoController {
 	boolean deleteTag(String fileName, String tagType, String tagValue, IUser user);
 
 	/**
-	 * Gets the photos by date range for the user, from start to end
+	 * Gets the photos by date range for the user, from start to end.
 	 *
 	 * @param start the start date
 	 * @param end the end date
@@ -49,7 +50,7 @@ public interface IPhotoController {
 	SortedSet<IPhoto> getPhotosByDate(Calendar start, Calendar end, IUser user);
 
 	/**
-	 * Gets the photos by tag for the user
+	 * Gets the photos by tag for the user.
 	 *
 	 * @param tagNames the list of tag names
 	 * @param tagValues the list tag values
@@ -59,7 +60,7 @@ public interface IPhotoController {
 	SortedSet<IPhoto> getPhotosByTag(List<String> tagNames, List<String> tagValues , IUser user);
 
 	/**
-	 * Determines if the user already has the photo
+	 * Determines if the user already has the photo.
 	 *
 	 * @param fileName the file name
 	 * @param user the user
@@ -68,7 +69,7 @@ public interface IPhotoController {
 	boolean containsPhoto(String fileName, IUser user);	
 
 	/**
-	 * Determines if the specified file exists
+	 * Determines if the specified file exists.
 	 *
 	 * @param fileName the file name
 	 * @return true, if successful

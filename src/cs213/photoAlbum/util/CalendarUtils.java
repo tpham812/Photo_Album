@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * Utility class to process Calendar.
  * @author dheeptha
@@ -16,7 +17,7 @@ public class CalendarUtils {
 	private static final String DATE_FMT = "MM/dd/yyyy-HH:mm:ss";
 
 	/**
-	 * Formats the calendar
+	 * Formats the calendar.
 	 *
 	 * @param time the time
 	 * @return the calendar
@@ -48,7 +49,7 @@ public class CalendarUtils {
 	}
 	
 	/**
-	 * Formats the date
+	 * Formats the date.
 	 *
 	 * @param cal the calendar
 	 * @return the string

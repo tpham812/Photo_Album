@@ -24,34 +24,68 @@ import javax.swing.table.JTableHeader;
 import cs213.photoAlbum.model.IAlbum;
 import cs213.photoAlbum.util.CalendarUtils;
 
+
 /**
- * Creates the GUI for displaying albums
- * 
+ * Creates the GUI for displaying albums.
+ *
  * @author Truong Pham
  */
 public class Albums {
 
+	/** The gui view. */
 	GuiView guiView;
+	
+	/** The panel listener. */
 	PanelListener panelListener;
+	
+	/** The frame. */
 	JFrame[] frame = new JFrame[4];
+	
+	/** The button listener. */
 	ActionListener buttonListener;
+	
+	/** The panel. */
 	JPanel[] panel = new JPanel[11];
+	
+	/** The tf. */
 	JTextField[] tf = new JTextField[2];
+	
+	/** The button. */
 	JButton[] button = new JButton[10];
+	
+	/** The close button. */
 	JButton closeButton;
+	
+	/** The label. */
 	JLabel[] label = new JLabel[3];
+	
+	/** The error label. */
 	JLabel errorLabel;
+	
+	/** The table. */
 	JTable table;
+	
+	/** The sp. */
 	JScrollPane sp; 
+	
+	/** The header. */
 	JTableHeader header;
+	
+	/** The column names. */
 	String[] columnNames = {"Album", "# Photos", "Date Range", "Oldest Date"};
+	
+	/** The album info. */
 	String[][] albumInfo;
+	
+	/** The table model. */
 	DefaultTableModel tableModel = null;
+	
+	/** The albums. */
 	Collection<IAlbum> albums;
 	
 	/**
-	 * Constructor that initializes GUI components
-	 * 
+	 * Constructor that initializes GUI components.
+	 *
 	 * @param gv GuiView object
 	 */
 	public Albums(GuiView gv) {
@@ -124,7 +158,7 @@ public class Albums {
 	}
 	
 	/**
-	 * Creates the album panel
+	 * Creates the album panel.
 	 */
 	@SuppressWarnings("serial")
 	public void createAlbumPanel() {
@@ -174,7 +208,7 @@ public class Albums {
 	}
 
 	/**
-	 * Creates the add album panel
+	 * Creates the add album panel.
 	 */
 	public void createAddAlbumPanel() {
 		
@@ -216,7 +250,7 @@ public class Albums {
 	}
 	
 	/**
-	 * Creates the edit panel
+	 * Creates the edit panel.
 	 */
 	public void createEditAlbumPanel() {
 		
@@ -258,7 +292,7 @@ public class Albums {
 	}
 	
 	/**
-	 * Create error panel for error handling
+	 * Create error panel for error handling.
 	 */
 	public void createErrorPanel() {
 		
@@ -282,7 +316,7 @@ public class Albums {
 	}
 	
 	/**
-	 * Display the albums current user has
+	 * Display the albums current user has.
 	 */
 	public void displayUserAlbum() {
 		
@@ -319,7 +353,7 @@ public class Albums {
 	}
 	
 	/**
-	 * Shows the album panel with the albums the user has
+	 * Shows the album panel with the albums the user has.
 	 */
 	public void show() {
 		
@@ -327,14 +361,35 @@ public class Albums {
 		frame[0].setVisible(true);
 	}
 	
+	/**
+	 * The listener interface for receiving button events.
+	 * The class that is interested in processing a button
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addButtonListener<code> method. When
+	 * the button event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see ButtonEvent
+	 */
 	class ButtonListener implements ActionListener {
 
+		/** The album. */
 		Albums album;
 		
+		/**
+		 * Instantiates a new button listener.
+		 *
+		 * @param al the al
+		 */
 		public ButtonListener(Albums al) {
 			
 			album = al;
 		}
+		
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
 			
@@ -450,15 +505,35 @@ public class Albums {
 		}
 	}
 	
+	/**
+	 * The listener interface for receiving panel events.
+	 * The class that is interested in processing a panel
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addPanelListener<code> method. When
+	 * the panel event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see PanelEvent
+	 */
 	class PanelListener implements WindowListener {
 
+		/** The album. */
 		Albums album;
 		
+		/**
+		 * Instantiates a new panel listener.
+		 *
+		 * @param al the al
+		 */
 		public PanelListener(Albums al) {
 			
 			album = al;
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowClosing(java.awt.event.WindowEvent)
+		 */
 		@SuppressWarnings("deprecation")
 		public void windowClosing(WindowEvent arg0) {
 			
@@ -482,16 +557,34 @@ public class Albums {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowActivated(java.awt.event.WindowEvent)
+		 */
 		public void windowActivated(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowClosed(java.awt.event.WindowEvent)
+		 */
 		public void windowClosed(WindowEvent arg0) {}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowDeactivated(java.awt.event.WindowEvent)
+		 */
 		public void windowDeactivated(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowDeiconified(java.awt.event.WindowEvent)
+		 */
 		public void windowDeiconified(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowIconified(java.awt.event.WindowEvent)
+		 */
 		public void windowIconified(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowOpened(java.awt.event.WindowEvent)
+		 */
 		public void windowOpened(WindowEvent arg0) {}
 	}
 }
