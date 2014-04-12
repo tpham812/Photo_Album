@@ -21,25 +21,51 @@ import javax.swing.JScrollPane;
 import cs213.photoAlbum.util.DefaultListModelAction;
 
 
+
 /**
- * Creates the GUI for Admin
- * 
+ * Creates the GUI for Admin.
+ *
  * @author Truong Pham
  */
 public class Admin {
 
+	/** The gui view. */
 	GuiView guiView;
+	
+	/** The frame2. */
 	JFrame frame, frame2;
+	
+	/** The button listener. */
 	ActionListener buttonListener;
+	
+	/** The panel. */
 	JPanel[] panel = new JPanel[6];
+	
+	/** The button. */
 	JButton[] button = new JButton[3];
+	
+	/** The close button. */
 	JButton closeButton;
+	
+	/** The label. */
 	JLabel[] label = new JLabel[2];
+	
+	/** The error label. */
 	JLabel errorLabel;
+	
+	/** The tf. */
 	JTextField[] tf = new JTextField[2];
+	
+	/** The list. */
 	JList<DefaultListModel<String>> list;
+	
+	/** The sp. */
 	JScrollPane sp;
+	
+	/** The user model. */
 	DefaultListModel<String> userModel = new DefaultListModel<String>();
+	
+	/** The model action. */
 	DefaultListModelAction modelAction = new DefaultListModelAction();
 	
 	
@@ -86,7 +112,7 @@ public class Admin {
 	}
 	
 	/**
-	 * Creates the admin panel
+	 * Creates the admin panel.
 	 */
 	public void createAdminPanel() {
 		
@@ -133,7 +159,7 @@ public class Admin {
 	}
 	
 	/**
-	 * Creates the error panel for error handling
+	 * Creates the error panel for error handling.
 	 */
 	public void createUserExistErrorPanel() {
 		
@@ -157,22 +183,42 @@ public class Admin {
 	}
 	
 	/**
-	 * Shows the admin panel
+	 * Shows the admin panel.
 	 */
 	public void show() {
 		
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * The listener interface for receiving button events.
+	 * The class that is interested in processing a button
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addButtonListener<code> method. When
+	 * the button event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see ButtonEvent
+	 */
 	class ButtonListener implements ActionListener {
 
+		/** The admin. */
 		Admin admin;
 		
+		/**
+		 * Instantiates a new button listener.
+		 *
+		 * @param ad the ad
+		 */
 		public ButtonListener(Admin ad) {
 			
 			admin = ad;
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
 			
@@ -233,31 +279,69 @@ public class Admin {
 		}
 	}
 	
+	/**
+	 * The listener interface for receiving panel events.
+	 * The class that is interested in processing a panel
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addPanelListener<code> method. When
+	 * the panel event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see PanelEvent
+	 */
 	class PanelListener implements WindowListener {
 
+		/** The admin. */
 		Admin admin;
 		
+		/**
+		 * Instantiates a new panel listener.
+		 *
+		 * @param ad the ad
+		 */
 		public PanelListener(Admin ad) {
 			
 			admin = ad;
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowClosing(java.awt.event.WindowEvent)
+		 */
 		@SuppressWarnings("deprecation")
 		public void windowClosing(WindowEvent arg0) {
 			
 			admin.frame.enable();
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowActivated(java.awt.event.WindowEvent)
+		 */
 		public void windowActivated(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowClosed(java.awt.event.WindowEvent)
+		 */
 		public void windowClosed(WindowEvent arg0) {}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowDeactivated(java.awt.event.WindowEvent)
+		 */
 		public void windowDeactivated(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowDeiconified(java.awt.event.WindowEvent)
+		 */
 		public void windowDeiconified(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowIconified(java.awt.event.WindowEvent)
+		 */
 		public void windowIconified(WindowEvent arg0) {}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowOpened(java.awt.event.WindowEvent)
+		 */
 		public void windowOpened(WindowEvent arg0) {}
 	}
 }

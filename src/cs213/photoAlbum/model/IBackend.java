@@ -3,6 +3,7 @@ package cs213.photoAlbum.model;
 import java.io.File;
 import java.util.List;
 
+
 /**
  * IBackend is the interface to perform backend functions such as storage/retrieval of files and saving the user data.
  * @author dheeptha
@@ -11,7 +12,7 @@ import java.util.List;
 public interface IBackend {
 
 	/**
-	 * Retrieve the user's photo file
+	 * Retrieve the user's photo file.
 	 *
 	 * @param photo the photo
 	 * @param user the user
@@ -20,7 +21,7 @@ public interface IBackend {
 	File retrievePhotoFile(IPhoto photo, IUser user);
 
 	/**
-	 * Reads the user
+	 * Reads the user.
 	 *
 	 * @param userId the users id
 	 * @return the user
@@ -28,7 +29,7 @@ public interface IBackend {
 	IUser readUser(String userId);
 
 	/**
-	 * Writes a new user
+	 * Writes a new user.
 	 *
 	 * @param u the user
 	 * @return true, if successful
@@ -36,7 +37,7 @@ public interface IBackend {
 	boolean writeUser(IUser u);
 
 	/**
-	 * Deletes the user
+	 * Deletes the user.
 	 *
 	 * @param userId the user id
 	 * @return true, if successful

@@ -2,8 +2,19 @@ package cs213.photoAlbum.util;
 
 import javax.swing.DefaultComboBoxModel;
 
+
+/**
+ * The Class DefaultComboBoxModelAction.
+ * @author Truong Pham
+ */
 public class DefaultComboBoxModelAction {
 
+	/**
+	 * New combo box.
+	 *
+	 * @param model the model
+	 * @param date the date
+	 */
 	public void newComboBox(DefaultComboBoxModel<String> model, int[] date) {
 		
 		model.addElement("");
@@ -12,6 +23,13 @@ public class DefaultComboBoxModelAction {
 		}
 	}
 	
+	/**
+	 * Sets the year combo box.
+	 *
+	 * @param model the model
+	 * @param max the max
+	 * @param min the min
+	 */
 	public void setYearComboBox(DefaultComboBoxModel<String> model, int max, int min) {
 		
 		model.removeAllElements();
@@ -21,6 +39,11 @@ public class DefaultComboBoxModelAction {
 		}
 	}
 	
+	/**
+	 * Sets the hour combo box.
+	 *
+	 * @param model the new hour combo box
+	 */
 	public void setHourComboBox(DefaultComboBoxModel<String> model) {
 		
 		model.addElement("");
@@ -29,6 +52,12 @@ public class DefaultComboBoxModelAction {
 		}
 	}
 	
+	/**
+	 * Sets the minute_ seconds combo box.
+	 *
+	 * @param model the model
+	 * @param model2 the model2
+	 */
 	public void setMinute_SecondsComboBox(DefaultComboBoxModel<String> model, DefaultComboBoxModel<String> model2) {
 		
 		model.addElement("");

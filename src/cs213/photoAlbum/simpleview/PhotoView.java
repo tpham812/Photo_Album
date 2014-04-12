@@ -44,40 +44,66 @@ import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.simpleview.SearchPhotos.PanelListener;
 import cs213.photoAlbum.util.CalendarUtils;
 
+
+/**
+ * Creates the Gui for viewing photos.
+ * @author dheeptha
+ */
 public class PhotoView extends JFrame {
 
+	/** The view container. */
 	ViewContainer viewContainer;
 
+	/** The error label. */
 	private JLabel errorLabel;
 
+	/** The icons pane. */
 	private JScrollPane iconsPane;
 
+	/** The photo label. */
 	private JLabel photoLabel = new JLabel();
 
+	/** The edit panel. */
 	private JPanel editPanel;
 
+	/** The photo. */
 	private IPhoto photo;
 
+	/** The photo index. */
 	private int photoIndex;
 
+	/** The tag table. */
 	private JTable tagTable;
 
+	/** The albums list. */
 	private JList<String> albumsList;
 
+	/** The caption field. */
 	private JTextField captionField;
 
+	/** The gui view. */
 	private GuiView guiView;
 
+	/** The display actions. */
 	private List<DisplayPhotoAction> displayActions;
 
+	/** The display photo index. */
 	public int displayPhotoIndex;
 
+	/** The make album field. */
 	private JTextField makeAlbumField;
 
+	/** The error frame. */
 	private JFrame errorFrame;
 
+	/** The panel listener. */
 	private PanelListener panelListener;
 
+	/**
+	 * Instantiates a new photo view.
+	 *
+	 * @param gv the gv
+	 */
 	public PhotoView(GuiView gv) {
 
 		this.guiView = gv;
@@ -292,6 +318,13 @@ public class PhotoView extends JFrame {
 	
 	
 
+	/**
+	 * Gets the icon.
+	 *
+	 * @param path the path
+	 * @param description the description
+	 * @return the icon
+	 */
 	protected ImageIcon getIcon(String path, String description) {
 
 		try {
@@ -303,6 +336,14 @@ public class PhotoView extends JFrame {
 		return null;
 	}
 
+	/**
+	 * Make thumbnail.
+	 *
+	 * @param srcImg the src img
+	 * @param w the w
+	 * @param h the h
+	 * @return the image
+	 */
 	private Image makeThumbnail(Image srcImg, int w, int h) {
 		BufferedImage resizedImg = new BufferedImage(w, h,
 				BufferedImage.TYPE_INT_RGB);
@@ -312,22 +353,51 @@ public class PhotoView extends JFrame {
 		return resizedImg;
 	}
 
+	/**
+	 * The Class DisplayPhotoAction.
+	 */
 	private class DisplayPhotoAction extends AbstractAction {
 
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/** The full icon. */
 		private ImageIcon fullIcon;
+		
+		/** The photo view. */
 		private PhotoView photoView;
+		
+		/** The photo. */
 		private IPhoto photo;
+		
+		/** The photo index. */
 		private int photoIndex;
+		
+		/** The icon button. */
 		private JButton iconButton;
+		
+		/** The img dim. */
 		private Dimension imgDim;
 		
 		
+		/**
+		 * Sets the icon button.
+		 *
+		 * @param iconButton the new icon button
+		 */
 		public void setIconButton(JButton iconButton) {
 			this.iconButton = iconButton;
 		}
 
+		/**
+		 * Instantiates a new display photo action.
+		 *
+		 * @param fullIcon the full icon
+		 * @param thumb the thumb
+		 * @param photo the photo
+		 * @param photoIndex the photo index
+		 * @param photoView the photo view
+		 */
 		public DisplayPhotoAction(ImageIcon fullIcon, Icon thumb, IPhoto photo,
 				int photoIndex, PhotoView photoView) {
 			this.fullIcon = fullIcon;
@@ -340,11 +410,17 @@ public class PhotoView extends JFrame {
 			imgDim = new Dimension(fullIcon.getImage().getWidth(null), fullIcon.getImage().getHeight(null));
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 
 			showPhoto();
 		}
 
+		/**
+		 * Show photo.
+		 */
 		public void showPhoto() {
 			
 			Dimension dim = photoLabel.getBounds().getSize();
@@ -620,6 +696,12 @@ public class PhotoView extends JFrame {
 
 	}
 
+	/**
+	 * To int array.
+	 *
+	 * @param list the list
+	 * @return the int[]
+	 */
 	int[] toIntArray(List<Integer> list) {
 		int[] ret = new int[list.size()];
 		int i = 0;
@@ -628,6 +710,9 @@ public class PhotoView extends JFrame {
 		return ret;
 	}
 
+	/**
+	 * Creates the error panel.
+	 */
 	public void createErrorPanel() {
 
 		errorFrame = new JFrame("Error");
@@ -646,6 +731,12 @@ public class PhotoView extends JFrame {
 		errorFrame.setVisible(false);
 	}
 	
+	/**
+	 * Gets the photo dim.
+	 *
+	 * @param d the d
+	 * @return the photo dim
+	 */
 	public Dimension getPhotoDim(Dimension d){
 		
 	    Dimension newDim = new Dimension((int)(d.getWidth() * 0.75), (int)(d.getHeight() * 0.8));

@@ -30,36 +30,72 @@ import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.util.DefaultComboBoxModelAction;
 
 
+
 /**
- * Creates the GUI for searching photos
- * 
+ * Creates the GUI for searching photos.
+ *
  * @author Truong Pham
  */
 public class SearchPhotos {
 	
 	
+	/** The table model. */
 	DefaultTableModel tableModel;
+	
+	/** The gui view. */
 	GuiView guiView;
+	
+	/** The button listener. */
 	ActionListener buttonListener;
+	
+	/** The panel listener. */
 	PanelListener panelListener;
+	
+	/** The button. */
 	JButton[] button = new JButton[2];
+	
+	/** The close button. */
 	JButton closeButton;
+	
+	/** The error label. */
 	JLabel errorLabel;
+	
+	/** The frame. */
 	JFrame[] frame = new JFrame[2];
+	
+	/** The table. */
 	JTable table;
+	
+	/** The sp. */
 	JScrollPane sp;
+	
+	/** The panel. */
 	JPanel[] panel = new JPanel[9];
+	
+	/** The label. */
 	JLabel[] label = new JLabel[17];
+	
+	/** The cb. */
 	JComboBox<String>[] cb = new JComboBox[12];
+	
+	/** The column names. */
 	String[] columnNames = {"Tag Type", "Tag Value"};
+	
+	/** The month. */
 	int[] month = {1,2,3,4,5,6,7,8,9,10,11,12};
+	
+	/** The day. */
 	int[] day = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+	
+	/** The second2. */
 	DefaultComboBoxModel<String> monthModel, dayModel, yearModel, monthModel2, dayModel2, yearModel2, hour, hour2, minute, minute2, second, second2;
+	
+	/** The model action. */
 	DefaultComboBoxModelAction modelAction = new DefaultComboBoxModelAction();
 	
 	/**
-	 * Cosntructor to initialize GUI components
-	 * 
+	 * Cosntructor to initialize GUI components.
+	 *
 	 * @param gv GuiView object
 	 */
 	public SearchPhotos (GuiView gv){
@@ -129,7 +165,7 @@ public class SearchPhotos {
 	}
 	
 	/**
-	 * Creates the search photo panel
+	 * Creates the search photo panel.
 	 */
 	public void createSearchPhotoPanel() {
 		
@@ -262,6 +298,9 @@ public class SearchPhotos {
 		frame[0].setVisible(false);	
 	}
 	
+	/**
+	 * Creates the error panel.
+	 */
 	public void createErrorPanel() {
 		
 		frame[1] = new JFrame("Error");
@@ -285,8 +324,8 @@ public class SearchPhotos {
 	
 	/**
 	 * Gets the start date and end date in the given album and store all the dates
-	 * starting from start date up to end date into the year combo boxes
-	 * 
+	 * starting from start date up to end date into the year combo boxes.
+	 *
 	 * @param albumName album name
 	 */
 	public void setYearComboBox(String albumName) {
@@ -308,8 +347,8 @@ public class SearchPhotos {
 	
 	/**
 	 * Shows the search photo panel while updating the start date
-	 * and end date for given album
-	 * 
+	 * and end date for given album.
+	 *
 	 * @param albumName album name
 	 */
 	public void show(String albumName) {
@@ -318,15 +357,35 @@ public class SearchPhotos {
 		frame[0].setVisible(true);
 	}
 	
+	/**
+	 * The listener interface for receiving button events.
+	 * The class that is interested in processing a button
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addButtonListener<code> method. When
+	 * the button event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see ButtonEvent
+	 */
 	class ButtonListener implements ActionListener {
 
+		/** The sp. */
 		SearchPhotos sp;
 		
+		/**
+		 * Instantiates a new button listener.
+		 *
+		 * @param sp the sp
+		 */
 		public ButtonListener(SearchPhotos sp) {
 			
 			this.sp = sp;
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
 			
@@ -468,6 +527,13 @@ public class SearchPhotos {
 			}
 		}
 		
+		/**
+		 * Gets the tags.
+		 *
+		 * @param tagValues the tag values
+		 * @param tagNames the tag names
+		 * @return the tags
+		 */
 		public boolean getTags(List<String> tagValues, List<String> tagNames) {
 			
 			String tagV = "";
@@ -504,12 +570,20 @@ public class SearchPhotos {
 			}
 			return check;
 		}
+		
+		/**
+		 * Reset combo box.
+		 */
 		public void resetComboBox() {
 			
 			for(int i = 0; i < sp.cb.length; i++) {
 				cb[i].setSelectedIndex(0);
 			}
 		}
+		
+		/**
+		 * Clear tag panel.
+		 */
 		public void clearTagPanel() {
 			
 			for(int i = 0; i < sp.table.getRowCount(); i++) {
@@ -519,15 +593,35 @@ public class SearchPhotos {
 		}
 	}
 	
+	/**
+	 * The listener interface for receiving panel events.
+	 * The class that is interested in processing a panel
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addPanelListener<code> method. When
+	 * the panel event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see PanelEvent
+	 */
 	class PanelListener implements WindowListener {
 
+		/** The sp. */
 		SearchPhotos sp;
 		
+		/**
+		 * Instantiates a new panel listener.
+		 *
+		 * @param sp the sp
+		 */
 		public PanelListener(SearchPhotos sp) {
 			
 			this.sp = sp;
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowClosing(java.awt.event.WindowEvent)
+		 */
 		@SuppressWarnings("deprecation")
 		public void windowClosing(WindowEvent arg0) {
 			
@@ -542,16 +636,34 @@ public class SearchPhotos {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowActivated(java.awt.event.WindowEvent)
+		 */
 		public void windowActivated(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowClosed(java.awt.event.WindowEvent)
+		 */
 		public void windowClosed(WindowEvent arg0) {}
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowDeactivated(java.awt.event.WindowEvent)
+		 */
 		public void windowDeactivated(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowDeiconified(java.awt.event.WindowEvent)
+		 */
 		public void windowDeiconified(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowIconified(java.awt.event.WindowEvent)
+		 */
 		public void windowIconified(WindowEvent arg0) {}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.WindowListener#windowOpened(java.awt.event.WindowEvent)
+		 */
 		public void windowOpened(WindowEvent arg0) {}
 	}
 }

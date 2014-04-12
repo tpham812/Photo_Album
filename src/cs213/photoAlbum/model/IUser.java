@@ -3,6 +3,7 @@ package cs213.photoAlbum.model;
 import java.util.Collection;
 import java.util.Map;
 
+
 /**
  * Represents the IUser, containing a unique ID, their full name, and the
  * album(s) of the user.
@@ -12,8 +13,8 @@ import java.util.Map;
 public interface IUser {
 	
 	/**
-	 * Change the name of the album	
-	 * 
+	 * Change the name of the album	.
+	 *
 	 * @param newAlbumName new album name
 	 * @param oldAlbumName old album name
 	 */
@@ -28,7 +29,7 @@ public interface IUser {
 	abstract void addAlbum(Album album);
 
 	/**
-	 * Determines if the user has a album with the specified albumName
+	 * Determines if the user has a album with the specified albumName.
 	 *
 	 * @param albumName the album name
 	 * @return true, if successful
@@ -36,7 +37,7 @@ public interface IUser {
 	abstract boolean containsAlbum(String albumName);
 
 	/**
-	 * Gets the album
+	 * Gets the album.
 	 *
 	 * @param albumName the album name
 	 * @return the album
@@ -44,7 +45,7 @@ public interface IUser {
 	abstract IAlbum getAlbum(String albumName);
 
 	/**
-	 * Adds the photo to the album
+	 * Adds the photo to the album.
 	 *
 	 * @param photo the photo
 	 * @param album the album
@@ -52,7 +53,7 @@ public interface IUser {
 	abstract void addPhoto(Photo photo, IAlbum album);
 
 	/**
-	 * deletes the album
+	 * deletes the album.
 	 *
 	 * @param albumName the album name
 	 * @return the IAlbum
@@ -68,8 +69,8 @@ public interface IUser {
 	abstract String rename(IAlbum album);
 
 	/**
-	 * To string method
-	 * 
+	 * To string method.
+	 *
 	 * @return id The users unique string ID
 	 */
 	abstract String toString();
@@ -82,15 +83,15 @@ public interface IUser {
 	abstract void setUserID(String id);
 
 	/**
-	 * Sets the users full name
-	 * 
+	 * Sets the users full name.
+	 *
 	 * @param fname  Users full name
 	 */
 	abstract void setUserFullName(String fname);
 
 	/**
-	 * Gets the users id
-	 * 
+	 * Gets the users id.
+	 *
 	 * @return id users id
 	 */
 	abstract String getUserID();
@@ -103,15 +104,15 @@ public interface IUser {
 	abstract String getUserFullName();
 
 	/**
-	 * Gets the albums associated to the user
+	 * Gets the albums associated to the user.
 	 *
 	 * @return the albums
 	 */
 	abstract Collection<IAlbum> getAlbums();
 
 	/**
-	 * Gets the photos
-	 * 
+	 * Gets the photos.
+	 *
 	 * @return the photos
 	 */
 	abstract Map<String, IPhoto> getPhotos();

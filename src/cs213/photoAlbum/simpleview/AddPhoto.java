@@ -26,30 +26,52 @@ import cs213.photoAlbum.model.IAlbum;
 import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.simpleview.SearchPhotos.PanelListener;
 
+
+/**
+ * Creates the gui for adding photos
+ * @author dheeptha
+ */
 public class AddPhoto extends JFrame {
 
+	/** The view container. */
 	ViewContainer viewContainer;
 
+	/** The panel listener. */
 	private PanelListener panelListener;
 
+	/** The error label. */
 	private JLabel errorLabel;
 
+	/** The error frame. */
 	private JFrame errorFrame;
 
+	/** The album. */
 	private IAlbum album;
 
+	/** The edit panel. */
 	private JPanel editPanel;
 
+	/** The albums list. */
 	private JList<String> albumsList;
 
+	/** The caption field. */
 	private JTextField captionField;
 
+	/** The gui view. */
 	private GuiView guiView;
 
+	/** The file label. */
 	private JLabel fileLabel;
 
+	/** The file name. */
 	private String fileName = "";
 	
+	/**
+	 * Instantiates a new adds the photo.
+	 *
+	 * @param album the album
+	 * @param gv the gv
+	 */
 	public AddPhoto(IAlbum album, GuiView gv) {
 
 		this.guiView = gv;
@@ -199,14 +221,26 @@ public class AddPhoto extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * The Class AddAction.
+	 */
 	private class AddAction implements ActionListener {
 
+		/** The add photo. */
 		private AddPhoto addPhoto;
 
+		/**
+		 * Instantiates a new adds the action.
+		 *
+		 * @param addPhoto the add photo
+		 */
 		public AddAction(AddPhoto addPhoto) {
 			this.addPhoto = addPhoto;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if (fileName != null && !fileName.isEmpty()) {
@@ -248,14 +282,26 @@ public class AddPhoto extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class BackAction.
+	 */
 	private class BackAction implements ActionListener {
 
+		/** The add photo. */
 		private AddPhoto addPhoto;
 
+		/**
+		 * Instantiates a new back action.
+		 *
+		 * @param addPhoto the add photo
+		 */
 		public BackAction(AddPhoto addPhoto) {
 			this.addPhoto = addPhoto;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 
@@ -264,6 +310,9 @@ public class AddPhoto extends JFrame {
 		}
 	}
 
+	/**
+	 * Creates the error panel.
+	 */
 	public void createErrorPanel() {
 
 		errorFrame = new JFrame("Error");

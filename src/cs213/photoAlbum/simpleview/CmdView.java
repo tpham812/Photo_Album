@@ -22,18 +22,23 @@ import cs213.photoAlbum.model.IPhoto;
 import cs213.photoAlbum.model.IUser;
 import cs213.photoAlbum.util.CalendarUtils;
 
+
 /**
  * CmdView class is the text interface for managing the album.
  * @author dheeptha
  */
 public class CmdView extends ViewContainer {
 
+	/** The login. */
 	protected Login login;
 	
+	/** The admin. */
 	protected Admin admin;
 	
+	/** The album. */
 	protected Albums album;
 	
+	/** The sp. */
 	protected SearchPhotos sp;
 
 	/**
@@ -59,7 +64,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * The main method the creates a CmdView object and calls the process arguments method
+	 * The main method the creates a CmdView object and calls the process arguments method.
 	 *
 	 * @param args the arguments
 	 */
@@ -70,7 +75,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Processes input arguments 
+	 * Processes input arguments .
 	 *
 	 * @param args the arguments
 	 */
@@ -105,7 +110,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Launches interactive mode once the user logs in
+	 * Launches interactive mode once the user logs in.
 	 *
 	 * @param u the IUser
 	 */
@@ -173,7 +178,7 @@ public class CmdView extends ViewContainer {
 
 
 	/**
-	 * Gets the photos by tag
+	 * Gets the photos by tag.
 	 *
 	 * @param u the IUser
 	 * @param cmd the command
@@ -200,7 +205,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Gets the photos by date
+	 * Gets the photos by date.
 	 *
 	 * @param u the IUser
 	 * @param cmd the Commans
@@ -226,7 +231,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Lists photo information
+	 * Lists photo information.
 	 *
 	 * @param u the IUser
 	 * @param cmd the command
@@ -279,7 +284,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Checks if the add or delete method completes successfully and prints appropriate message to user
+	 * Checks if the add or delete method completes successfully and prints appropriate message to user.
 	 *
 	 * @param u the IUser
 	 * @param cmd the command
@@ -332,7 +337,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Checks if the removePhoto method completes successfully and prints appropriate message to user
+	 * Checks if the removePhoto method completes successfully and prints appropriate message to user.
 	 *
 	 * @param u the IUser
 	 * @param cmd the command
@@ -353,7 +358,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Checks if the movePhoto method completes successfully and prints appropriate message to user
+	 * Checks if the movePhoto method completes successfully and prints appropriate message to user.
 	 *
 	 * @param u the IUser
 	 * @param cmd the command
@@ -380,7 +385,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Checks if the addPhoto method completes successfully and prints appropriate message to userr
+	 * Checks if the addPhoto method completes successfully and prints appropriate message to userr.
 	 *
 	 * @param u the IUser
 	 * @param cmd the command
@@ -407,7 +412,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Checks if the listPhotos method completes successfully and prints appropriate message to user
+	 * Checks if the listPhotos method completes successfully and prints appropriate message to user.
 	 *
 	 * @param u the IUser
 	 * @param cmd the command
@@ -442,7 +447,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Checks if the listAlbums method completes successfully and prints appropriate message to user
+	 * Checks if the listAlbums method completes successfully and prints appropriate message to user.
 	 *
 	 * @param u the u
 	 */
@@ -468,7 +473,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Checks if the deleteAlbum method completes successfully and prints appropriate message to user
+	 * Checks if the deleteAlbum method completes successfully and prints appropriate message to user.
 	 *
 	 * @param u the u
 	 * @param cmd the cmd
@@ -489,7 +494,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Checks if the createAlbum method completes successfully and prints appropriate message to user
+	 * Checks if the createAlbum method completes successfully and prints appropriate message to user.
 	 *
 	 * @param u the IUser
 	 * @param cmd the command
@@ -510,7 +515,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Correctly formats the albums
+	 * Correctly formats the albums.
 	 *
 	 * @param p the IPhoto
 	 * @param albums the albums
@@ -534,7 +539,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Parses the tag
+	 * Parses the tag.
 	 *
 	 * @param l the string
 	 * @param tagNames the tag names
@@ -567,7 +572,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Parses the tag
+	 * Parses the tag.
 	 *
 	 * @param l the string
 	 * @param tagName the tag name
@@ -595,7 +600,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Parses the date
+	 * Parses the date.
 	 *
 	 * @param string the string
 	 * @return the calendar
@@ -614,7 +619,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Gets the quoted parameters
+	 * Gets the quoted parameters.
 	 *
 	 * @param l the l
 	 * @param numParams the number of params
@@ -645,7 +650,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Processes the arguments and calls the login method, prints out appropriate message
+	 * Processes the arguments and calls the login method, prints out appropriate message.
 	 *
 	 * @param args the arguments
 	 * @return the IUser
@@ -668,7 +673,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Process the arguments and calls the delete user method, prints out appropriate message
+	 * Process the arguments and calls the delete user method, prints out appropriate message.
 	 *
 	 * @param args the args
 	 */
@@ -689,7 +694,7 @@ public class CmdView extends ViewContainer {
 	}
 
 	/**
-	 * Process the arguments and calls the addUser method, prints out appropriate message
+	 * Process the arguments and calls the addUser method, prints out appropriate message.
 	 *
 	 * @param args the args
 	 */
@@ -713,7 +718,7 @@ public class CmdView extends ViewContainer {
 
 	/**
 	 * Calls the listUsers method and prints them out, or if empty, prints 
-	 * that no users exist
+	 * that no users exist.
 	 */
 	private void listUsers() {
 		List<String> users = userController.listUsers();
