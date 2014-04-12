@@ -382,7 +382,14 @@ public class PhotoView extends JFrame {
 			c.insets = new Insets(5, 0, 5, 0);
 			c.gridx = 1;
 			c.gridy = 0;
-			ep2.add(new JLabel(photo.getName()), c);
+			
+			String name = photo.getName();
+			
+			if(name.length() > 40) {
+				name = "..." + name.substring(name.length() - 40);
+			}
+			
+			ep2.add(new JLabel(name), c);
 
 			c = new GridBagConstraints();
 			c.insets = new Insets(5, 0, 5, 0);
