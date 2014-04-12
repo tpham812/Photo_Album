@@ -126,12 +126,13 @@ public class Albums {
 
 			public void actionPerformed(ActionEvent event) {
 				
-				frame[0].dispose();
+				
 				
 				int[] selection = table.getSelectedRows();
 				int row;
 				
-				if(selection.length > 0) {				
+				if(selection.length > 0) {			
+					frame[0].dispose();
 					row = table.convertRowIndexToModel(selection[0]);
 					IAlbum album = null;
 										
@@ -387,11 +388,17 @@ public class Albums {
 			album = al;
 		}
 		
+		public boolean isEmptyAlbum() {
+			return albums == null || albums.isEmpty();
+		}
+		
 		/* (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
 		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
+			
+			try {
 			
 			if(e.getSource() == album.button[0]) {
 				album.guiView.viewContainer.logout();
@@ -402,7 +409,7 @@ public class Albums {
 			}
 			else if(e.getSource() == album.button[1]) {
 				String num;
-				if((num = (String)album.table.getValueAt(album.table.getSelectedRow(), 1)).equals("0")) {
+				if( (num = (String)album.table.getValueAt(album.table.getSelectedRow(), 1)).equals("0")) {
 					album.errorLabel.setText("No photos in album to search");
 					album.frame[0].disable();
 					album.frame[3].setSize(210, 150);
@@ -501,6 +508,9 @@ public class Albums {
 					album.frame[2].enable();
 					album.frame[3].setVisible(false);
 				}
+			}
+			} catch (Exception e1) {
+				
 			}
 		}
 	}
