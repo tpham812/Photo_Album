@@ -224,6 +224,30 @@ public class PhotoView extends JFrame {
 			});
 			iconsBar.add(navButton, iconsBar.getComponentCount());
 			iconsBar.add(Box.createHorizontalStrut(10));
+			
+
+			iconsBar.add(Box.createHorizontalStrut(10));
+
+			navButton = new JButton(" Next photo >>> ");
+			navButton.setBorder(BorderFactory.createLineBorder(Color.black));
+			navButton.setBorderPainted(true);
+			navButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+
+					if (displayPhotoIndex < displayActions.size() - 1) {
+						displayActions.get(++displayPhotoIndex).showPhoto();
+					}
+
+				}
+			});
+
+			iconsBar.add(navButton, iconsBar.getComponentCount());
+			iconsBar.add(Box.createHorizontalStrut(10));
+
+
+
 
 		}
 
@@ -261,25 +285,6 @@ public class PhotoView extends JFrame {
 
 		if (!viewContainer.getPhotos().isEmpty()) {
 			displayActions.get(0).showPhoto();
-
-			iconsBar.add(Box.createHorizontalStrut(10));
-
-			JButton navButton = new JButton(" Next photo >>> ");
-			navButton.setBorder(BorderFactory.createLineBorder(Color.black));
-			navButton.setBorderPainted(true);
-			navButton.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-
-					if (displayPhotoIndex < displayActions.size() - 1) {
-						displayActions.get(++displayPhotoIndex).showPhoto();
-					}
-
-				}
-			});
-
-			iconsBar.add(navButton, iconsBar.getComponentCount());
 		}
 
 	
