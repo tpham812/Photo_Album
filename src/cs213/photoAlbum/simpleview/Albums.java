@@ -108,9 +108,6 @@ public class Albums {
 					
 					try {
 						guiView.viewContainer.setAlbum(album);
-						//Use the below for search results
-						//guiView.viewContainer.setPhotos(album.getPhotos());
-						
 						PhotoView photoView = new PhotoView(guiView);
 						photoView.setVisible(true);
 
@@ -141,29 +138,28 @@ public class Albums {
 		header = table.getTableHeader();
 		sp = new JScrollPane(table);
 
-		frame[0].setSize(500, 550);
-		frame[0].setMaximumSize(new Dimension(500,550));
+		frame[0].setSize(1200, 700);
+		frame[0].setMaximumSize(new Dimension(1200,700));
 		frame[0].setResizable(false);
 		frame[0].setLocationRelativeTo(null);
 		
-		table.setMaximumSize(new Dimension(450,400));
+		table.setMaximumSize(new Dimension(1100,530));
 		table.setRowSelectionAllowed(true);
 		
-		panel[1].add(Box.createRigidArea(new Dimension(421,0)));
+		panel[1].add(Box.createRigidArea(new Dimension(1122,0)));
 		panel[1].add(button[0]);
 		
 		panel[2].add(button[1]);
-		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
+		panel[2].add(Box.createRigidArea(new Dimension(60,0)));
 		panel[2].add(button[2]);
-		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
+		panel[2].add(Box.createRigidArea(new Dimension(60,0)));
 		panel[2].add(button[3]);
-		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
+		panel[2].add(Box.createRigidArea(new Dimension(60,0)));
 		panel[2].add(button[4]);
-		
-		panel[2].add(Box.createRigidArea(new Dimension(25,0)));
+		panel[2].add(Box.createRigidArea(new Dimension(60,0)));
 		panel[2].add(button[5]);
 		
-		panel[3].add(Box.createRigidArea(new Dimension(21,0)));
+		panel[3].add(Box.createRigidArea(new Dimension(46,0)));
 		panel[3].add(header);
 		
 		panel[0].add(panel[1]);
