@@ -48,6 +48,8 @@ public class AddPhoto extends JFrame {
 
 	private JLabel fileLabel;
 
+	private String fileName = "";
+	
 	public AddPhoto(IAlbum album, GuiView gv) {
 
 		this.guiView = gv;
@@ -114,7 +116,14 @@ public class AddPhoto extends JFrame {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
 					// This is where a real application would open the file.
-					fileLabel.setText(file.getAbsolutePath());
+					
+					fileName = file.getAbsolutePath();
+					
+					String name = fileName;
+					if(name.length() > 40) {
+						name = "..." + name.substring(name.length() - 40);
+					}
+					fileLabel.setText(name);
 				}
 			}
 		});
@@ -200,7 +209,7 @@ public class AddPhoto extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if (!fileLabel.getText().isEmpty()) {
+			if (fileName != null && !fileName.isEmpty()) {
 				if (!captionField.getText().isEmpty()) {
 
 					List<String> sels = albumsList.getSelectedValuesList();
@@ -208,7 +217,7 @@ public class AddPhoto extends JFrame {
 					if (!sels.isEmpty()) {
 						for (String s : sels) {
 							viewContainer.albumController.addPhoto(
-									fileLabel.getText(),
+									fileName,
 									captionField.getText(), s,
 									viewContainer.getUser());
 						}
